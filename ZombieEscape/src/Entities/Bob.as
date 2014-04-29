@@ -4,7 +4,7 @@ package Entities
 	 * ...
 	 * @author Brandon
 	 */
-	public class Bob 
+	public class Bob extends GameSprite
 	{
 		
 		public function Bob() 
