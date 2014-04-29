@@ -4,7 +4,7 @@ package Entities
 	 * ...
 	 * @author Brandon
 	 */
-	public class Zombie 
+	public class Zombie extends GameSprite
 	{
 		
 		public function Zombie() 
