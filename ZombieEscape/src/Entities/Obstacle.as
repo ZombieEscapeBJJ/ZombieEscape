@@ -4,7 +4,7 @@ package Entities
 	 * ...
 	 * @author Brandon
 	 */
-	public class Obstacle 
+	public class Obstacle extends GameSprite
 	{
 		
 		public function Obstacle() 
