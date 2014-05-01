@@ -7,9 +7,9 @@ package Entities.Zombies
 	public class FastZombie extends Zombie 
 	{
 		
-		public function FastZombie() 
+		public function FastZombie(x:int, y:int) 
 		{
-			super();
+			super(x, y, 5);
 			
 		}
 		

@@ -1,5 +1,6 @@
 package Entities.Obstacles  
 {
+	import Entities.GameSprite;
 	/**
 	 * ...
 	 * @author Brandon

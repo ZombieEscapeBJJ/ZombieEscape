@@ -6,10 +6,11 @@ package Entities.Zombies
 	 */
 	public class NormalZombie extends Zombie 
 	{
+
 		
-		public function NormalZombie() 
+		public function NormalZombie(x:int, y:int) 
 		{
-			super();
+			super(x, y, 3);
 			
 		}
 		
