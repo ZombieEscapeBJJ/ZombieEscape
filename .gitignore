@@ -2,6 +2,7 @@
 bin/
 bin-debug/
 bin-release/
+*.as3proj
 
 # Other files and folders
 .settings/

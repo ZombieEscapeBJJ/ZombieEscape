@@ -1,5 +1,6 @@
 package
 {
+	import Entities.Zombies.Zombie;
     import flash.display.Bitmap;
     import flash.display.BitmapData;
 	import flash.text.TextFormat;
@@ -26,6 +27,9 @@ package
 		
 		private var state:int;
 		public const MAIN_MENU:int = 0;
+		public const ZOMBIE_TEST:int = 1;
+		
+		private var zombie:Zombie;
 		
 		public function Game(stageWidth:int, stageHeight:int)
 		{
@@ -69,7 +73,9 @@ package
 			0x666666, 0x999999,
 			StartGame);
 			
-			state = MAIN_MENU;
+			zombie = new Zombie(0, 0, 1);
+			
+			state = ZOMBIE_TEST;
 		}
 		
 		public function ShowMainMenu():void
@@ -84,14 +90,18 @@ package
 			
 			if (state == MAIN_MENU) {
 				main_menu_screen.Render(Renderer);
+			} else if (state == ZOMBIE_TEST) {
+				zombie.Render();
 			}
+			
+			
 	 
 			Renderer.unlock();
 		}
 		
     	public function Update():void
 		{
-			
+			zombie.Update();
 		}
 		
 		public function StartGame():void
