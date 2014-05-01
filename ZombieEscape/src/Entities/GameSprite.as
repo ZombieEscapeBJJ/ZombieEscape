@@ -15,23 +15,6 @@ package Entities
  
 		protected var image:BitmapData;
 		protected var image_sprite:Shape;
-		public var width:int;
-		public var height:int;
-		
-		public function GameSprite(x:int, y:int, width:int, height:int) 
-		{
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-		}
-		
-		public function Render():void
-		{
-			
-		}
-		
-		public function Update():void
 	 
 		public function GameSprite(x:int, y:int, width:int, height:int, angle:int=0)
 		{

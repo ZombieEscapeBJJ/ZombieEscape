@@ -37,8 +37,8 @@ package Entities.Zombies
 		
 		override public function Update():void
 		{
-			var bobX:Number = 80;	//update to Bob's x coordinate
-			var bobY:Number = 80;	//update to Bob's y coordinate
+			var bobX:Number = Game.bob.x;	//update to Bob's x coordinate
+			var bobY:Number = Game.bob.y;	//update to Bob's y coordinate
 			var xDiff:Number = this.x - bobX; 
 			var yDiff:Number = this.y - bobY;
 			var radian:Number = Math.atan2(yDiff, xDiff);

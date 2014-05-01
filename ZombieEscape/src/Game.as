@@ -2,31 +2,28 @@ package
 {
 	import Entities.Bob;
 	import Entities.Zombies.Zombie;
-    import flash.display.Bitmap;
-    import flash.display.BitmapData;
-	import flash.text.TextFormat;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Rectangle;
 	import flash.utils.getTimer;
+	import UI.Screen;
+	import flash.text.TextFormat;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-    import flash.geom.Rectangle;
-    import flash.utils.getTimer;
-	import flash.media.Sound; 
 	import flash.net.URLRequest;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import UI.Screen;
+	
+	
  
 	public class Game
 	{
 		public var bitmap:Bitmap;
 		public static var Renderer:BitmapData;
  
-		private var bob:Bob;
+		public static var bob:Bob;
  
 		private var keys_down:Array
  
@@ -34,26 +31,29 @@ package
 		private const UP:int = 38;
 		private const RIGHT:int = 39;
 		private const SPACE:int = 32;
+		private const DOWN:int = 40;
 		
+		// menu items
 		private var main_menu_screen:Screen;
-		
 		private var state:int;
 		public const MAIN_MENU:int = 0;
+		public const PLAYING:int = 1;
+		
+		// zombies
 		public const ZOMBIE_TEST:int = 1;
-		
 		private var zombie:Zombie;
-		
-		private const DOWN:int = 40;
  
+		// clicking
+		public static var mouse_down:Boolean;
+		public static var mouse_click:Boolean;
+		public static var mouse_pos:Point;
+		
 		public function Game(stageWidth:int, stageHeight:int)
 		{
 			trace("Game created");
-			Renderer = new BitmapData(stageWidth, stageHeight, false, 0x000000);
+			Renderer = new BitmapData(stageWidth, stageHeight, false, 0xffffff);
 			bitmap = new Bitmap(Renderer);
  
-			bob = new Bob(Renderer.width / 2 - 5, Renderer.height / 2 - 10, 10, 20);
-			keys_down = new Array();
-			
 			var title:TextFormat = new TextFormat("Courier", 50, 0x000000, true);
 			title.align = "center";
 			title.bold = true;
@@ -79,7 +79,7 @@ package
 			0x000000, "Courier",
 			10, true,
 			0x666666, 0x999999,
-			StartGame);
+			ShowMainMenu);
 			
 			main_menu_screen.AddTextButton(
 			3*(Renderer.width / 4) - 75, Renderer.height - 100,
@@ -88,61 +88,63 @@ package
 			0x000000, "Courier",
 			10, true,
 			0x666666, 0x999999,
-			StartGame);
+			ShowMainMenu);
 			
+			bob = new Bob(Renderer.width / 2 - 5, Renderer.height / 2 - 10, 10, 20);
 			zombie = new Zombie(0, 0, 1);
+			keys_down = new Array();
+			mouse_down = false;
+			mouse_click = false;
+			mouse_pos = new Point(0, 0);
 			
-			state = ZOMBIE_TEST;
+			state = MAIN_MENU;
 		}
 		
-		public function ShowMainMenu():void
-		{
+		public function ShowMainMenu():void {
 			state = MAIN_MENU;
+		}
+		
+		public function StartGame():void {
+			trace("It got here");
+			state = PLAYING;
 		}
 		
 		public function Render():void
 		{
 			Renderer.lock();
-			Renderer.fillRect(new Rectangle(0, 0, Renderer.width, Renderer.height), 0x000000);
+			Renderer.fillRect(new Rectangle(0, 0, Renderer.width, Renderer.height), 0xffffff);
  
-			bob.Render();
- 
-			Renderer.unlock();
-			Renderer.fillRect(new Rectangle(0, 0, Renderer.width, Renderer.height), 0xFFFFFF);
-			
 			if (state == MAIN_MENU) {
 				main_menu_screen.Render(Renderer);
-			} else if (state == ZOMBIE_TEST) {
+			} else {
+				bob.Render();
 				zombie.Render();
 			}
-			
-			
-	 
+ 
 			Renderer.unlock();
 		}
  
 		public function Update():void
 		{
-			if (CheckKeyDown(LEFT))
-				bob.RotateLeft();
- 
-			if (CheckKeyDown(RIGHT))
-				bob.RotateRight();
- 
-			if (CheckKeyDown(UP))
-						bob.Thrust(1);
-			if (CheckKeyDown(DOWN))
-				bob.Thrust( -1);
- 
-			bob.Update();
-			zombie.Update();
- 
+			if (state == MAIN_MENU) {
+				main_menu_screen.Update();
+			} else {
+				if (CheckKeyDown(LEFT))
+					bob.RotateLeft();
+	 
+				if (CheckKeyDown(RIGHT))
+					bob.RotateRight();
+	 
+				if (CheckKeyDown(UP))
+							bob.Thrust(1);
+				if (CheckKeyDown(DOWN))
+					bob.Thrust( -1);
+	 
+				bob.Update();
+				zombie.Update();
+			}
 		}
- 		
-		public function StartGame():void {
-		
-		}
-		
+ 
 		public function KeyUp(e:KeyboardEvent):void
 		{
 			//position of key in the array
@@ -182,6 +184,23 @@ package
 					break;
 				}
 			return answer;
+		}
+		
+		public function MoveMouse(e:MouseEvent):void
+		{
+			mouse_pos.x = e.stageX;
+			mouse_pos.y = e.stageY;
+		}
+		
+		public function MouseDown(e:MouseEvent):void
+		{
+			mouse_down = true;
+		}
+		
+		public function MouseUp(e:MouseEvent):void
+		{
+			mouse_down = false;
+			mouse_click = true;
 		}
 	}
 }

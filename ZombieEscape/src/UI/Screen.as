@@ -68,19 +68,19 @@ package UI
 		
 		override public function Update():void
 		{
-			//for (var i:int = 0; i < buttons.length; i++)
-			//{
-				//buttons[i].Update();
-				//if (Game.mouse_pos.x >= x + buttons[i].x && Game.mouse_pos.x <= x + buttons[i].x + buttons[i].width)
-				//{
-					//if (Game.mouse_pos.y >= y + buttons[i].y && Game.mouse_pos.y <= y + buttons[i].y + buttons[i].height)
-					//{
-						//buttons[i].hovered = true;
-						//if (Game.mouse_click)
-							//buttons[i].clicked = true;
-					//}
-				//}
-			//}
+			for (var i:int = 0; i < buttons.length; i++)
+			{
+				buttons[i].Update();
+				if (Game.mouse_pos.x >= x + buttons[i].x && Game.mouse_pos.x <= x + buttons[i].x + buttons[i].width)
+				{
+					if (Game.mouse_pos.y >= y + buttons[i].y && Game.mouse_pos.y <= y + buttons[i].y + buttons[i].height)
+					{
+						buttons[i].hovered = true;
+						if (Game.mouse_click)
+							buttons[i].clicked = true;
+					}
+				}
+			}
 		}
 		
 	}
