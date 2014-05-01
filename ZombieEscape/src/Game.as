@@ -1,7 +1,7 @@
 package
 {
 	import Entities.Bob;
-	import Entities.Zombies.Zombie;
+	import Entities.Zombies.*;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -96,6 +96,7 @@ package
 			mouse_down = false;
 			mouse_click = false;
 			mouse_pos = new Point(0, 0);
+			zombie = new FastZombie(0, 0);
 			
 			state = MAIN_MENU;
 		}

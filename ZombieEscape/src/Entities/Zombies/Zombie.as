@@ -12,21 +12,19 @@ package Entities.Zombies
 	 */
 	public class Zombie extends GameSprite
 	{
-		private var speed:int;
+		private var speed:Number;
 		private var velocity:Point;
 		private var direction:Number;
 		protected var image_shape:Shape;
 		
-		public function Zombie(x:int, y:int, speed:int) 
+		public function Zombie(x:int, y:int, speed:Number) 
 		{
 			super(x, y, 5, 5);
 			this.speed = speed;
 			this.velocity = pointToBob();
 			image_shape = new Shape;
-			image_shape.graphics.beginFill(0xFF0000);
-			image_shape.graphics.drawCircle(0, 0, 6);
-			image_shape.graphics.endFill();
 		}
+		
 		
 		override public function Render():void
 		{
