@@ -14,7 +14,7 @@ package
 	import flash.geom.Point;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
-	import flash.text.TextFormat;
+	import flash.text.TextFormat; 
 	
 	
  
@@ -35,9 +35,18 @@ package
 		
 		// menu items
 		private var main_menu_screen:Screen;
+		
+		// playing state
+		private var playing_screen:Screen;
+		
+		// paused
+		private var paused_screen:Screen;
+		
+		// states
 		private var state:int;
 		public const MAIN_MENU:int = 0;
 		public const PLAYING:int = 1;
+		public const PAUSED:int = 2;
 		
 		// zombies
 		public const ZOMBIE_TEST:int = 1;
@@ -90,6 +99,52 @@ package
 			0x666666, 0x999999,
 			ShowMainMenu);
 			
+			playing_screen = new Screen(0, 0, Renderer.width, Renderer.height, true, 0xFFFFFF);
+			
+			playing_screen.AddRect(0, 0, Renderer.width, 50, 0x000000);
+			playing_screen.AddRect(0, Renderer.height-50, Renderer.width, 50, 0x000000);
+			
+			playing_screen.AddTextButton(
+			10, 10,
+			100, 30,
+			"Pause", null,
+			0x000000, "Courier",
+			10, true,
+			0x666666, 0x999999,
+			PauseGame);
+			
+			playing_screen.AddTextButton(
+			10, Renderer.height-40,
+			100, 30,
+			"Couch", null,
+			0x000000, "Courier",
+			10, true,
+			0x666666, 0x999999,
+			SelectCouch);
+			
+			playing_screen.AddTextButton(
+			120, Renderer.height-40,
+			100, 30,
+			"Desk", null,
+			0x000000, "Courier",
+			10, true,
+			0x666666, 0x999999,
+			SelectDesk);
+			
+			paused_screen = new Screen(0, 0, Renderer.width, Renderer.height, true, 0xFFFFFF);
+			
+			paused_screen.AddTextButton(
+			10, 10,
+			100, 30,
+			"Resume", null,
+			0x000000, "Courier",
+			10, true,
+			0x666666, 0x999999,
+			StartGame);
+			
+			paused_screen.AddText(0, 50, Renderer.width, 100, "GAME PAUSED", title);
+			
+			
 			bob = new Bob(Renderer.width / 2 - 5, Renderer.height / 2 - 10, 10, 20);
 			zombie = new Zombie(0, 0, 1);
 			keys_down = new Array();
@@ -110,6 +165,18 @@ package
 			state = PLAYING;
 		}
 		
+		public function PauseGame():void {
+			state = PAUSED;
+		}
+		
+		public function SelectCouch():void {
+			
+		}
+		
+		public function SelectDesk():void {
+			
+		}
+		
 		public function Render():void
 		{
 			Renderer.lock();
@@ -117,9 +184,12 @@ package
  
 			if (state == MAIN_MENU) {
 				main_menu_screen.Render(Renderer);
-			} else {
+			} else if (state == PLAYING) {
+				playing_screen.Render(Renderer);
 				bob.Render();
 				zombie.Render();
+			} else if (state == PAUSED) {
+				paused_screen.Render(Renderer);
 			}
  
 			Renderer.unlock();
@@ -129,7 +199,9 @@ package
 		{
 			if (state == MAIN_MENU) {
 				main_menu_screen.Update();
-			} else {
+			} else if (state == PLAYING) {
+				playing_screen.Update();
+				
 				if (CheckKeyDown(LEFT))
 					bob.RotateLeft();
 	 
@@ -143,7 +215,11 @@ package
 	 
 				bob.Update();
 				zombie.Update();
+			} else if (state == PAUSED) {
+				paused_screen.Update();
 			}
+			
+			mouse_click = false;
 		}
  
 		public function KeyUp(e:KeyboardEvent):void

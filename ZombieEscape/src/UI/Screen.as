@@ -11,18 +11,21 @@ package UI
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.display.Shape;
 	 
 	public class Screen extends UI_Element 
 	{
 		
 		public var texts:Array;
 		public var buttons:Array;
+		public var shapes:Array;
 		
 		public function Screen(x:Number = 0, y:Number = 0, width:int = 10, height:int = 10, background:Boolean = true, bg_color:uint = 0x888888) 
 		{
 			super(x, y, width, height, background, bg_color);
 			texts = new Array();
 			buttons = new Array();
+			shapes = new Array();
 			
 		}
 		
@@ -46,6 +49,15 @@ package UI
 			buttons.push(new TextButton(x, y, width, height, text, format, background, bg_color, bg_color2, func));
 		}
 		
+		public function AddRect(x:Number, y:Number, width:int, height:int, color:uint):void {
+			var rectangle:Shape = new Shape;
+			rectangle.graphics.beginFill(color); // choosing the colour for the fill, here it is red
+			rectangle.graphics.drawRect(x, y, width, height); // (x spacing, y spacing, width, height)
+			rectangle.graphics.endFill();
+			
+			shapes.push(rectangle);
+		}
+		
 		override public function Render(Renderer:BitmapData):void
 		{
 			if (!visible)
@@ -55,6 +67,10 @@ package UI
 				image.fillRect(new Rectangle(0, 0, width, height), bg_color);
  
 			//next we'll render the texts and buttons
+			for (var k:int = 0; k < shapes.length; k++) {
+				image.draw(shapes[k]);
+			}
+			
 			for (var i:int = 0; i < texts.length; i++)
 			{
 				image.draw(texts[i], new Matrix(1, 0, 0, 1, texts[i].x , texts[i].y ));
