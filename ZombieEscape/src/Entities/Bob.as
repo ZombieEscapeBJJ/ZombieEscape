@@ -43,6 +43,22 @@ package Entities
 			speed.x *= friction;
 			speed.y *= friction;
 		}
+		public function DiagonalTopRight():void {
+			
+		}
+		
+		public function DiagonalTopLeft():void {
+			
+		}
+		
+		public function DiagonalBottomRight():void {
+			
+		}
+		
+		public function DiagonalBottomLeft():void {
+			
+		}
+		
 		public function RotateLeft():void
 		{
 			//first convert angle in rads
@@ -61,13 +77,13 @@ package Entities
 			var angle_deg:int = angle * (180.0 / Math.PI);
 			if (dir == 1)
 			{
-				speed.x +=speed_multi * Math.sin(angle);
-				speed.y -= speed_multi * Math.cos(angle);
+				speed.x +=speed_multi * Math.sin(0);
+				speed.y -= speed_multi * Math.cos(0);
 			}
 			else
 			{
-				speed.x -=speed_multi * Math.sin(angle);
-				speed.y += speed_multi * Math.cos(angle);
+				speed.x -=speed_multi * Math.sin(0);
+				speed.y += speed_multi * Math.cos(0);
 			}
 		}
 	}
