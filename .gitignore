@@ -2,7 +2,6 @@
 bin/
 bin-debug/
 bin-release/
-*.as3proj
 
 # Other files and folders
 .settings/
@@ -10,6 +9,3 @@ bin-release/
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
-ZombieEscape/obj/ZombieEscapeConfig.old
-ZombieEscape/obj/ZombieEscapeConfig.xml
-ZombieEscape/ZombieEscape.as3proj
