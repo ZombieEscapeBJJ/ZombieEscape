@@ -13,7 +13,7 @@ package Entities
  
 		private var speed:Point;
 		private var speed_multi:Number = .5;
-		private var friction:Number = .95;
+		private var friction:Number = .85;
  
 		public function Bob(x:int, y:int, width:int, height:int)
 		{
@@ -43,35 +43,20 @@ package Entities
 			speed.x *= friction;
 			speed.y *= friction;
 		}
-		public function DiagonalTopRight():void {
-			
+		
+		public function MoveSideways(dir:int=1):void {
+			if (dir == 1)
+			{
+				speed.x +=speed_multi * Math.sin(Math.PI / 2);
+				speed.y -= speed_multi * Math.cos(Math.PI / 2);
+			}
+			else
+			{
+				speed.x -=speed_multi * Math.sin(Math.PI / 2);
+				speed.y += speed_multi * Math.cos(Math.PI / 2);
+			}
 		}
 		
-		public function DiagonalTopLeft():void {
-			
-		}
-		
-		public function DiagonalBottomRight():void {
-			
-		}
-		
-		public function DiagonalBottomLeft():void {
-			
-		}
-		
-		public function RotateLeft():void
-		{
-			//first convert angle in rads
-			var angle_deg:int = Math.round(angle * (180.0 / Math.PI));
-			angle_deg -= rotate_amount;
-			angle = angle_deg * (Math.PI / 180.0);
-		}
-		public function RotateRight():void
-		{
-			var angle_deg:int = angle * (180.0 / Math.PI);
-			angle_deg += rotate_amount;
-			angle = angle_deg * (Math.PI / 180.0);
-		}
 		public function Thrust(dir:int=1):void
 		{
 			var angle_deg:int = angle * (180.0 / Math.PI);

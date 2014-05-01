@@ -203,13 +203,13 @@ package
 				playing_screen.Update();
 				
 				if (CheckKeyDown(LEFT))
-					bob.RotateLeft();
+					bob.MoveSideways(-1);
 	 
 				if (CheckKeyDown(RIGHT))
-					bob.RotateRight();
+					bob.MoveSideways(1);
 	 
 				if (CheckKeyDown(UP))
-							bob.Thrust(1);
+					bob.Thrust(1);
 				if (CheckKeyDown(DOWN))
 					bob.Thrust( -1);
 	 
