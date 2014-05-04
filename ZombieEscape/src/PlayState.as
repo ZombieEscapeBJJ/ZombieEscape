@@ -21,20 +21,35 @@ package
 		public var test:TestObj;
 		public var Rect:Shape;
 		public var zombie:ZombieTest;
+		public var state:Number;
+		
+		private var PLAY_STATE:Number = 0;
+		private var COUCH_STATE:Number = 1;
 		public function PlayState() 
 		{
-			add(new FlxText(0, 0, 100, "Hello, Play!"));
 			add(bob = new BobFlx(10, 10));
 			add(test = new TestObj(50, 50));
 			add(zombie = new ZombieTest(100, 0));
+			add(new FlxButton(FlxG.width / 2 - 20, FlxG.height - 20, "Couch", placeCouch));
+			state = PLAY_STATE;
 		}
 	
 		override public function update():void {
 			super.update();
+			if (state == COUCH_STATE) {
+				if (FlxG.mouse.pressed()) {
+					add(new TestObj(FlxG.mouse.x, FlxG.mouse.y));
+				}
+			}
 			bob.update();
 			test.update();
 			zombie.update();
+			FlxG.collide(zombie, test);
 			FlxG.collide(bob, test);
+		}
+		
+		public function placeCouch():void {
+			state = COUCH_STATE;
 		}
 	}
 
