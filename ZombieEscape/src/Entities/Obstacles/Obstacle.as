@@ -1,38 +1,23 @@
-package Entities.Obstacles  
+package Entities.Obstacles
 {
-	import Entities.GameSprite;
-	import flash.display.Shape;
-	import flash.geom.Matrix;
-	
+	import org.flixel.FlxObject;
+	import org.flixel.FlxSprite;
+
 	/**
 	 * ...
-	 * @author Brandon
+	 * @author James Okada
 	 */
-	
-		
-	public class Obstacle extends GameSprite
+
+	public class Obstacle extends FlxSprite 
 	{
-		public var image_shape:Shape;
-
-		
-		public function Obstacle(x:int, y:int)  
-		{
-			super(x, y, 5, 5);
-			image_shape = new Shape;
+		protected static const RUN_SPEED:int = 0;
+		public function Obstacle(X:int, Y:int):void {
+			super(X, Y);
+			loadGraphic(Assets.BOOKCASE);
+			immovable = true;
 		}
-		
-		override public function Render():void
-		{
-			var matrix:Matrix = new Matrix();
-			matrix.translate(x, y);
-			Game.Renderer.draw(image_shape, matrix);
+		public override function update():void {
+			
 		}
-		
-		override public function Update():void
-		{
-			//strong zombie move
-		}
-		
 	}
-
 }

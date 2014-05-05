@@ -17,8 +17,7 @@ package
 	import flash.geom.Point;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
-	import flash.text.TextFormat; 
-	
+	import flash.text.TextFormat;
 	
  
 	public class Game
