@@ -1,42 +1,25 @@
-package Entities.Zombies  
+package Entities.Zombies 
 {
-	import Entities.GameSprite;
-	import flash.display.Shape;
 	import flash.geom.Point;
-	import flash.geom.Matrix;
-
-	
+	import org.flixel.FlxSprite;
 	/**
 	 * ...
-	 * @author Brandon
+	 * @author James Okada
 	 */
-	public class Zombie extends GameSprite
-	{
-		private var speed:Number;
-		private var velocity:Point;
-		private var direction:Number;
-		protected var image_shape:Shape;
+	public class Zombie extends FlxSprite {
 		
-		public function Zombie(x:int, y:int, speed:Number) 
-		{
-			super(x, y, 5, 5);
-			this.speed = speed;
-			this.velocity = pointToBob();
-			image_shape = new Shape;
+		private var speed:Number = .1;
+		public function Zombie(X:int, Y:int) {
+			super(X, Y);
+			loadGraphic(Assets.ARMOR);
+			var bobPoint:Point = pointToBob();
+			velocity.x = bobPoint.x;
+			velocity.y = bobPoint.y;
 		}
 		
-		
-		override public function Render():void
-		{
-			var matrix:Matrix = new Matrix();
-			matrix.translate(x, y);
-			Game.Renderer.draw(image_shape, matrix);
-		}
-		
-		override public function Update():void
-		{
-			var bobX:Number = Game.bob.x;	//update to Bob's x coordinate
-			var bobY:Number = Game.bob.y;	//update to Bob's y coordinate
+		public override function update():void {
+			var bobX:Number = PlayState.LEVEL.bob.x	//update to Bob's x coordinate
+			var bobY:Number = PlayState.LEVEL.bob.y;	//update to Bob's y coordinate
 			var xDiff:Number = this.x - bobX; 
 			var yDiff:Number = this.y - bobY;
 			var radian:Number = Math.atan2(yDiff, xDiff);

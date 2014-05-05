@@ -1,18 +1,20 @@
-package Entities.Obstacles  
+package Entities.Obstacles
 {
-	import Entities.GameSprite;
+	import org.flixel.FlxObject;
+	import org.flixel.FlxSprite;
 	/**
 	 * ...
-	 * @author Brandon
+	 * @author James Okada
 	 */
-	public class Obstacle extends GameSprite
+	public class Obstacle extends FlxSprite 
 	{
-		
-		public function Obstacle() 
-		{
-			
+		protected static const RUN_SPEED:int = 0;
+		public function Obstacle(X:int, Y:int):void {
+			super(X, Y);
+			loadGraphic(Assets.BOOKCASE);
+			immovable = true;
 		}
-		
+		public override function update():void {
+		}
 	}
-
 }
