@@ -12,6 +12,7 @@ package Entities.Levels
 	import Entities.BobFlx;
 	import Entities.Zombies.Zombie;
 	import Entities.Obstacles.Obstacle;
+	import org.flixel.FlxText;
 	/**
 	 * ...
 	 * @author James Okada
@@ -36,7 +37,10 @@ package Entities.Levels
 		public var PLAYING_STATE:Number = 0;
 		public var COUCH_STATE:Number = 1;
 		
-		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
+		protected var numCouches:int;
+		protected var couchButton:FlxButton;
+		
+		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numCouches:int) {
 			super();
 			this.state = state;
 			this.levelSize = levelSize;
@@ -48,6 +52,7 @@ package Entities.Levels
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
 			this.create();
+			this.numCouches = numCouches;
 		}
 
 		public function create():void {
@@ -72,7 +77,8 @@ package Entities.Levels
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
-			add(new FlxButton(10, FlxG.height - 20, "C", placeCouch));
+			couchButton = new FlxButton(10, FlxG.height - 20, "Couch (" + numCouches + ")", placeCouch);
+			add(couchButton);
 		}
 		
 		protected function createCamera():void {
@@ -83,9 +89,11 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
-			if (playState == COUCH_STATE) {
-				if (FlxG.mouse.pressed()) {
+			couchButton.label.text = "Couch (" + numCouches + ")";
+			if (playState == COUCH_STATE && numCouches > 0 ) {
+				if (FlxG.mouse.justReleased() && FlxG.mouse.y < FlxG.height-100) {
 					obstacleGroup.add(new Obstacle(FlxG.mouse.x, FlxG.mouse.y));
+					numCouches--;
 				}
 			}
 			

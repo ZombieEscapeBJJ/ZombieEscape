@@ -3,6 +3,8 @@ package Entities.Levels
 	import org.flixel.FlxState;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
+	import org.flixel.FlxButton;
+	import org.flixel.FlxG;
 	/**
 	 * ...
 	 * @author James Okada
@@ -54,11 +56,11 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
         );
 		
 		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			super(state, levelSize, blockSize);
+			super(state, levelSize, blockSize, 3);
 		}
 		
 		override protected function createMap():void {
