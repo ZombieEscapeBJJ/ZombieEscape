@@ -11,7 +11,7 @@ package Entities.Levels
 	 * ...
 	 * @author James Okada
 	 */
-	public class FirstLevel extends ZELevel {
+	public class Level_2 extends ZELevel {
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -60,7 +60,7 @@ package Entities.Levels
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+		public function Level_2(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize, 10);
 		}
 		
@@ -90,12 +90,15 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
-			//fastZombie = new FastZombie(100, 50);
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 50));
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 100));
+			this.zombieGroup.add(normalZombie = new NormalZombie(100, 150));
+			normalZombie = new NormalZombie(100, 50);
+			fastZombie = new FastZombie(100, 50);
 		}
 		
 		override public function wonLevel():void {
-			FlxG.switchState(new WinState(1));
+			FlxG.switchState(new WinState(2));
 		}
 		
 	}
