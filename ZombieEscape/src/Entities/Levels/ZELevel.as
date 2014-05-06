@@ -28,6 +28,8 @@ package Entities.Levels
 		public var guiGroup:FlxGroup;
 		public var obstacleGroup:FlxGroup;
 		
+		public var bedButton:FlxButton;
+		
 		public var bob:BobFlx;
 		public var zombie:Zombie;
 		
@@ -72,7 +74,10 @@ package Entities.Levels
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
-			add(new FlxButton(10, FlxG.height - 20, "C", placeCouch));
+			bedButton = new FlxButton(10, FlxG.height - 27);
+			bedButton.loadGraphic(Assets.BED);
+			bedButton.onDown = selectedCouch;
+			add(bedButton);
 		}
 		
 		protected function createCamera():void {
@@ -84,7 +89,8 @@ package Entities.Levels
 		override public function update():void {
 			super.update();
 			if (playState == COUCH_STATE) {
-				if (FlxG.mouse.pressed()) {
+				bedButton.loadGraphic(Assets.BED_SELECTED);
+				if (FlxG.mouse.justReleased()) {
 					obstacleGroup.add(new Obstacle(FlxG.mouse.x, FlxG.mouse.y));
 				}
 			}
@@ -98,7 +104,7 @@ package Entities.Levels
 			}
 		}
 		
-		public function placeCouch():void {
+		public function selectedCouch():void {
 			playState = COUCH_STATE;
 		}
 	}
