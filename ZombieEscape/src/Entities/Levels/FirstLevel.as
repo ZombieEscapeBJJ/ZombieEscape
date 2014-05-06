@@ -3,6 +3,10 @@ package Entities.Levels
 	import org.flixel.FlxState;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
+	import org.flixel.FlxButton;
+	import org.flixel.FlxG;
+	import Entities.BobFlx;
+	import Entities.Zombies.Zombie;
 	/**
 	 * ...
 	 * @author James Okada
@@ -50,15 +54,14 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2
+			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
 		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			super(state, levelSize, blockSize);
+			super(state, levelSize, blockSize, 10);
 		}
 		
 		override protected function createMap():void {
@@ -66,7 +69,7 @@ package Entities.Levels
 			tiles = new FlxTilemap();
 			tiles.loadMap(
 				FlxTilemap.arrayToCSV(FLOORS, 25),
-				Assets.FLOORS_TILE,
+				Assets.CARPET_TILE,
 				tileSize.x,
 				tileSize.y,
 				0,
@@ -83,6 +86,12 @@ package Entities.Levels
                 tileSize.y // height of each tile (in pixels)
             );
             wallGroup.add(tiles);
+		}
+		
+		override protected function createPlayer():void {
+			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
+			this.zombieGroup.add(zombie = new Zombie(100, 50));
+			zombie = new Zombie(100, 50);
 		}
 		
 	}

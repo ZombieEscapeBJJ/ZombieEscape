@@ -13,7 +13,7 @@ package Entities.Obstacles
 		protected static const RUN_SPEED:int = 0;
 		public function Obstacle(X:int, Y:int):void {
 			super(X, Y);
-			loadGraphic(Assets.BOOKCASE);
+			//loadGraphic(Assets.BOOKCASE);
 			immovable = true;
 		}
 		public override function update():void {

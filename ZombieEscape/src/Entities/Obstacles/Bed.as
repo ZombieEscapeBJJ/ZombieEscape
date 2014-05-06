@@ -7,10 +7,10 @@ package Entities.Obstacles
 	public class Bed extends Obstacle 
 	{
 		
-		public function Bed() 
+		public function Bed(X:int, Y:int) 
 		{
-			super();
-			
+			super(X, Y);
+			loadGraphic(Assets.BED);
 		}
 		
 	}
