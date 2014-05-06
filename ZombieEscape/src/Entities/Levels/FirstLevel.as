@@ -15,7 +15,6 @@ package Entities.Levels
 	 * @author James Okada
 	 */
 	public class FirstLevel extends ZELevel {
-		public var fastZombie:FastZombie;
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
