@@ -32,7 +32,7 @@ package Entities
 			super.update();
 			acceleration.x = 0;
 			acceleration.y = 0;
-			if (PlayState.LEVEL.playState != PlayState.LEVEL.PAUSED_STATE && PlayState.LEVEL.playState != PlayState.LEVEL.COUCH_STATE) {
+			if (PlayState.LEVEL.playState == PlayState.LEVEL.PLAYING_STATE) {
 				if (FlxG.keys.LEFT) {
 					acceleration.x = -drag.x;
 				} else if (FlxG.keys.RIGHT) {
