@@ -151,7 +151,7 @@ package Entities.Levels
 			if (playState == BED_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed)) {
+					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed.SIZE)) {
 						obstacleGroup.add(new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2));
 						numBeds--;
 					}
@@ -159,8 +159,7 @@ package Entities.Levels
 			} else if (playState == LAMP_STATE && numLamps > 0) {
 				lampButton.loadGraphic(Assets.LAMP_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					if (FlxG.mouse.y < FlxG.height - 50
-					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Lamp.SIZE)) {
 						obstacleGroup.add(new Lamp(FlxG.mouse.x, FlxG.mouse.y));
 						numLamps--;
 					}
@@ -168,8 +167,7 @@ package Entities.Levels
 			} else if (playState == COUCH_STATE && numCouches > 0) {
 				couchButton.loadGraphic(Assets.COUCH_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					if (FlxG.mouse.y < FlxG.height - 50
-					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Couch.SIZE)) {
 						obstacleGroup.add(new Couch(FlxG.mouse.x, FlxG.mouse.y));
 						numCouches--;
 					}
@@ -177,8 +175,7 @@ package Entities.Levels
 			} else if (playState == TABLE_STATE && numTables > 0) {
 				tableButton.loadGraphic(Assets.TABLE_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					if (FlxG.mouse.y < FlxG.height - 50
-					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
 						obstacleGroup.add(new Table(FlxG.mouse.x, FlxG.mouse.y));
 						numTables--;
 					}
@@ -233,19 +230,23 @@ package Entities.Levels
 			tableButton.exists = false;
 		}
 		
-		public function checkValidPlacement(mouseX:int, mouseY:int, obstacle:Obstacle):Boolean {
+		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
 				return false;
 			}
-			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacle.SIZE.x, obstacle.SIZE.y), bob)) {
+			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
 				return false;
 			}
 			for (var i:int = 0; i < zombieGroup.length; i++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacle.SIZE.x, obstacle.SIZE.y), zombieGroup.members[i])) {
+				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
 					return false;
 				}
 			}
 			return true;
+			
+		}
+		
+		public function wonLevel():void {
 			
 		}
 	}
