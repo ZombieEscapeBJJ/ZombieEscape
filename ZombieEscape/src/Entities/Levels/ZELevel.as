@@ -1,5 +1,6 @@
 package Entities.Levels 
 {
+	import Entities.FinishLine;
 	import GameOverState;
 	import org.flixel.FlxBasic;
 	import org.flixel.FlxGroup;
@@ -36,6 +37,7 @@ package Entities.Levels
 		public var bob:BobFlx;
 		public var normalZombie:NormalZombie;
 		public var fastZombie:FastZombie;
+		public var finish:FinishLine;
 		public var playerRadius:FlxSprite;
 		
 		public var playState:Number;
@@ -63,7 +65,7 @@ package Entities.Levels
 			bedButton = new FlxButton(10, FlxG.height - 27);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			this.playerRadius = new FlxSprite();
-
+			
 			this.create();
 			this.numBeds = numBeds;
 		}
@@ -77,6 +79,7 @@ package Entities.Levels
 		protected function createMap():void {
 			
 		}
+		
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
 			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
@@ -87,6 +90,7 @@ package Entities.Levels
 			add(floorGroup);
 			add(wallGroup);
 			add(bob);
+			add(finish);
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
@@ -110,11 +114,6 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
-			//FlxG.collide();
-			
-			if (bob.x <= 100 && bob.y <= 100) {
-				wonLevel();
-			}
 			
 			if (playState == COUCH_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
@@ -133,6 +132,8 @@ package Entities.Levels
 			
 			if (FlxG.collide(bob, zombieGroup)) {
 				FlxG.switchState(new GameOverState());
+			} else if (FlxG.collide(bob, finish)) {
+				wonLevel();
 			}
 		}
 		

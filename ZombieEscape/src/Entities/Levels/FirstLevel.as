@@ -7,6 +7,8 @@ package Entities.Levels
 	import org.flixel.FlxG;
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
+	import Entities.FinishLine;
+	
 	/**
 	 * ...
 	 * @author James Okada
@@ -41,7 +43,7 @@ package Entities.Levels
         protected static var WALLS:Array = new Array(
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
@@ -89,9 +91,9 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
+			this.finish = new FinishLine(0, 16);
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
 			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
-			//fastZombie = new FastZombie(100, 50);
 		}
 		
 		override public function wonLevel():void {

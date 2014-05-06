@@ -13,6 +13,8 @@ package
 		public static var WALLS_TILE:Class;
 		[Embed(source="../assets/tiles/floor_wood (opengameart - Redshrike - ccby30).png")]
 		public static var FLOORS_TILE:Class;
+		[Embed(source = "../assets/tiles/checker_large.png")]
+		public static var FINISH_TILE:Class;
 		[Embed(source="../assets/sprites/bookcase (opengameart - Redshrike - ccby30).png")]
 		public static var BOOKCASE:Class;
 		[Embed(source = "../assets/sprites/armor (opengameart - Redshrike - ccby30).png")]
