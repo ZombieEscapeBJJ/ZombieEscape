@@ -11,7 +11,8 @@ package Entities.Levels
 	import org.flixel.FlxButton;
 	import Entities.BobFlx;
 	import Entities.Zombies.Zombie;
-	import Entities.Obstacles.Obstacle;
+	import Entities.Obstacles.Bed;
+	import org.flixel.FlxText;
 	/**
 	 * ...
 	 * @author James Okada
@@ -38,7 +39,10 @@ package Entities.Levels
 		public var PLAYING_STATE:Number = 0;
 		public var COUCH_STATE:Number = 1;
 		
-		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
+		protected var numBeds:int;
+		protected var bedButton:FlxButton;
+		
+		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numBeds:int) {
 			super();
 			this.state = state;
 			this.levelSize = levelSize;
@@ -50,6 +54,7 @@ package Entities.Levels
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
 			this.create();
+			this.numBeds = numBeds;
 		}
 
 		public function create():void {
@@ -88,10 +93,12 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
+			bedButton.label.text = "Bed (" + numBeds + ")";
 			if (playState == COUCH_STATE) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					obstacleGroup.add(new Obstacle(FlxG.mouse.x, FlxG.mouse.y));
+					obstacleGroup.add(new Bed(FlxG.mouse.x, FlxG.mouse.y));
+					numBeds--;
 				}
 			}
 			
