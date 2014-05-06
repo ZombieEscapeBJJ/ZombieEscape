@@ -5,6 +5,8 @@ package Entities.Levels
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
+	import Entities.BobFlx;
+	import Entities.Zombies.Zombie;
 	/**
 	 * ...
 	 * @author James Okada
@@ -85,6 +87,12 @@ package Entities.Levels
                 tileSize.y // height of each tile (in pixels)
             );
             wallGroup.add(tiles);
+		}
+		
+		override protected function createPlayer():void {
+			bob = new BobFlx(FlxG.width-20, FlxG.height-20);
+			this.zombieGroup.add(zombie = new Zombie(100, 50));
+			zombie = new Zombie(100, 50);
 		}
 		
 	}

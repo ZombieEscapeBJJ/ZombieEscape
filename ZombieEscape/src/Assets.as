@@ -17,6 +17,8 @@ package
 		public static var BOOKCASE:Class;
 		[Embed(source = "../assets/sprites/armor (opengameart - Redshrike - ccby30).png")]
 		public static var ARMOR:Class;
+		[Embed(source = "../assets/sprites/bed (opengameart - Redshrike - ccby30).png")]
+		public static var BED:Class;
 		
 		public function Assets() 
 		{

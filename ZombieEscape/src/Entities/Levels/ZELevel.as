@@ -11,7 +11,7 @@ package Entities.Levels
 	import org.flixel.FlxButton;
 	import Entities.BobFlx;
 	import Entities.Zombies.Zombie;
-	import Entities.Obstacles.Obstacle;
+	import Entities.Obstacles.Bed;
 	import org.flixel.FlxText;
 	/**
 	 * ...
@@ -37,10 +37,10 @@ package Entities.Levels
 		public var PLAYING_STATE:Number = 0;
 		public var COUCH_STATE:Number = 1;
 		
-		protected var numCouches:int;
-		protected var couchButton:FlxButton;
+		protected var numBeds:int;
+		protected var bedButton:FlxButton;
 		
-		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numCouches:int) {
+		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numBeds:int) {
 			super();
 			this.state = state;
 			this.levelSize = levelSize;
@@ -52,7 +52,7 @@ package Entities.Levels
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
 			this.create();
-			this.numCouches = numCouches;
+			this.numBeds = numBeds;
 		}
 
 		public function create():void {
@@ -77,8 +77,8 @@ package Entities.Levels
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
-			couchButton = new FlxButton(10, FlxG.height - 20, "Couch (" + numCouches + ")", placeCouch);
-			add(couchButton);
+			bedButton = new FlxButton(10, FlxG.height - 20, "Bed (" + numBeds + ")", placeBed);
+			add(bedButton);
 		}
 		
 		protected function createCamera():void {
@@ -89,11 +89,11 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
-			couchButton.label.text = "Couch (" + numCouches + ")";
-			if (playState == COUCH_STATE && numCouches > 0 ) {
-				if (FlxG.mouse.justReleased() && FlxG.mouse.y < FlxG.height-100) {
-					obstacleGroup.add(new Obstacle(FlxG.mouse.x, FlxG.mouse.y));
-					numCouches--;
+			bedButton.label.text = "Bed (" + numBeds + ")";
+			if (playState == COUCH_STATE && numBeds > 0 ) {
+				if (FlxG.mouse.justReleased() && FlxG.mouse.y < FlxG.height-50) {
+					obstacleGroup.add(new Bed(FlxG.mouse.x, FlxG.mouse.y));
+					numBeds--;
 				}
 			}
 			
@@ -106,7 +106,7 @@ package Entities.Levels
 			}
 		}
 		
-		public function placeCouch():void {
+		public function placeBed():void {
 			playState = COUCH_STATE;
 		}
 	}
