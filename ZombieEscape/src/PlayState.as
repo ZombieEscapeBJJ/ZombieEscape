@@ -1,7 +1,7 @@
 package  
 {
-	import Entities.Levels.FirstLevel;
-	import Entities.Levels.ZELevel;
+	import Entities.Levels.*;
+	import Levels.LevelOne;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxState;
 	import org.flixel.FlxG;
@@ -16,11 +16,14 @@ package
 		
 		public static var LEVEL:ZELevel = null;
 		
-		public function PlayState() 
+		private var LEVELS:Array = [FirstLevel, Level_2];
+		
+		public function PlayState(level:int) 
 		{
 			FlxG.mouse.show();
 			
-			LEVEL = new FirstLevel(this, LEVEL_SIZE, BLOCK_SIZE);
+			LEVEL = new LEVELS[level - 1](this, LEVEL_SIZE, BLOCK_SIZE);
+			
 			this.add(LEVEL);
 		}
 		
