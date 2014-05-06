@@ -1,6 +1,9 @@
 package
 {
 	import Entities.Bob;
+	import Entities.Obstacles.Couch;
+	import Entities.Obstacles.Obstacle;
+	import Entities.Obstacles.Table;
 	import Entities.Zombies.*;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -32,6 +35,8 @@ package
 		private const SPACE:int = 32;
 		private const DOWN:int = 40;
 		
+		private var furniture:Vector.<Obstacle>;
+		
 		// menu items
 		private var main_menu_screen:Screen;
 		
@@ -48,13 +53,20 @@ package
 		public const PAUSED:int = 2;
 		
 		// zombies
-		public const ZOMBIE_TEST:int = 1;
 		private var zombie:Zombie;
  
 		// clicking
 		public static var mouse_down:Boolean;
 		public static var mouse_click:Boolean;
 		public static var mouse_pos:Point;
+		
+		private var furniture_state:int;
+		
+		//furniture states
+		public const COUCH:int = 3;
+		public const TABLE:int = 4;
+		public const BED:int = 5;
+		public const DECOY:int = 6;
 		
 		public function Game(stageWidth:int, stageHeight:int)
 		{
@@ -150,7 +162,11 @@ package
 			mouse_down = false;
 			mouse_click = false;
 			mouse_pos = new Point(0, 0);
+			
+			furniture = new Vector.<Obstacle>;
 			zombie = new FastZombie(0, 0);
+			
+			furniture_state = -1;
 			
 			state = MAIN_MENU;
 		}
@@ -169,11 +185,13 @@ package
 		}
 		
 		public function SelectCouch():void {
-			
+			furniture_state = COUCH;
+			trace("furniture state set to couch");
 		}
 		
 		public function SelectDesk():void {
-			
+			furniture_state = TABLE;
+			trace("furniture state set to table");
 		}
 		
 		public function Render():void
@@ -187,6 +205,9 @@ package
 				playing_screen.Render(Renderer);
 				bob.Render();
 				zombie.Render();
+				for (var i:int = 0; i < furniture.length; i++) {
+					furniture[i].Render();
+				}
 			} else if (state == PAUSED) {
 				paused_screen.Render(Renderer);
 			}
@@ -277,6 +298,14 @@ package
 		{
 			mouse_down = false;
 			mouse_click = true;
+			if (furniture_state == COUCH) {
+				trace(e.localX, e.localY);
+				var c:Obstacle = new Couch(e.localX / 2, e.localY / 2);
+				c.Render();
+				furniture.push(c);
+			} else if (furniture_state == TABLE) {
+				furniture.push(new Table(e.stageX, e.stageY));
+			}
 		}
 	}
 }

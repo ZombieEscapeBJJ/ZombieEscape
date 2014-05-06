@@ -10,7 +10,7 @@ package
 		override public function create():void
 		{
 			add(new FlxText(FlxG.width /2 - 20, 0, 100, "You Died!!"));
-			add(new FlxButton(FlxG.width /2 - 20, FlxG.height - 20, "Play Again?", StartOver));
+			add(new FlxButton(FlxG.width /2 - 20, FlxG.height - 20, "Levels", StartOver));
 			FlxG.mouse.show();
 		}
 		override public function update():void
@@ -19,7 +19,7 @@ package
 		}
 		
 		public function StartOver():void {
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new LevelMenuState);
 		}
 	}
 }

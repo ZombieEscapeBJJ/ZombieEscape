@@ -1,6 +1,6 @@
 package Entities.Levels 
 {
-	import Entities.Zombies.FastZombie;
+	import Entities.FinishLine;
 	import org.flixel.FlxState;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
@@ -8,14 +8,11 @@ package Entities.Levels
 	import org.flixel.FlxG;
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
-	import Entities.FinishLine;
-	
 	/**
 	 * ...
 	 * @author James Okada
 	 */
-	public class FirstLevel extends ZELevel {
-		public var fastZombie:FastZombie;
+	public class Level_2 extends ZELevel {
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -64,9 +61,10 @@ package Entities.Levels
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+		public function Level_2(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize);
 			this.numBeds = 10;
+			this.numLamps = 10;
 		}
 		
 		override protected function createMap():void {
@@ -94,13 +92,17 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			this.finish = new FinishLine(0, 16);
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 50));
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 100));
+			this.zombieGroup.add(normalZombie = new NormalZombie(100, 150));
+			normalZombie = new NormalZombie(100, 50);
+			fastZombie = new FastZombie(100, 50);
+			finish = new FinishLine(0, 16);
 		}
 		
 		override public function wonLevel():void {
-			FlxG.switchState(new WinState(1));
+			FlxG.switchState(new WinState(2));
 		}
 		
 	}

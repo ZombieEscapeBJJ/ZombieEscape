@@ -7,9 +7,9 @@ package Entities.Obstacles
 	public class Table extends Obstacle 
 	{
 		
-		public function Table() 
+		public function Table(x:int, y:int) 
 		{
-			super();
+			super(x, y);
 			
 		}
 		

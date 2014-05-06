@@ -1,5 +1,6 @@
 package Entities.Levels 
 {
+	import Entities.FinishLine;
 	import Entities.Obstacles.Obstacle;
 	import Entities.Zombies.FastZombie;
 	import GameOverState;
@@ -12,11 +13,12 @@ package Entities.Levels
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxG;
+	import org.flixel.FlxU;
 	import org.flixel.FlxCamera;
 	import org.flixel.FlxButton;
 	import Entities.BobFlx;
-	import Entities.Zombies.Zombie;
-	import Entities.Obstacles.Bed;
+	import Entities.Zombies.*;
+	import Entities.Obstacles.*;
 	import flash.display.Graphics;
 	import org.flixel.FlxText;
 	/**
@@ -36,7 +38,9 @@ package Entities.Levels
 		public var obstacleGroup:FlxGroup;
 				
 		public var bob:BobFlx;
-		public var zombie:Zombie;
+		public var normalZombie:NormalZombie;
+		public var fastZombie:FastZombie;
+		public var finish:FinishLine;
 		public var playerRadius:FlxSprite;
 		
 		public var playState:Number;
@@ -44,13 +48,16 @@ package Entities.Levels
 		public var PLAYING_STATE:Number = 0;
 		public var COUCH_STATE:Number = 1;
 		public var PAUSED_STATE:Number = 2;
+		public var LAMP_STATE:Number = 3;
 		
 		protected var numBeds:int;
+		protected var numLamps:int;
 		protected var bedButton:FlxButton;
 		protected var startButton:FlxButton;
+		protected var lampButton:FlxButton;
 		
 		public var movementD:int;
-		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numBeds:int = 10) {
+		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
 			this.state = state;
 			this.levelSize = levelSize;
@@ -61,12 +68,13 @@ package Entities.Levels
 			this.guiGroup = new FlxGroup();
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
-			bedButton = new FlxButton(10, FlxG.height - 27);
+			bedButton = new FlxButton(4, FlxG.height - 27);
+			lampButton = new FlxButton(60, FlxG.height - 27);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			this.playerRadius = new FlxSprite();
-
+			
 			this.create();
-			this.numBeds = numBeds;
+			this.numBeds = 0;
 		}
 
 		public function create():void {
@@ -78,22 +86,33 @@ package Entities.Levels
 		protected function createMap():void {
 			
 		}
+		
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
-			//this.zombieGroup.add(zombie = new Zombie(100, 50));
-			//zombie = new Zombie(100, 50);
+			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
+			normalZombie = new NormalZombie(100, 50);
 		}
 		
 		protected function createGUI():void {
 			add(floorGroup);
 			add(wallGroup);
 			add(bob);
+			add(finish);
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
-			bedButton.loadGraphic(Assets.BED);
-			bedButton.onDown = selectedCouch;
-			add(bedButton);
+			//if (numBeds > 0) {
+				bedButton.loadGraphic(Assets.BED_BUTTON);
+				bedButton.onDown = selectedCouch;
+				add(bedButton);
+			//}
+	
+			//if(numLamps > 0) {
+				lampButton.loadGraphic(Assets.LAMP);
+				lampButton.onDown = selectedLamp;
+				add(lampButton);
+			//}
+			
 			add(startButton);
 			var attackRadius:int = 500;
 			
@@ -110,18 +129,27 @@ package Entities.Levels
 			FlxG.worldBounds = new FlxRect(0, 0, levelSize.x, levelSize.y);
 			FlxG.camera.setBounds(0, 0, levelSize.x, levelSize.y, true);
 			FlxG.camera.follow(bob, FlxCamera.STYLE_TOPDOWN);
+			//FlxU.setWorldBounds(0, 0, FlxG.width, FlxG.height);
 		}
 		
 		override public function update():void {
 			super.update();
-			//playerRadius.x = zombieGroup.members[0].x - playerRadius.width / 2;
-			//playerRadius.y = zombieGroup.members[0].y - playerRadius.height / 2;
+			
 			if (playState == COUCH_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed)) {
 						obstacleGroup.add(new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2));
 						numBeds--;
+					}
+				}
+			} else if (playState == LAMP_STATE && numLamps > 0) {
+				lampButton.loadGraphic(Assets.LAMP_SELECTED);
+				if (FlxG.mouse.justReleased()) {
+					if (FlxG.mouse.y < FlxG.height - 50
+					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+						obstacleGroup.add(new Lamp(FlxG.mouse.x, FlxG.mouse.y));
+						numLamps--;
 					}
 				}
 			}
@@ -131,15 +159,19 @@ package Entities.Levels
 			
 			if (FlxG.collide(bob, zombieGroup)) {
 				FlxG.switchState(new GameOverState());
+			} else if (FlxG.collide(bob, finish)) {
+				wonLevel();
 			}
 		}
 		
 		public function selectedCouch():void {
 			playState = COUCH_STATE;
-			startButton.exists = false;
 		}
 		
-		
+		public function selectedLamp():void {
+			playState = LAMP_STATE;
+			trace("selected lamp");
+		}
 		
 		public function startGame():void {
 			playState = PLAYING_STATE;
