@@ -111,6 +111,11 @@ package Entities.Levels
 		override public function update():void {
 			super.update();
 			//FlxG.collide();
+			
+			if (bob.x <= 100 && bob.y <= 100) {
+				wonLevel();
+			}
+			
 			if (playState == COUCH_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
@@ -135,12 +140,14 @@ package Entities.Levels
 			playState = COUCH_STATE;
 		}
 		
-		
-		
 		public function startGame():void {
 			playState = PLAYING_STATE;
 			startButton.exists = false;
 			bedButton.exists = false;
+		}
+		
+		public function wonLevel():void {
+			
 		}
 	}
 

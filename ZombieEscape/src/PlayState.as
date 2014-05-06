@@ -22,6 +22,9 @@ package
 		{
 			FlxG.mouse.show();
 			
+			if (level > LEVELS.length)
+				level = LEVELS.length;
+			
 			LEVEL = new LEVELS[level - 1](this, LEVEL_SIZE, BLOCK_SIZE);
 			
 			this.add(LEVEL);

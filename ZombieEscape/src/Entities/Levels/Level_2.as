@@ -97,6 +97,10 @@ package Entities.Levels
 			fastZombie = new FastZombie(100, 50);
 		}
 		
+		override public function wonLevel():void {
+			FlxG.switchState(new WinState(2));
+		}
+		
 	}
 
 }
