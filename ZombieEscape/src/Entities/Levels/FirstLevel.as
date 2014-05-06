@@ -67,6 +67,7 @@ package Entities.Levels
 			this.numBeds = 10;
 			this.numLamps = 10;
 			this.numCouches = 10;
+			this.numTables = 10;
 		}
 		
 		override protected function createMap():void {

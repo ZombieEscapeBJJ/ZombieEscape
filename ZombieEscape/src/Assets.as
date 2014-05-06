@@ -41,6 +41,12 @@ package
 		public static var COUCH_BUTTON:Class;
 		[Embed(source = "../assets/sprites/couchbuttonselected.png")]
 		public static var COUCH_SELECTED:Class;
+		[Embed(source = "../assets/sprites/table.png")]
+		public static var TABLE:Class;
+		[Embed(source = "../assets/sprites/tablebutton.png")]
+		public static var TABLE_BUTTON:Class;
+		[Embed(source = "../assets/sprites/tablebuttonselected.png")]
+		public static var TABLE_SELECTED:Class;
 
 		public function Assets() 
 		{
