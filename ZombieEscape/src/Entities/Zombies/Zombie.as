@@ -10,12 +10,12 @@ package Entities.Zombies
 		
 		private var speed:Number = .1;
 		
-		public function Zombie(X:int, Y:int) {
+		public function Zombie(X:int, Y:int, speed:Number = .1) {
 			super(X, Y);
 			loadGraphic(Assets.ARMOR);
-			var bobPoint:Point = pointToBob();
-			velocity.x = bobPoint.x;
-			velocity.y = bobPoint.y;
+			velocity.x = 0;
+			velocity.y = 0;
+			this.speed = speed;
 		}
 		
 		public override function update():void {
@@ -32,14 +32,7 @@ package Entities.Zombies
 				y -= velocity.y;
 			}
 		}
-		
-		public function pointToBob():Point
-		{
-			var xDiff:Number = this.x + 20;
-			var yDiff:Number = this.y + 20;
-			var radian:Number = Math.atan2(yDiff, xDiff);
-			return new Point(speed * Math.cos(radian), speed * Math.sin(radian));
-		}
+
 	}
 
 }

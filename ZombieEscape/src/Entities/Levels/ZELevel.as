@@ -1,8 +1,11 @@
 package Entities.Levels 
 {
+	import Entities.Obstacles.Obstacle;
+	import Entities.Zombies.FastZombie;
 	import GameOverState;
 	import org.flixel.FlxBasic;
 	import org.flixel.FlxGroup;
+	import org.flixel.FlxObject;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxRect;
 	import org.flixel.FlxSave;
@@ -77,8 +80,8 @@ package Entities.Levels
 		}
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
-			this.zombieGroup.add(zombie = new Zombie(100, 50));
-			zombie = new Zombie(100, 50);
+			//this.zombieGroup.add(zombie = new Zombie(100, 50));
+			//zombie = new Zombie(100, 50);
 		}
 		
 		protected function createGUI():void {
@@ -92,10 +95,14 @@ package Entities.Levels
 			bedButton.onDown = selectedCouch;
 			add(bedButton);
 			add(startButton);
-			var attackRadius:int = 25;
-			playerRadius.makeGraphic(attackRadius * 2, attackRadius * 2, 0x000000);
-			Utils.drawRect(playerRadius, new FlxPoint(attackRadius, attackRadius), attackRadius, 0xff33ff33, 1, 0x4433ff33);
-			Utils.checkWithinBounds(FlxG.mouse.x,FlxG.mouse.y, attackRadius, attackRadius, attackRadius);
+			var attackRadius:int = 500;
+			
+			for (var i:int = 0; i < zombieGroup.members.length; i++) {
+				var currentZombie:Zombie = zombieGroup.members[i];
+				playerRadius.makeGraphic(FlxG.width,FlxG.height, 0x000000);
+				Utils.drawRect(playerRadius, currentZombie, 10, 0xff33ff33, 1, 0x4433ff33);
+			}
+			
 			add(playerRadius);
 		}
 		
@@ -107,17 +114,17 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
+			//playerRadius.x = zombieGroup.members[0].x - playerRadius.width / 2;
+			//playerRadius.y = zombieGroup.members[0].y - playerRadius.height / 2;
 			if (playState == COUCH_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					if (FlxG.mouse.y < FlxG.height - 50
-					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
-						obstacleGroup.add(new Bed(FlxG.mouse.x, FlxG.mouse.y));
+					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed)) {
+						obstacleGroup.add(new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2));
 						numBeds--;
 					}
 				}
 			}
-			
 			FlxG.collide(bob, obstacleGroup);
 			FlxG.collide(zombieGroup, obstacleGroup);
 			FlxG.collide(wallGroup, bob);
@@ -137,6 +144,22 @@ package Entities.Levels
 		public function startGame():void {
 			playState = PLAYING_STATE;
 			startButton.exists = false;
+		}
+		
+		public function checkValidPlacement(mouseX:int, mouseY:int, obstacle:Obstacle):Boolean {
+			if (FlxG.mouse.y >= FlxG.height - 50) {
+				return false;
+			}
+			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacle.SIZE.x, obstacle.SIZE.y), bob)) {
+				return false;
+			}
+			for (var i:int = 0; i < zombieGroup.length; i++) {
+				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacle.SIZE.x, obstacle.SIZE.y), zombieGroup.members[i])) {
+					return false;
+				}
+			}
+			return true;
+			
 		}
 	}
 

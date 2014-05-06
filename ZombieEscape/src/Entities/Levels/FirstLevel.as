@@ -1,5 +1,6 @@
 package Entities.Levels 
 {
+	import Entities.Zombies.FastZombie;
 	import org.flixel.FlxState;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
@@ -12,6 +13,7 @@ package Entities.Levels
 	 * @author James Okada
 	 */
 	public class FirstLevel extends ZELevel {
+		public var fastZombie:FastZombie;
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -91,7 +93,7 @@ package Entities.Levels
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
 			this.zombieGroup.add(zombie = new Zombie(100, 50));
-			zombie = new Zombie(100, 50);
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 100));
 		}
 		
 	}

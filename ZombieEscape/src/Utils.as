@@ -6,6 +6,8 @@ package
 	 */
 	public class Utils 
 	{
+		import flash.media.SoundLoaderContext;
+		import mx.core.FlexSprite;
 		import org.flixel.*;
 		import flash.display.Graphics;
 		public function Utils() 
@@ -13,7 +15,7 @@ package
 			
 		}
 		
-		public static function drawRect(Sprite:FlxSprite, Center:FlxPoint, Radius:Number = 30, LineColor:uint = 0xffffffff, LineThickness:uint = 1, FillColor:uint = 0xffffffff):void {
+		public static function drawRect(Sprite:FlxSprite, object:FlxSprite, radius:int, LineColor:uint = 0xffffffff, LineThickness:uint = 1, FillColor:uint = 0xffffffff):void {
  
 			var gfx:Graphics = FlxG.flashGfx;
 			gfx.clear();
@@ -32,7 +34,7 @@ package
 		 
 			gfx.beginFill(FillColor & 0x00ffffff, alphaComponent);
 		 
-			gfx.drawRect(10, 10, 50, 50);
+			gfx.drawRect(object.x - radius, object.y - radius, object.width + (2 * radius), object.height + (2 * radius));
 		 
 			gfx.endFill();
 		 
@@ -40,9 +42,10 @@ package
 			Sprite.dirty = true;
 		}
 		
-		public static function checkWithinBounds(xsource:int, ysource:int, x:int, y:int, width:int):Boolean {
+		public static function checkWithinBounds(sourceObject:FlxObject, destObject:FlxObject):Boolean {
 			
-			return (xsource > x && xsource < x + width && ysource > y && ysource < y + width);
+			return (sourceObject.x > destObject.x - sourceObject.width / 2 && sourceObject.x < destObject.x + destObject.width + sourceObject.width / 2 && 
+			sourceObject.y > destObject.y - destObject.height / 2 && sourceObject.y < destObject.y + destObject.height + sourceObject.height / 2);
 		}
 	}
 
