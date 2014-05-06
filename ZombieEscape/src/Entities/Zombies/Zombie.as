@@ -9,6 +9,7 @@ package Entities.Zombies
 	public class Zombie extends FlxSprite {
 		
 		private var speed:Number = .1;
+		
 		public function Zombie(X:int, Y:int) {
 			super(X, Y);
 			loadGraphic(Assets.ARMOR);
@@ -20,14 +21,16 @@ package Entities.Zombies
 		public override function update():void {
 			var bobX:Number = PlayState.LEVEL.bob.x	//update to Bob's x coordinate
 			var bobY:Number = PlayState.LEVEL.bob.y;	//update to Bob's y coordinate
-			var xDiff:Number = this.x - bobX; 
-			var yDiff:Number = this.y - bobY;
-			var radian:Number = Math.atan2(yDiff, xDiff);
-			velocity.x = speed * Math.cos(radian);
-			velocity.y = speed * Math.sin(radian);
-			
-			x -= velocity.x;
-			y -= velocity.y;
+			if (PlayState.LEVEL.playState != PlayState.LEVEL.PAUSED_STATE) {
+				var xDiff:Number = this.x - bobX; 
+				var yDiff:Number = this.y - bobY;
+				var radian:Number = Math.atan2(yDiff, xDiff);
+				velocity.x = speed * Math.cos(radian);
+				velocity.y = speed * Math.sin(radian);
+				
+				x -= velocity.x;
+				y -= velocity.y;
+			}
 		}
 		
 		public function pointToBob():Point
@@ -37,7 +40,6 @@ package Entities.Zombies
 			var radian:Number = Math.atan2(yDiff, xDiff);
 			return new Point(speed * Math.cos(radian), speed * Math.sin(radian));
 		}
-		
 	}
 
 }

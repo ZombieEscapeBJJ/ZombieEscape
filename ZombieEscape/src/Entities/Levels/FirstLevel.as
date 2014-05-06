@@ -61,7 +61,7 @@ package Entities.Levels
         );
 		
 		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			super(state, levelSize, blockSize, 3);
+			super(state, levelSize, blockSize, 10);
 		}
 		
 		override protected function createMap():void {
@@ -89,7 +89,7 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-20, FlxG.height-20);
+			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
 			this.zombieGroup.add(zombie = new Zombie(100, 50));
 			zombie = new Zombie(100, 50);
 		}

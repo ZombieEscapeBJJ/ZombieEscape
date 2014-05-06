@@ -23,14 +23,16 @@ package Entities
 			super.update();
 			acceleration.x = 0;
 			acceleration.y = 0;
-			if (FlxG.keys.LEFT) {
-				acceleration.x = -drag.x;
-			} else if (FlxG.keys.RIGHT) {
-				acceleration.x = drag.x;
-			} else if (FlxG.keys.UP) {
-				acceleration.y = -drag.y;
-			} else if (FlxG.keys.DOWN) {
-				acceleration.y = drag.y;
+			if (PlayState.LEVEL.playState != PlayState.LEVEL.PAUSED_STATE) {
+				if (FlxG.keys.LEFT) {
+					acceleration.x = -drag.x;
+				} else if (FlxG.keys.RIGHT) {
+					acceleration.x = drag.x;
+				} else if (FlxG.keys.UP) {
+					acceleration.y = -drag.y;
+				} else if (FlxG.keys.DOWN) {
+					acceleration.y = drag.y;
+				}
 			}
 		}
 	}

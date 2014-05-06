@@ -1,10 +1,12 @@
 package Entities.Levels 
 {
 	import GameOverState;
+	import org.flixel.FlxBasic;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxRect;
 	import org.flixel.FlxSave;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxG;
 	import org.flixel.FlxCamera;
@@ -12,6 +14,7 @@ package Entities.Levels
 	import Entities.BobFlx;
 	import Entities.Zombies.Zombie;
 	import Entities.Obstacles.Bed;
+	import flash.display.Graphics;
 	import org.flixel.FlxText;
 	/**
 	 * ...
@@ -28,31 +31,37 @@ package Entities.Levels
 		public var wallGroup:FlxGroup;
 		public var guiGroup:FlxGroup;
 		public var obstacleGroup:FlxGroup;
-		
-		public var bedButton:FlxButton;
-		
+				
 		public var bob:BobFlx;
 		public var zombie:Zombie;
+		public var playerRadius:FlxSprite;
 		
 		public var playState:Number;
 		
 		public var PLAYING_STATE:Number = 0;
 		public var COUCH_STATE:Number = 1;
+		public var PAUSED_STATE:Number = 2;
 		
 		protected var numBeds:int;
 		protected var bedButton:FlxButton;
+		protected var startButton:FlxButton;
 		
-		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numBeds:int) {
+		public var movementD:int;
+		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint, numBeds:int = 10) {
 			super();
 			this.state = state;
 			this.levelSize = levelSize;
 			this.tileSize = tileSize;
-			this.playState = 0;
+			this.playState = 2;
 			this.floorGroup = new FlxGroup();
 			this.wallGroup = new FlxGroup();
 			this.guiGroup = new FlxGroup();
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
+			bedButton = new FlxButton(10, FlxG.height - 27);
+			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
+			this.playerRadius = new FlxSprite();
+
 			this.create();
 			this.numBeds = numBeds;
 		}
@@ -67,7 +76,7 @@ package Entities.Levels
 			
 		}
 		protected function createPlayer():void {
-			bob = new BobFlx(50, 50);
+			bob = new BobFlx(100, 100);
 			this.zombieGroup.add(zombie = new Zombie(100, 50));
 			zombie = new Zombie(100, 50);
 		}
@@ -79,10 +88,15 @@ package Entities.Levels
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
-			bedButton = new FlxButton(10, FlxG.height - 27);
 			bedButton.loadGraphic(Assets.BED);
 			bedButton.onDown = selectedCouch;
 			add(bedButton);
+			add(startButton);
+			var attackRadius:int = 25;
+			playerRadius.makeGraphic(attackRadius * 2, attackRadius * 2, 0x000000);
+			Utils.drawRect(playerRadius, new FlxPoint(attackRadius, attackRadius), attackRadius, 0xff33ff33, 1, 0x4433ff33);
+			Utils.checkWithinBounds(FlxG.mouse.x,FlxG.mouse.y, attackRadius, attackRadius, attackRadius);
+			add(playerRadius);
 		}
 		
 		protected function createCamera():void {
@@ -93,12 +107,14 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
-			bedButton.label.text = "Bed (" + numBeds + ")";
-			if (playState == COUCH_STATE) {
+			if (playState == COUCH_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
-					obstacleGroup.add(new Bed(FlxG.mouse.x, FlxG.mouse.y));
-					numBeds--;
+					if (FlxG.mouse.y < FlxG.height - 50
+					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+						obstacleGroup.add(new Bed(FlxG.mouse.x, FlxG.mouse.y));
+						numBeds--;
+					}
 				}
 			}
 			
@@ -113,6 +129,14 @@ package Entities.Levels
 		
 		public function selectedCouch():void {
 			playState = COUCH_STATE;
+			startButton.exists = false;
+		}
+		
+		
+		
+		public function startGame():void {
+			playState = PLAYING_STATE;
+			startButton.exists = false;
 		}
 	}
 
