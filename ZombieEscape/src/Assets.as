@@ -23,7 +23,8 @@ package
 		public static var BED:Class;
 		[Embed(source = "../assets/sprites/bed-selected (opengameart - Redshrike - ccby30).png")]
 		public static var BED_SELECTED:Class;
-		
+		[Embed(source = "../assets/sprites/ranger (opengameart - Antifarea - ccby30).png")]
+		public static var RANGER_SPRITE:Class;
 		public function Assets() 
 		{
 			
