@@ -27,12 +27,27 @@ package
 		public static var BED_BUTTON:Class;
 		[Embed(source = "../assets/sprites/bedbuttonselected.png")]
 		public static var BED_SELECTED:Class;
+		[Embed(source = "../assets/sprites/lampbutton.png")]
+		public static var LAMP_BUTTON:Class;
+		[Embed(source = "../assets/sprites/lampbuttonselected.png")]
+		public static var LAMP_SELECTED:Class;
 		[Embed(source = "../assets/sprites/ranger (opengameart - Antifarea - ccby30).png")]
 		public static var RANGER_SPRITE:Class;
 		[Embed(source = "../assets/sprites/lamp.png")]
 		public static var LAMP:Class;
-		[Embed(source = "../assets/sprites/lamp-selected.png")]
-		public static var LAMP_SELECTED:Class;
+		[Embed(source = "../assets/sprites/couch.png")]
+		public static var COUCH:Class;
+		[Embed(source = "../assets/sprites/couchbutton.png")]
+		public static var COUCH_BUTTON:Class;
+		[Embed(source = "../assets/sprites/couchbuttonselected.png")]
+		public static var COUCH_SELECTED:Class;
+		[Embed(source = "../assets/sprites/table.png")]
+		public static var TABLE:Class;
+		[Embed(source = "../assets/sprites/tablebutton.png")]
+		public static var TABLE_BUTTON:Class;
+		[Embed(source = "../assets/sprites/tablebuttonselected.png")]
+		public static var TABLE_SELECTED:Class;
+
 		public function Assets() 
 		{
 			

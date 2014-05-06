@@ -46,15 +46,21 @@ package Entities.Levels
 		public var playState:Number;
 		
 		public var PLAYING_STATE:Number = 0;
-		public var COUCH_STATE:Number = 1;
+		public var BED_STATE:Number = 1;
 		public var PAUSED_STATE:Number = 2;
 		public var LAMP_STATE:Number = 3;
+		public var COUCH_STATE:Number = 4;
+		public var TABLE_STATE:Number = 5;
 		
 		protected var numBeds:int;
 		protected var numLamps:int;
+		protected var numCouches:int;
+		protected var numTables:int;
 		protected var bedButton:FlxButton;
 		protected var startButton:FlxButton;
 		protected var lampButton:FlxButton;
+		protected var couchButton:FlxButton;
+		protected var tableButton:FlxButton;
 		
 		public var movementD:int;
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
@@ -69,7 +75,9 @@ package Entities.Levels
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
 			bedButton = new FlxButton(4, FlxG.height - 27);
-			lampButton = new FlxButton(60, FlxG.height - 27);
+			lampButton = new FlxButton(50, FlxG.height - 27);
+			couchButton = new FlxButton(96, FlxG.height - 27);
+			tableButton = new FlxButton(142, FlxG.height - 27);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			this.playerRadius = new FlxSprite();
 			
@@ -101,17 +109,22 @@ package Entities.Levels
 			add(zombieGroup);
 			add(obstacleGroup);
 			add(guiGroup);
-			//if (numBeds > 0) {
-				bedButton.loadGraphic(Assets.BED_BUTTON);
-				bedButton.onDown = selectedCouch;
-				add(bedButton);
-			//}
-	
-			//if(numLamps > 0) {
-				lampButton.loadGraphic(Assets.LAMP);
-				lampButton.onDown = selectedLamp;
-				add(lampButton);
-			//}
+			
+			bedButton.loadGraphic(Assets.BED_BUTTON);
+			bedButton.onDown = selectedBed;
+			add(bedButton);
+
+			lampButton.loadGraphic(Assets.LAMP_BUTTON);
+			lampButton.onDown = selectedLamp;
+			add(lampButton);
+			
+			couchButton.loadGraphic(Assets.COUCH_BUTTON);
+			couchButton.onDown = selectedCouch;
+			add(couchButton);
+			
+			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+			tableButton.onDown = selectedTable;
+			add(tableButton);
 			
 			add(startButton);
 			var attackRadius:int = 500;
@@ -135,7 +148,7 @@ package Entities.Levels
 		override public function update():void {
 			super.update();
 			
-			if (playState == COUCH_STATE && numBeds > 0) {
+			if (playState == BED_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed)) {
@@ -152,6 +165,24 @@ package Entities.Levels
 						numLamps--;
 					}
 				}
+			} else if (playState == COUCH_STATE && numCouches > 0) {
+				couchButton.loadGraphic(Assets.COUCH_SELECTED);
+				if (FlxG.mouse.justReleased()) {
+					if (FlxG.mouse.y < FlxG.height - 50
+					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+						obstacleGroup.add(new Couch(FlxG.mouse.x, FlxG.mouse.y));
+						numCouches--;
+					}
+				}
+			} else if (playState == TABLE_STATE && numTables > 0) {
+				tableButton.loadGraphic(Assets.TABLE_SELECTED);
+				if (FlxG.mouse.justReleased()) {
+					if (FlxG.mouse.y < FlxG.height - 50
+					&& !Utils.checkWithinBounds(FlxG.mouse.x, FlxG.mouse.y, bob.x, bob.y, 20)) {
+						obstacleGroup.add(new Table(FlxG.mouse.x, FlxG.mouse.y));
+						numTables--;
+					}
+				}
 			}
 			FlxG.collide(bob, obstacleGroup);
 			FlxG.collide(zombieGroup, obstacleGroup);
@@ -164,18 +195,42 @@ package Entities.Levels
 			}
 		}
 		
+		public function selectedBed():void {
+			playState = BED_STATE;
+			couchButton.loadGraphic(Assets.COUCH_BUTTON);
+			lampButton.loadGraphic(Assets.LAMP_BUTTON);
+			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+		}
+		
 		public function selectedCouch():void {
 			playState = COUCH_STATE;
+			lampButton.loadGraphic(Assets.LAMP_BUTTON);
+			bedButton.loadGraphic(Assets.BED_BUTTON);
+			tableButton.loadGraphic(Assets.TABLE_BUTTON);
 		}
 		
 		public function selectedLamp():void {
 			playState = LAMP_STATE;
-			trace("selected lamp");
+			couchButton.loadGraphic(Assets.COUCH_BUTTON);
+			bedButton.loadGraphic(Assets.BED_BUTTON);
+			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+		}
+		
+		public function selectedTable():void {
+			trace("TABLE");
+			playState = TABLE_STATE;
+			lampButton.loadGraphic(Assets.LAMP_BUTTON);
+			couchButton.loadGraphic(Assets.COUCH_BUTTON);
+			bedButton.loadGraphic(Assets.BED_BUTTON);
+			
 		}
 		
 		public function startGame():void {
 			playState = PLAYING_STATE;
 			startButton.exists = false;
+			lampButton.exists = false;
+			couchButton.exists = false;
+			tableButton.exists = false;
 		}
 		
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacle:Obstacle):Boolean {

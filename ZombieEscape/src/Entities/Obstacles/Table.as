@@ -10,7 +10,7 @@ package Entities.Obstacles
 		public function Table(x:int, y:int) 
 		{
 			super(x, y);
-			
+			loadGraphic(Assets.TABLE);
 		}
 		
 	}
