@@ -71,10 +71,10 @@ package Entities.Levels
 			this.guiGroup = new FlxGroup();
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
-			bedButton = new FlxButton(4, FlxG.height - 27);
-			lampButton = new FlxButton(50, FlxG.height - 27);
-			couchButton = new FlxButton(96, FlxG.height - 27);
-			tableButton = new FlxButton(142, FlxG.height - 27);
+			bedButton = new FlxButton(4, FlxG.height - 27, "x"+numBeds);
+			lampButton = new FlxButton(50, FlxG.height - 27, "x"+numLamps);
+			couchButton = new FlxButton(96, FlxG.height - 27, "x"+numCouches);
+			tableButton = new FlxButton(142, FlxG.height - 27, "x"+numTables);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			this.playerRadius = new FlxSprite();
 			
@@ -108,18 +108,26 @@ package Entities.Levels
 			add(guiGroup);
 			
 			bedButton.loadGraphic(Assets.BED_BUTTON);
+			bedButton.label.color = 0xFFFFFF;
+			bedButton.labelOffset = new FlxPoint(5, 5);
 			bedButton.onDown = selectedBed;
 			add(bedButton);
 
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
+			lampButton.label.color = 0xFFFFFF;
+			lampButton.labelOffset = new FlxPoint(5, 5);
 			lampButton.onDown = selectedLamp;
 			add(lampButton);
 			
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
+			couchButton.label.color = 0xFFFFFF;
+			couchButton.labelOffset = new FlxPoint(8, 5);
 			couchButton.onDown = selectedCouch;
 			add(couchButton);
 			
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+			tableButton.label.color = 0xFFFFFF;
+			tableButton.labelOffset = new FlxPoint(5, 5);
 			tableButton.onDown = selectedTable;
 			add(tableButton);
 			
@@ -140,6 +148,10 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
+			bedButton.label.text = "x" + numBeds;
+			lampButton.label.text = "x" + numLamps;
+			couchButton.label.text = "x" + numCouches;
+			tableButton.label.text = "x" + numTables;
 			
 			if (playState == BED_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
