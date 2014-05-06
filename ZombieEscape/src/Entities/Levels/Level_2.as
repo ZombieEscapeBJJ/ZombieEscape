@@ -1,5 +1,6 @@
 package Entities.Levels 
 {
+	import Entities.FinishLine;
 	import org.flixel.FlxState;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
@@ -41,7 +42,7 @@ package Entities.Levels
         protected static var WALLS:Array = new Array(
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
@@ -61,7 +62,9 @@ package Entities.Levels
         );
 		
 		public function Level_2(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			super(state, levelSize, blockSize, 10);
+			super(state, levelSize, blockSize);
+			this.numBeds = 10;
+			this.numLamps = 10;
 		}
 		
 		override protected function createMap():void {
@@ -95,6 +98,7 @@ package Entities.Levels
 			this.zombieGroup.add(normalZombie = new NormalZombie(100, 150));
 			normalZombie = new NormalZombie(100, 50);
 			fastZombie = new FastZombie(100, 50);
+			finish = new FinishLine(0, 16);
 		}
 		
 		override public function wonLevel():void {
