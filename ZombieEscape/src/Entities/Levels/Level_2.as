@@ -6,7 +6,7 @@ package Entities.Levels
 	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
 	import Entities.BobFlx;
-	import Entities.Zombies.Zombie;
+	import Entities.Zombies.*;
 	/**
 	 * ...
 	 * @author James Okada
@@ -90,10 +90,11 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(zombie = new Zombie(100, 50));
-			zombie = new Zombie(100, 50);
-			this.zombieGroup.add(zombie = new Zombie(100, 100));
-			this.zombieGroup.add(zombie = new Zombie(100, 150));
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 50));
+			this.zombieGroup.add(fastZombie = new FastZombie(100, 100));
+			this.zombieGroup.add(normalZombie = new NormalZombie(100, 150));
+			normalZombie = new NormalZombie(100, 50);
+			fastZombie = new FastZombie(100, 50);
 		}
 		
 	}

@@ -9,10 +9,11 @@ package Entities.Levels
 	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
 	import org.flixel.FlxG;
+	import org.flixel.FlxU;
 	import org.flixel.FlxCamera;
 	import org.flixel.FlxButton;
 	import Entities.BobFlx;
-	import Entities.Zombies.Zombie;
+	import Entities.Zombies.*;
 	import Entities.Obstacles.Bed;
 	import flash.display.Graphics;
 	import org.flixel.FlxText;
@@ -33,7 +34,8 @@ package Entities.Levels
 		public var obstacleGroup:FlxGroup;
 				
 		public var bob:BobFlx;
-		public var zombie:Zombie;
+		public var normalZombie:NormalZombie;
+		public var fastZombie:FastZombie;
 		public var playerRadius:FlxSprite;
 		
 		public var playState:Number;
@@ -77,8 +79,8 @@ package Entities.Levels
 		}
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
-			this.zombieGroup.add(zombie = new Zombie(100, 50));
-			zombie = new Zombie(100, 50);
+			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
+			normalZombie = new NormalZombie(100, 50);
 		}
 		
 		protected function createGUI():void {
@@ -103,10 +105,12 @@ package Entities.Levels
 			FlxG.worldBounds = new FlxRect(0, 0, levelSize.x, levelSize.y);
 			FlxG.camera.setBounds(0, 0, levelSize.x, levelSize.y, true);
 			FlxG.camera.follow(bob, FlxCamera.STYLE_TOPDOWN);
+			//FlxU.setWorldBounds(0, 0, FlxG.width, FlxG.height);
 		}
 		
 		override public function update():void {
 			super.update();
+			//FlxG.collide();
 			if (playState == COUCH_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
@@ -129,7 +133,6 @@ package Entities.Levels
 		
 		public function selectedCouch():void {
 			playState = COUCH_STATE;
-			startButton.exists = false;
 		}
 		
 		
@@ -137,6 +140,7 @@ package Entities.Levels
 		public function startGame():void {
 			playState = PLAYING_STATE;
 			startButton.exists = false;
+			bedButton.exists = false;
 		}
 	}
 
