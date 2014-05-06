@@ -65,6 +65,8 @@ package Entities.Levels
 		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize);
 			this.numBeds = 10;
+			this.numLamps = 10;
+			this.numCouches = 10;
 		}
 		
 		override protected function createMap():void {
