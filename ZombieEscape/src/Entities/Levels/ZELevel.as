@@ -97,7 +97,6 @@ package Entities.Levels
 		
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
-			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
 			normalZombie = new NormalZombie(100, 50);
 		}
 		
@@ -137,7 +136,7 @@ package Entities.Levels
 			add(startButton);
 			var attackRadius:int = 500;
 			
-			for (var i:int = 0; i < zombieGroup.members.length; i++) {
+			for (var i:int = 0; i < zombieGroup.length; i++) {
 				var currentZombie:Zombie = zombieGroup.members[i];
 				playerRadius.makeGraphic(FlxG.width,FlxG.height, 0x000000);
 				Utils.drawRect(playerRadius, currentZombie, 10, 0xff33ff33, 1, 0x4433ff33);
@@ -249,12 +248,16 @@ package Entities.Levels
 			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
 				return false;
 			}
+			
 			for (var i:int = 0; i < zombieGroup.length; i++) {
 				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
 					return false;
 				}
 			}
+			
+			trace("player radius " + playerRadius.y);
 			return true;
+			
 			
 		}
 		
