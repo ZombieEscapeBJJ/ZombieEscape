@@ -1,0 +1,9 @@
+game name: zombie_escape4
+game id: 104
+skey: 2bbdad86d57942666f08d86f9385395d
+valid version ids: 1-3
+valid category ids: any number (usually starts at 1)
+
+db host: dev.db.centerforgamescience.com
+db username: zombie_db_user
+db password: aa38982b76

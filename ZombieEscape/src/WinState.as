@@ -1,6 +1,7 @@
 package  
 {
 	import org.flixel.*;
+	import flash.net.SharedObject;
 	/**
 	 * ...
 	 * @author James Okada
@@ -14,6 +15,16 @@ package
 			FlxG.mouse.show();
 			
 			currentLevel = level;
+			
+			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+			var nextLevel:int = shared.data.nextLevel;
+			
+			if (level+1 > nextLevel) {
+				nextLevel = level + 1;
+				
+				shared.data.nextLevel = nextLevel;
+				shared.flush();
+			}
 		}
 		
 		override public function create():void
