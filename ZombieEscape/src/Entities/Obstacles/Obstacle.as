@@ -15,8 +15,8 @@ package Entities.Obstacles
 			super(X, Y);
 			immovable = true;
 		}
+		
 		public override function update():void {
-			
 		}
 	}
 }

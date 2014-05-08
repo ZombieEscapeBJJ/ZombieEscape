@@ -53,6 +53,10 @@ package Entities.Levels
 		public var COUCH_STATE:Number = 4;
 		public var TABLE_STATE:Number = 5;
 		
+		public var NORMAL_ZOMBIE:int = 0;
+		public var FAST_ZOMBIE:int = 1;
+		public var STRONG_ZOMBIE:int = 2;
+		
 		protected var numBeds:int;
 		protected var numLamps:int;
 		protected var numCouches:int;
@@ -196,7 +200,7 @@ package Entities.Levels
 				}
 			}
 			FlxG.collide(bob, obstacleGroup);
-			FlxG.collide(zombieGroup, obstacleGroup);
+			collideZombies();
 			FlxG.collide(zombieGroup, zombieGroup);
 			FlxG.collide(wallGroup, bob);
 			
@@ -233,7 +237,6 @@ package Entities.Levels
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
-			
 		}
 		
 		public function startGame():void {
@@ -272,6 +275,22 @@ package Entities.Levels
 		
 		public function wonLevel():void {
 			
+		}
+
+		public function collideZombies():void {
+		
+			for (var j:int = 0; j < zombieGroup.length; j++) {
+				var canMove:Boolean = true;
+				var curZombie:Zombie = zombieGroup.members[j];
+				if (curZombie.ZOMBIE_TYPE == STRONG_ZOMBIE) {
+					canMove = false;
+				}
+				for (var i:int = 0; i < obstacleGroup.length; i++) {
+					var curObstacle:Obstacle = obstacleGroup.members[i];
+					curObstacle.immovable = canMove;
+					FlxG.collide(curZombie, curObstacle);
+				}
+			}
 		}
 	}
 
