@@ -1,6 +1,7 @@
 package  
 {
 	import org.flixel.*;
+	import flash.net.SharedObject;
 	/**
 	 * ...
 	 * @author James Okada
@@ -16,9 +17,13 @@ package
 			
 			LEVELS = new Array(one, two);
 			
+			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+			var nextLevel:int = shared.data.nextLevel;
+			trace(nextLevel);
+			
 			for (var i:int = 0; i < LEVELS.length; i++) {
 				var temp:FlxButton = LEVELS[i];
-				if (ZombieEscape.nextLevel <= i) {
+				if (nextLevel <= i) {
 					temp.on = true;
 					temp.color = 0xFF0000;
 					temp.onUp = function():void { temp.status = 0; };
