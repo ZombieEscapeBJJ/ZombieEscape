@@ -67,7 +67,6 @@ package Entities.Levels
 		public function Level3(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
 		{
 			super(state, levelSize, tileSize);
-			
 		}
 		
 		override protected function createMap():void {
