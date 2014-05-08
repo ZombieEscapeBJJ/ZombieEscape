@@ -13,19 +13,20 @@ package
 			add(new FlxText(FlxG.width / 2 - 20, 0, 100, "Select a Level"));
 			var one:FlxButton = new FlxButton(10, 100, "1", One);
 			var two:FlxButton = new FlxButton(110, 100, "2", Two);
-			//add(one);
-			//add(two);
 			
 			LEVELS = new Array(one, two);
 			
 			for (var i:int = 0; i < LEVELS.length; i++) {
-				add(LEVELS[i]);
-				
+				var temp:FlxButton = LEVELS[i];
 				if (ZombieEscape.nextLevel <= i) {
-					var temp:FlxButton = LEVELS[i];
-					temp.label = null;
-					temp.active = false;
+					temp.on = true;
+					temp.color = 0xFF0000;
+					temp.onUp = function():void { temp.status = 0; };
+					temp.onDown = function():void {temp.status = 0;};
+				} else {
+					temp.color = 0x00FF00;
 				}
+				add(temp);
 			}
 			
 			FlxG.mouse.show();
