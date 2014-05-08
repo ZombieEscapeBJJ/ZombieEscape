@@ -14,6 +14,9 @@ package
 			FlxG.mouse.show();
 			
 			currentLevel = level;
+			
+			if (level+1 > ZombieEscape.nextLevel)
+				ZombieEscape.nextLevel = level+1;
 		}
 		
 		override public function create():void

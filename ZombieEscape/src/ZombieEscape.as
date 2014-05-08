@@ -11,6 +11,7 @@ package
 	
 	public class ZombieEscape extends FlxGame
 	{
+		public static var nextLevel:int = 1;
 		
 		public function ZombieEscape() 
 		{
