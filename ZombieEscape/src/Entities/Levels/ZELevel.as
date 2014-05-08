@@ -199,6 +199,7 @@ package Entities.Levels
 			FlxG.collide(zombieGroup, obstacleGroup);
 			FlxG.collide(zombieGroup, zombieGroup);
 			FlxG.collide(wallGroup, bob);
+			FlxG.collide(wallGroup, zombieGroup);
 			
 			if (FlxG.collide(bob, zombieGroup)) {
 				FlxG.switchState(new GameOverState());
