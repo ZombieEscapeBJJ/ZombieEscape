@@ -242,6 +242,7 @@ package Entities.Levels
 			lampButton.exists = false;
 			couchButton.exists = false;
 			tableButton.exists = false;
+			bedButton.exists = false;
 		}
 		
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
