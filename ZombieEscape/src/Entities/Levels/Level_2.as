@@ -93,8 +93,8 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(fastZombie = new FastZombie(100, 50));
-			this.zombieGroup.add(fastZombie = new FastZombie(100, 100));
+			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
+			this.zombieGroup.add(new StrongZombie(100, 100));
 			this.zombieGroup.add(fastZombie = new FastZombie(100, 150));			
 			finish = new FinishLine(0, 16);
 		}

@@ -11,6 +11,7 @@ package Entities.Zombies
 		
 		private var speed:Number = 0.1;
 		public static const SIZE:FlxPoint = new FlxPoint(14, 25);
+		public var ZOMBIE_TYPE:int = 0;
 		
 		public function Zombie(X:int, Y:int, speed:Number) {
 			super(X, Y);
