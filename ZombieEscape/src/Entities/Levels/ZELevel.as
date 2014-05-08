@@ -42,6 +42,7 @@ package Entities.Levels
 		public var fastZombie:FastZombie;
 		public var finish:FinishLine;
 		public var playerRadius:FlxSprite;
+		public var playerRadiusArray:Array;
 		
 		public var playState:Number;
 		
@@ -80,7 +81,7 @@ package Entities.Levels
 			tableButton = new FlxButton(142, FlxG.height - 27, "x"+numTables);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			this.playerRadius = new FlxSprite();
-			
+			this.playerRadiusArray = new Array();
 			this.create();
 			this.numBeds = 0;
 		}
@@ -136,10 +137,12 @@ package Entities.Levels
 			add(startButton);
 			var attackRadius:int = 500;
 			
+			var zoneRadius:int = 10;
 			for (var i:int = 0; i < zombieGroup.length; i++) {
 				var currentZombie:Zombie = zombieGroup.members[i];
 				playerRadius.makeGraphic(FlxG.width,FlxG.height, 0x000000);
 				Utils.drawRect(playerRadius, currentZombie, 10, 0xff33ff33, 1, 0x4433ff33);
+				playerRadiusArray.push(new FlxObject(currentZombie.x - zoneRadius / 2, currentZombie.y - zoneRadius / 2, Zombie.SIZE.x + (zoneRadius  * 2), Zombie.SIZE.y + (zoneRadius * 2)));
 			}
 			
 			add(playerRadius);
@@ -249,6 +252,11 @@ package Entities.Levels
 				return false;
 			}
 			
+			for (var j:int = 0; j < playerRadiusArray.length; j++) {
+				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), playerRadiusArray[j])) {
+					return false;
+				}
+			}
 			for (var i:int = 0; i < zombieGroup.length; i++) {
 				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
 					return false;

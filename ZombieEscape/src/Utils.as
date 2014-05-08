@@ -20,7 +20,6 @@ package
 			var gfx:Graphics = FlxG.flashGfx;
 			gfx.clear();
 		 
-			trace("THIS IS OBJECT " + object.x);
 			// Line alpha
 			var alphaComponent:Number = Number((LineColor >> 24) & 0xFF) / 255;
 			if(alphaComponent <= 0)
@@ -44,10 +43,10 @@ package
 		}
 		
 		public static function checkWithinBounds(sourceObject:FlxObject, destObject:FlxObject):Boolean {
-			
 			return (sourceObject.x > destObject.x - sourceObject.width / 2 && sourceObject.x < destObject.x + destObject.width + sourceObject.width / 2 && 
 			sourceObject.y > destObject.y - destObject.height / 2 && sourceObject.y < destObject.y + destObject.height + sourceObject.height / 2);
 		}
+		
 	}
 
 }

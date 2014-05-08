@@ -1,6 +1,7 @@
 package Entities.Zombies 
 {
 	import flash.geom.Point;
+	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	/**
 	 * ...
@@ -9,6 +10,7 @@ package Entities.Zombies
 	public class Zombie extends FlxSprite {
 		
 		private var speed:Number = 0.1;
+		public static const SIZE:FlxPoint = new FlxPoint(14, 25);
 		
 		public function Zombie(X:int, Y:int, speed:Number) {
 			super(X, Y);
