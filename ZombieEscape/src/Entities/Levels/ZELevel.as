@@ -197,6 +197,7 @@ package Entities.Levels
 			}
 			FlxG.collide(bob, obstacleGroup);
 			FlxG.collide(zombieGroup, obstacleGroup);
+			FlxG.collide(zombieGroup, zombieGroup);
 			FlxG.collide(wallGroup, bob);
 			
 			if (FlxG.collide(bob, zombieGroup)) {
@@ -228,7 +229,6 @@ package Entities.Levels
 		}
 		
 		public function selectedTable():void {
-			trace("TABLE");
 			playState = TABLE_STATE;
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
@@ -242,6 +242,8 @@ package Entities.Levels
 			lampButton.exists = false;
 			couchButton.exists = false;
 			tableButton.exists = false;
+			playerRadius.exists = false;
+			bedButton.exists = false;
 		}
 		
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
@@ -263,7 +265,6 @@ package Entities.Levels
 				}
 			}
 			
-			trace("player radius " + playerRadius.y);
 			return true;
 			
 			
