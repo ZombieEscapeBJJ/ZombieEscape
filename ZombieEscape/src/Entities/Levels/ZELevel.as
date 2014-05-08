@@ -38,8 +38,6 @@ package Entities.Levels
 		public var obstacleGroup:FlxGroup;
 				
 		public var bob:BobFlx;
-		public var normalZombie:NormalZombie;
-		public var fastZombie:FastZombie;
 		public var finish:FinishLine;
 		public var playerRadius:FlxSprite;
 		public var playerRadiusArray:Array;
@@ -102,7 +100,6 @@ package Entities.Levels
 		
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
-			normalZombie = new NormalZombie(100, 50);
 		}
 		
 		protected function createGUI():void {

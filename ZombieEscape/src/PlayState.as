@@ -1,7 +1,6 @@
 package  
 {
 	import Entities.Levels.*;
-	import Levels.LevelOne;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxState;
 	import org.flixel.FlxG;
@@ -16,7 +15,7 @@ package
 		
 		public static var LEVEL:ZELevel = null;
 		
-		private var LEVELS:Array = [FirstLevel, Level_2, Level_5];
+		private var LEVELS:Array = [FirstLevel, Level_2, Level3, Level_5];
 		
 		public function PlayState(level:int) 
 		{
