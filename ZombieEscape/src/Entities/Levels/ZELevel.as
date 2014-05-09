@@ -72,8 +72,8 @@ package Entities.Levels
 		protected var couchButton:FlxButton;
 		protected var tableButton:FlxButton;
 		protected var holoButton:FlxButton;
-		
 		public var currentLevel:int;
+
 		
 		public var movementD:int;
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
