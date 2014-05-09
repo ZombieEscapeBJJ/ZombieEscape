@@ -15,7 +15,9 @@ package
 			var one:FlxButton = new FlxButton(10, 100, "1", function():void{FlxG.switchState(new PlayState(1))});
 			var two:FlxButton = new FlxButton(110, 100, "2", function():void{FlxG.switchState(new PlayState(2))});
 			var three:FlxButton = new FlxButton(210, 100, "3", function():void { FlxG.switchState(new PlayState(3)) } );
-			var four:FlxButton = new FlxButton(10, 150, "4", function():void{FlxG.switchState(new PlayState(4))});
+			var four:FlxButton = new FlxButton(10, 150, "4", function():void { FlxG.switchState(new PlayState(4)) } );
+			
+			add(new FlxButton(FlxG.width  / 2 - 20, FlxG.height - 60, "Main Menu", MainMenu));
 			
 			LEVELS = new Array(one, two, three, four);
 			
@@ -42,5 +44,9 @@ package
 		{
 			super.update();
 		}	
+		
+		public function MainMenu():void {
+			FlxG.switchState(new MenuState);
+		}
 	}
 }

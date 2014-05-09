@@ -9,8 +9,12 @@ package
 	{
 		override public function create():void
 		{
-			add(new FlxText(FlxG.width /2 - 20, 0, 100, "Hello, World!"));
-			add(new FlxButton(FlxG.width /2 - 20, FlxG.height - 20, "Level Select", Start));
+			var text:FlxText = new FlxText(0, 50, FlxG.width, "ZOMBIE ESCAPE 4");
+			text.alignment = "center";
+			text.size = 24;
+			add(text);
+			var button:FlxButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height - 60, "Level Select", Start);
+			add(button);
 			FlxG.mouse.show();
 		}
 		override public function update():void
