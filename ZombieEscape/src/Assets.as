@@ -47,6 +47,13 @@ package
 		public static var TABLE_BUTTON:Class;
 		[Embed(source = "../assets/sprites/tablebuttonselected.png")]
 		public static var TABLE_SELECTED:Class;
+		[Embed(source = "../assets/sprites/decoy.png")]
+		public static var HOLOGRAM:Class;
+		[Embed(source = "../assets/sprites/horizontalwall.png")]
+		public static var WALL:Class;
+		[Embed(source = "../assets/sprites/verticalwall.png")]
+		public static var VWALL:Class;
+		
 
 		public function Assets() 
 		{

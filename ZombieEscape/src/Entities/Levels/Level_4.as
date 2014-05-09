@@ -8,11 +8,12 @@ package Entities.Levels
 	import org.flixel.FlxG;
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
+	import org.flixel.FlxObject;
 	/**
 	 * ...
 	 * @author James Okada
 	 */
-	public class Level_5 extends ZELevel {
+	public class Level_4 extends ZELevel {
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -61,9 +62,10 @@ package Entities.Levels
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level_5(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+		public function Level_4(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize);
 			this.numCouches = 1;
+			currentLevel = 4;
 		}
 		
 		override protected function createMap():void {
@@ -92,14 +94,43 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-30, FlxG.height-63);
-			this.zombieGroup.add(fastZombie = new FastZombie(85, 150));		
+			this.zombieGroup.add(new FastZombie(85, 150));		
 			finish = new FinishLine(0, 16*14);
 		}
 		
 		override public function wonLevel():void {
-			FlxG.switchState(new WinState(5));
+			FlxG.switchState(new WinState(4));
 		}
 		
+		
+		override public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
+			if (FlxG.mouse.y >= FlxG.height - 50 || FlxG.mouse.y <= 16*9) {
+				return false;
+			}
+			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
+				return false;
+			}
+			
+			if (FlxG.mouse.y <= FlxG.height - 50 && FlxG.mouse.y >= 16 * 9 &&
+				(FlxG.mouse.x < 16*4 || FlxG.mouse.x > 16*8)) {
+				return false;
+			}
+			
+			for (var j:int = 0; j < playerRadiusArray.length; j++) {
+				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), playerRadiusArray[j])) {
+					return false;
+				}
+			}
+			for (var i:int = 0; i < zombieGroup.length; i++) {
+				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
+					return false;
+				}
+			}
+			
+			return true;
+			
+			
+		}
 	}
 
 }

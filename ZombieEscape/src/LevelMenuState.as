@@ -12,10 +12,12 @@ package
 		override public function create():void
 		{
 			add(new FlxText(FlxG.width / 2 - 20, 0, 100, "Select a Level"));
-			var one:FlxButton = new FlxButton(10, 100, "1", One);
-			var two:FlxButton = new FlxButton(110, 100, "2", Two);
+			var one:FlxButton = new FlxButton(10, 100, "1", function():void{FlxG.switchState(new PlayState(1))});
+			var two:FlxButton = new FlxButton(110, 100, "2", function():void{FlxG.switchState(new PlayState(2))});
+			var three:FlxButton = new FlxButton(210, 100, "3", function():void { FlxG.switchState(new PlayState(3)) } );
+			var four:FlxButton = new FlxButton(10, 150, "4", function():void{FlxG.switchState(new PlayState(4))});
 			
-			LEVELS = new Array(one, two);
+			LEVELS = new Array(one, two, three, four);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 			var nextLevel:int = shared.data.nextLevel;
@@ -39,14 +41,6 @@ package
 		override public function update():void
 		{
 			super.update();
-		}
-		
-		public function One():void {
-			FlxG.switchState(new PlayState(1));
-		}
-		
-		public function Two():void {
-			FlxG.switchState(new PlayState(2));
-		}
+		}	
 	}
 }

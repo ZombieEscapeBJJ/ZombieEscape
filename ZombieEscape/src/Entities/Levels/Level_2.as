@@ -8,6 +8,8 @@ package Entities.Levels
 	import org.flixel.FlxG;
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
+	import Entities.Obstacles.*;
+	
 	/**
 	 * ...
 	 * @author James Okada
@@ -63,8 +65,7 @@ package Entities.Levels
 		
 		public function Level_2(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize);
-			this.numBeds = 10;
-			this.numLamps = 10;
+			currentLevel = 2;
 		}
 		
 		override protected function createMap():void {
@@ -93,16 +94,15 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
-			this.zombieGroup.add(new StrongZombie(100, 100));
-			this.zombieGroup.add(fastZombie = new FastZombie(100, 150));			
+			this.zombieGroup.add(new NormalZombie(100, 50));
+			this.zombieGroup.add(new NormalZombie(100, 100));
+			this.zombieGroup.add(new NormalZombie(100, 150));			
 			finish = new FinishLine(0, 16);
 		}
 		
 		override public function wonLevel():void {
 			FlxG.switchState(new WinState(2));
-		}
-		
+		}	
 	}
 
 }

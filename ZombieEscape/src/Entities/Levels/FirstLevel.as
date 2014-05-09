@@ -1,6 +1,6 @@
 package Entities.Levels 
 {
-	import Entities.Zombies.FastZombie;
+	import Entities.Obstacles.*;
 	import org.flixel.FlxState;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
@@ -57,7 +57,7 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -65,10 +65,12 @@ package Entities.Levels
 		
 		public function FirstLevel(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize);
-			this.numBeds = 10;
-			this.numLamps = 10;
-			this.numCouches = 10;
-			this.numTables = 10;
+			this.numBeds = 0;
+			this.numLamps = 0;
+			this.numCouches = 0;
+			this.numTables = 0;
+			currentLevel = 1;
+			this.numHolos = 0;
 		}
 		
 		override protected function createMap():void {
@@ -98,7 +100,7 @@ package Entities.Levels
 		override protected function createPlayer():void {
 			this.finish = new FinishLine(0, 16);
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(normalZombie = new NormalZombie(100, 50));
+			this.zombieGroup.add(new NormalZombie(100, 50));
 		}
 		
 		override public function wonLevel():void {

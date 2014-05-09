@@ -2,9 +2,7 @@ package Entities.Levels
 {
 	import adobe.utils.CustomActions;
 	import Entities.FinishLine;
-	import Entities.Obstacles.Obstacle;
 	import Entities.PauseScreen;
-	import Entities.Zombies.FastZombie;
 	import GameOverState;
 	import org.flixel.FlxBasic;
 	import org.flixel.FlxGroup;
@@ -23,6 +21,10 @@ package Entities.Levels
 	import Entities.Obstacles.*;
 	import flash.display.Graphics;
 	import org.flixel.FlxText;
+	import Entities.Hologram;
+	import flash.utils.Timer;
+    import flash.events.TimerEvent;
+	
 	/**
 	 * ...
 	 * @author James Okada
@@ -40,13 +42,14 @@ package Entities.Levels
 		public var obstacleGroup:FlxGroup;
 				
 		public var bob:BobFlx;
-		public var normalZombie:NormalZombie;
-		public var fastZombie:FastZombie;
+		public var holo:Hologram;
+		public var placedHolo:Boolean;
 		public var finish:FinishLine;
 		public var playerRadius:FlxSprite;
 		public var playerRadiusArray:Array;
 		
 		public var playState:Number;
+		public var furnitureState:Number;
 		
 		public var PLAYING_STATE:Number = 0;
 		public var BED_STATE:Number = 1;
@@ -54,6 +57,7 @@ package Entities.Levels
 		public var LAMP_STATE:Number = 3;
 		public var COUCH_STATE:Number = 4;
 		public var TABLE_STATE:Number = 5;
+		public var HOLO_STATE:Number = 6;
 		
 		public var NORMAL_ZOMBIE:int = 0;
 		public var FAST_ZOMBIE:int = 1;
@@ -63,6 +67,7 @@ package Entities.Levels
 		protected var numLamps:int;
 		protected var numCouches:int;
 		protected var numTables:int;
+		protected var numHolos:int;
 		protected var bedButton:FlxButton;
 		protected var startButton:FlxButton;
 		protected var pauseButton:FlxButton;
@@ -72,6 +77,9 @@ package Entities.Levels
 		protected var lampButton:FlxButton;
 		protected var couchButton:FlxButton;
 		protected var tableButton:FlxButton;
+		protected var holoButton:FlxButton;
+		public var currentLevel:int;
+
 		
 		// pause screen entities
 		private var pauseScreen:PauseScreen;
@@ -79,10 +87,12 @@ package Entities.Levels
 		public var movementD:int;
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
+			this.placedHolo = false;
 			this.state = state;
 			this.levelSize = levelSize;
 			this.tileSize = tileSize;
 			this.playState = 2;
+			this.furnitureState = 0;
 			this.floorGroup = new FlxGroup();
 			this.wallGroup = new FlxGroup();
 			this.guiGroup = new FlxGroup();
@@ -95,11 +105,12 @@ package Entities.Levels
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Pause Game", pauseGame);
 			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Resume Game", resumeGame);
+			holoButton = new FlxButton(4, FlxG.height - 27, "x" + numHolos);
+			holoButton.exists = false;
 			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2  + 20, "Restart Level", restartLevel);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
 			this.create();
-			this.numBeds = 0;
 		}
 
 		public function create():void {
@@ -114,7 +125,6 @@ package Entities.Levels
 		
 		protected function createPlayer():void {
 			bob = new BobFlx(100, 100);
-			normalZombie = new NormalZombie(100, 50);
 		}
 		
 		protected function createGUI():void {
@@ -149,6 +159,12 @@ package Entities.Levels
 			tableButton.labelOffset = new FlxPoint(5, 5);
 			tableButton.onDown = selectedTable;
 			add(tableButton);
+			
+			holoButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.label.color = 0xFFFFFF;
+			holoButton.labelOffset = new FlxPoint(5, 5);
+			holoButton.onDown = selectedHolo;
+			add(holoButton);
 			
 			add(startButton);
 			add(pauseButton);
@@ -188,8 +204,9 @@ package Entities.Levels
 			lampButton.label.text = "x" + numLamps;
 			couchButton.label.text = "x" + numCouches;
 			tableButton.label.text = "x" + numTables;
-			
-			if (playState == BED_STATE && numBeds > 0) {
+			holoButton.label.text = "x" + numHolos;
+
+			if (furnitureState == BED_STATE && numBeds > 0) {
 				bedButton.loadGraphic(Assets.BED_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed.SIZE)) {
@@ -197,7 +214,7 @@ package Entities.Levels
 						numBeds--;
 					}
 				}
-			} else if (playState == LAMP_STATE && numLamps > 0) {
+			} else if (furnitureState == LAMP_STATE && numLamps > 0) {
 				lampButton.loadGraphic(Assets.LAMP_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Lamp.SIZE)) {
@@ -205,7 +222,7 @@ package Entities.Levels
 						numLamps--;
 					}
 				}
-			} else if (playState == COUCH_STATE && numCouches > 0) {
+			} else if (furnitureState == COUCH_STATE && numCouches > 0) {
 				couchButton.loadGraphic(Assets.COUCH_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Couch.SIZE)) {
@@ -213,7 +230,7 @@ package Entities.Levels
 						numCouches--;
 					}
 				}
-			} else if (playState == TABLE_STATE && numTables > 0) {
+			} else if (furnitureState == TABLE_STATE && numTables > 0) {
 				tableButton.loadGraphic(Assets.TABLE_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
@@ -221,7 +238,20 @@ package Entities.Levels
 						numTables--;
 					}
 				}
+			} else if (furnitureState == HOLO_STATE && numHolos > 0) {
+				holoButton.loadGraphic(Assets.BED_SELECTED);
+				if (FlxG.mouse.justReleased()) {
+					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
+						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x, FlxG.mouse.y));
+						placedHolo = true;
+						numHolos--;
+						var timer:Timer = new Timer(3000);
+						timer.addEventListener(TimerEvent.TIMER, turnOffHologram);
+						timer.start();
+					}
+				}
 			}
+			
 			FlxG.collide(bob, obstacleGroup);
 			collideZombies();
 			FlxG.collide(zombieGroup, zombieGroup);
@@ -229,38 +259,51 @@ package Entities.Levels
 			FlxG.collide(wallGroup, zombieGroup);
 			
 			if (FlxG.collide(bob, zombieGroup)) {
-				FlxG.switchState(new GameOverState());
+				FlxG.switchState(new GameOverState(currentLevel));
 			} else if (FlxG.collide(bob, finish)) {
 				wonLevel();
 			}
 		}
 		
+		public function turnOffHologram(event:TimerEvent):void {
+			furnitureState = 0;
+			placedHolo = false;
+		}
+		
 		public function selectedBed():void {
-			playState = BED_STATE;
+			furnitureState = BED_STATE;
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+			holoButton.loadGraphic(Assets.BED_BUTTON);
 		}
 		
 		public function selectedCouch():void {
-			playState = COUCH_STATE;
+			furnitureState = COUCH_STATE;
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+			holoButton.loadGraphic(Assets.BED_BUTTON);
 		}
 		
 		public function selectedLamp():void {
-			playState = LAMP_STATE;
+			furnitureState = LAMP_STATE;
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
+			holoButton.loadGraphic(Assets.BED_BUTTON);
 		}
 		
 		public function selectedTable():void {
-			playState = TABLE_STATE;
+			furnitureState = TABLE_STATE;
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.loadGraphic(Assets.BED_BUTTON);
+		}
+		
+		public function selectedHolo():void {
+			furnitureState = HOLO_STATE;
 		}
 		
 		public function startGame():void {
@@ -272,6 +315,7 @@ package Entities.Levels
 			tableButton.exists = false;
 			playerRadius.exists = false;
 			bedButton.exists = false;
+			holoButton.exists = true;
 		}
 		
 		public function pauseGame():void {

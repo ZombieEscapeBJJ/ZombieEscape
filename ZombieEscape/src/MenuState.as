@@ -10,7 +10,7 @@ package
 		override public function create():void
 		{
 			add(new FlxText(FlxG.width /2 - 20, 0, 100, "Hello, World!"));
-			add(new FlxButton(FlxG.width /2 - 20, FlxG.height - 20, "Levels", Start));
+			add(new FlxButton(FlxG.width /2 - 20, FlxG.height - 20, "Level Select", Start));
 			FlxG.mouse.show();
 		}
 		override public function update():void

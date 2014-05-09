@@ -25,12 +25,17 @@ package Entities.Zombies
 			var bobX:Number = PlayState.LEVEL.bob.x	//update to Bob's x coordinate
 			var bobY:Number = PlayState.LEVEL.bob.y;	//update to Bob's y coordinate
 			if (PlayState.LEVEL.playState == PlayState.LEVEL.PLAYING_STATE) {
+				if (PlayState.LEVEL.furnitureState == PlayState.LEVEL.HOLO_STATE && PlayState.LEVEL.placedHolo) {
+					bobX = PlayState.LEVEL.holo.x;
+					bobY = PlayState.LEVEL.holo.y;
+				}
+				
 				var xDiff:Number = this.x - bobX; 
 				var yDiff:Number = this.y - bobY;
 				var radian:Number = Math.atan2(yDiff, xDiff);
 				velocity.x = speed * Math.cos(radian);
 				velocity.y = speed * Math.sin(radian);
-				
+			
 				x -= velocity.x;
 				y -= velocity.y;
 			}
