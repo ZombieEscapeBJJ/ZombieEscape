@@ -1,7 +1,9 @@
 package Entities.Levels 
 {
+	import adobe.utils.CustomActions;
 	import Entities.FinishLine;
 	import Entities.Obstacles.Obstacle;
+	import Entities.PauseScreen;
 	import Entities.Zombies.FastZombie;
 	import GameOverState;
 	import org.flixel.FlxBasic;
@@ -63,10 +65,17 @@ package Entities.Levels
 		protected var numTables:int;
 		protected var bedButton:FlxButton;
 		protected var startButton:FlxButton;
+		protected var pauseButton:FlxButton;
+		protected var restartButton:FlxButton;
+		protected var resumeButton:FlxButton;
+		
 		protected var lampButton:FlxButton;
 		protected var couchButton:FlxButton;
 		protected var tableButton:FlxButton;
 		
+		// pause screen entities
+		private var pauseScreen:PauseScreen;
+		private var gamePausedText:FlxText;
 		public var movementD:int;
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
@@ -84,6 +93,9 @@ package Entities.Levels
 			couchButton = new FlxButton(96, FlxG.height - 27, "x"+numCouches);
 			tableButton = new FlxButton(142, FlxG.height - 27, "x"+numTables);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
+			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Pause Game", pauseGame);
+			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Resume Game", resumeGame);
+			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2  + 20, "Restart Level", restartLevel);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
 			this.create();
@@ -139,7 +151,8 @@ package Entities.Levels
 			add(tableButton);
 			
 			add(startButton);
-			var attackRadius:int = 500;
+			add(pauseButton);
+			pauseButton.exists = false;
 			
 			var zoneRadius:int = 10;
 			for (var i:int = 0; i < zombieGroup.length; i++) {
@@ -148,7 +161,17 @@ package Entities.Levels
 				Utils.drawRect(playerRadius, currentZombie, 10, 0xff33ff33, 1, 0x4433ff33);
 				playerRadiusArray.push(new FlxObject(currentZombie.x - zoneRadius / 2, currentZombie.y - zoneRadius / 2, Zombie.SIZE.x + (zoneRadius  * 2), Zombie.SIZE.y + (zoneRadius * 2)));
 			}
-			
+			var rectangle:FlxSprite = new FlxSprite();
+			add(pauseScreen = new PauseScreen());
+			gamePausedText = new FlxText(FlxG.width / 2 - 60, 50, 150, "Game Paused");
+			gamePausedText.size = 15;
+			add(gamePausedText);
+			add(resumeButton);
+			add(restartButton);
+			resumeButton.visible = false;
+			restartButton.visible = false;
+			pauseScreen.visible = false;
+			gamePausedText.visible = false;
 			add(playerRadius);
 		}
 		
@@ -243,6 +266,7 @@ package Entities.Levels
 		public function startGame():void {
 			playState = PLAYING_STATE;
 			startButton.exists = false;
+			pauseButton.exists = true;
 			lampButton.exists = false;
 			couchButton.exists = false;
 			tableButton.exists = false;
@@ -250,6 +274,28 @@ package Entities.Levels
 			bedButton.exists = false;
 		}
 		
+		public function pauseGame():void {
+			playState = PAUSED_STATE;
+			pauseScreen.visible = true;
+			resumeButton.visible = true;
+			restartButton.visible = true;
+			gamePausedText.visible = true;
+			pauseButton.visible = false;
+
+		}
+		
+		public function resumeGame():void {
+			playState = PLAYING_STATE;
+			pauseButton.visible = true;
+			gamePausedText.visible = false;
+			restartButton.visible = true;
+			pauseScreen.visible = false;
+			resumeButton.visible = false;
+		}
+
+		public function restartLevel():void {
+
+		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
 				return false;

@@ -15,6 +15,32 @@ package
 			
 		}
 		
+		public static function drawRectAtPoint(Sprite:FlxSprite, x:int, y:int, radius:int, LineColor:uint = 0xffffffff, LineThickness:uint = 1, FillColor:uint = 0xffffffff):void {
+			var gfx:Graphics = FlxG.flashGfx;
+			gfx.clear();
+		 
+			// Line alpha
+			var alphaComponent:Number = Number((LineColor >> 24) & 0xFF) / 255;
+			if(alphaComponent <= 0)
+				alphaComponent = 1;
+		 
+			gfx.lineStyle(LineThickness, LineColor, alphaComponent);
+		 
+			// Fill alpha
+			alphaComponent = Number((FillColor >> 24) & 0xFF) / 255;
+			if(alphaComponent <= 0)
+				alphaComponent = 1;
+		 
+			gfx.beginFill(FillColor & 0x00ffffff, alphaComponent);
+		 
+			gfx.drawRect(x, y, radius, radius);
+		 
+			gfx.endFill();
+			
+			Sprite.pixels.draw(FlxG.flashGfxSprite);
+			Sprite.dirty = true;
+			
+		}
 		public static function drawRect(Sprite:FlxSprite, object:FlxSprite, radius:int, LineColor:uint = 0xffffffff, LineThickness:uint = 1, FillColor:uint = 0xffffffff):void {
  
 			var gfx:Graphics = FlxG.flashGfx;
