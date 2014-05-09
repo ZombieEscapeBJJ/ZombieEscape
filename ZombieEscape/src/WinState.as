@@ -29,10 +29,11 @@ package
 		
 		override public function create():void
 		{
-			add(new FlxText(FlxG.width /2 - 20, 0, 100, "You Win!"));
-			add(new FlxButton(10, 100, "Continue", Continue));
-			add(new FlxButton(110, 100, "Restart", Restart));
-			add(new FlxButton(210, 100, "Select Level", SelectLevel));
+			add(new FlxText(FlxG.width /2 - 20, 20, 100, "You Win!"));
+			add(new FlxButton(FlxG.width / 3 - 50 , 100, "Continue", Continue));
+			add(new FlxButton(FlxG.width *2 / 3 - 50 , 100, "Restart", Restart));
+			add(new FlxButton(FlxG.width / 3 - 50 , 150, "Level Select", SelectLevel));
+			add(new FlxButton(FlxG.width *2 / 3 - 50 , 150, "Main Menu", MainMenu));
 			FlxG.mouse.show();
 		}
 		
@@ -53,6 +54,8 @@ package
 			FlxG.switchState(new PlayState(currentLevel));
 		}
 		
-
+		public function MainMenu():void {
+			FlxG.switchState(new MenuState);
+		}
 	}
 }
