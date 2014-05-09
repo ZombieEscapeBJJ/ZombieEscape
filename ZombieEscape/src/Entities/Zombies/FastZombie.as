@@ -11,6 +11,7 @@ package Entities.Zombies
 		{
 			super(x, y, SPEED);
 			ZOMBIE_TYPE = 1;
+			this.color = 0x00FF00;
 		}
 		
 	}

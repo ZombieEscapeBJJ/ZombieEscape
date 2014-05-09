@@ -67,6 +67,7 @@ package Entities.Levels
 		public function Level3(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
 		{
 			super(state, levelSize, tileSize);
+			currentLevel = 3;
 		}
 		
 		override protected function createMap():void {
@@ -105,7 +106,7 @@ package Entities.Levels
 		}
 		
 		override public function wonLevel():void {
-			FlxG.switchState(new WinState(2));
+			FlxG.switchState(new WinState(3));
 		}
 	}
 

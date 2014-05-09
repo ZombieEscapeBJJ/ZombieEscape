@@ -72,6 +72,8 @@ package Entities.Levels
 		protected var couchButton:FlxButton;
 		protected var tableButton:FlxButton;
 		protected var holoButton:FlxButton;
+		public var currentLevel:int;
+
 		
 		public var movementD:int;
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
@@ -234,7 +236,7 @@ package Entities.Levels
 			FlxG.collide(wallGroup, zombieGroup);
 			
 			if (FlxG.collide(bob, zombieGroup)) {
-				FlxG.switchState(new GameOverState());
+				FlxG.switchState(new GameOverState(currentLevel));
 			} else if (FlxG.collide(bob, finish)) {
 				wonLevel();
 			}
