@@ -70,6 +70,7 @@ package Entities.Levels
 			this.numCouches = 0;
 			this.numTables = 0;
 			currentLevel = 1;
+			this.numHolos = 0;
 		}
 		
 		override protected function createMap():void {
