@@ -15,9 +15,10 @@ package
 			var one:FlxButton = new FlxButton(10, 100, "1", function():void{FlxG.switchState(new PlayState(1))});
 			var two:FlxButton = new FlxButton(110, 100, "2", function():void{FlxG.switchState(new PlayState(2))});
 			var three:FlxButton = new FlxButton(210, 100, "3", function():void { FlxG.switchState(new PlayState(3)) } );
-			var four:FlxButton = new FlxButton(10, 150, "4", function():void{FlxG.switchState(new PlayState(4))});
+			var four:FlxButton = new FlxButton(10, 150, "4", function():void { FlxG.switchState(new PlayState(4)) } );
+			var five:FlxButton = new FlxButton(110, 150, "5", function():void { FlxG.switchState(new PlayState(5)) } );
 			
-			LEVELS = new Array(one, two, three, four);
+			LEVELS = new Array(one, two, three, four, five);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 			var nextLevel:int = shared.data.nextLevel;

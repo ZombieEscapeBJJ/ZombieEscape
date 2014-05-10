@@ -291,7 +291,9 @@ package Entities.Levels
 			tableButton.exists = false;
 			playerRadius.exists = false;
 			bedButton.exists = false;
-			holoButton.exists = true;
+			if (numHolos > 0) {
+				holoButton.exists = true;
+			}
 		}
 		
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
