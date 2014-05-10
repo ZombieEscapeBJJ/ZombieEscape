@@ -98,10 +98,6 @@ package Entities.Levels
 			finish = new FinishLine(0, 16*14);
 		}
 		
-		override public function wonLevel():void {
-			FlxG.switchState(new WinState(4));
-		}
-		
 		
 		override public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50 || FlxG.mouse.y <= 16*9) {

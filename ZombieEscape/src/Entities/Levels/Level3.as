@@ -104,10 +104,6 @@ package Entities.Levels
 			obstacleGroup.add(new Wall(270, 100, true));
 			obstacleGroup.add(new Wall(195, 100, true));
 		}
-		
-		override public function wonLevel():void {
-			FlxG.switchState(new WinState(3));
-		}
 	}
 
 }

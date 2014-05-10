@@ -108,9 +108,5 @@ package Entities.Levels
 			this.zombieGroup.add(new NormalZombie(335, 16 * 13));	
 			finish = new FinishLine(0, 16 * 13);
 		}
-		
-		override public function wonLevel():void {
-			FlxG.switchState(new WinState(currentLevel));
-		}
 	}
 }

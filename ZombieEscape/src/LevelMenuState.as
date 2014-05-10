@@ -15,15 +15,16 @@ package
 			var one:FlxButton = new FlxButton(10, 100, "1", function():void{FlxG.switchState(new PlayState(1))});
 			var two:FlxButton = new FlxButton(110, 100, "2", function():void{FlxG.switchState(new PlayState(2))});
 			var three:FlxButton = new FlxButton(210, 100, "3", function():void { FlxG.switchState(new PlayState(3)) } );
-			var four:FlxButton = new FlxButton(10, 150, "4", function():void { FlxG.switchState(new PlayState(4)) } );
+			var four:FlxButton = new FlxButton(10, 130, "4", function():void { FlxG.switchState(new PlayState(4)) } );
 			
 			add(new FlxButton(FlxG.width  / 2 - 20, FlxG.height - 60, "Main Menu", MainMenu));
-			var five:FlxButton = new FlxButton(110, 150, "5", function():void { FlxG.switchState(new PlayState(5)) } );
-			var six:FlxButton = new FlxButton(210, 150, "6", function():void { FlxG.switchState(new PlayState(6)) } );
+			var five:FlxButton = new FlxButton(110, 130, "5", function():void { FlxG.switchState(new PlayState(5)) } );
+			var six:FlxButton = new FlxButton(210, 130, "6", function():void { FlxG.switchState(new PlayState(6)) } );
+			var seven:FlxButton = new FlxButton(10, 160, "7", function():void { FlxG.switchState(new PlayState(7)) } );
 			
 			
 			
-			LEVELS = new Array(one, two, three, four, five, six);
+			LEVELS = new Array(one, two, three, four, five, six, seven);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 			var nextLevel:int = shared.data.nextLevel;

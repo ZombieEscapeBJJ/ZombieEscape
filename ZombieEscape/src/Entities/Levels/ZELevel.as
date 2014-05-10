@@ -321,7 +321,7 @@ package Entities.Levels
 		}
 		
 		public function wonLevel():void {
-			
+			FlxG.switchState(new WinState(currentLevel));
 		}
 
 		public function collideZombies():void {
