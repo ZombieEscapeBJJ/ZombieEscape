@@ -19,8 +19,11 @@ package
 			
 			add(new FlxButton(FlxG.width  / 2 - 20, FlxG.height - 60, "Main Menu", MainMenu));
 			var five:FlxButton = new FlxButton(110, 150, "5", function():void { FlxG.switchState(new PlayState(5)) } );
+			var six:FlxButton = new FlxButton(210, 150, "6", function():void { FlxG.switchState(new PlayState(6)) } );
 			
-			LEVELS = new Array(one, two, three, four, five);
+			
+			
+			LEVELS = new Array(one, two, three, four, five, six);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 			var nextLevel:int = shared.data.nextLevel;

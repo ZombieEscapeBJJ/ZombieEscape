@@ -110,7 +110,7 @@ package Entities.Levels
 		}
 		
 		override public function wonLevel():void {
-			FlxG.switchState(new WinState(3));
+			FlxG.switchState(new WinState(currentLevel));
 		}
 	}
 }

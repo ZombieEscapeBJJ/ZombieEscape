@@ -195,7 +195,7 @@ package Entities.Levels
 				lampButton.loadGraphic(Assets.LAMP_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Lamp.SIZE)) {
-						obstacleGroup.add(new Lamp(FlxG.mouse.x, FlxG.mouse.y));
+						obstacleGroup.add(new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2 , FlxG.mouse.y  - Lamp.SIZE.y / 2));
 						numLamps--;
 					}
 				}
@@ -203,7 +203,7 @@ package Entities.Levels
 				couchButton.loadGraphic(Assets.COUCH_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Couch.SIZE)) {
-						obstacleGroup.add(new Couch(FlxG.mouse.x, FlxG.mouse.y));
+						obstacleGroup.add(new Couch(FlxG.mouse.x - Couch.SIZE.x / 2 , FlxG.mouse.y  - Couch.SIZE.y / 2));
 						numCouches--;
 					}
 				}
@@ -211,7 +211,7 @@ package Entities.Levels
 				tableButton.loadGraphic(Assets.TABLE_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
-						obstacleGroup.add(new Table(FlxG.mouse.x, FlxG.mouse.y));
+						obstacleGroup.add(new Table(FlxG.mouse.x - Table.SIZE.x / 2 , FlxG.mouse.y  - Table.SIZE.y / 2));
 						numTables--;
 					}
 				}
