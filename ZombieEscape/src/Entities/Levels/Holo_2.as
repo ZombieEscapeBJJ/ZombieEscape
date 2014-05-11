@@ -1,9 +1,7 @@
 package Entities.Levels 
 {
 	import Entities.FinishLine;
-	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
-	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
@@ -16,12 +14,8 @@ package Entities.Levels
 	 * ...
 	 * @author Brandon
 	 */
-	public class Level3 extends ZELevel 
+	public class Holo_2 extends ZELevel 
 	{
-		public var tutorialBackground:FlxSprite;
-		public var tutorialText:FlxText;
-		public var closeButton:FlxButton;
-		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -56,24 +50,26 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level3(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
+		public function Holo_2(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
 		{
 			super(state, levelSize, tileSize);
-			currentLevel = 3;
+			currentLevel = 7;
+			this.numHolos = 1;
+			this.numLamps = 1;
 		}
 		
 		override protected function createMap():void {
@@ -99,34 +95,27 @@ package Entities.Levels
             );
             wallGroup.add(tiles);
 		}
-
-		override protected function createGUI():void {
-			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
-			tutorialBackground.loadGraphic(Assets.FIRST_TUT2);
-			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "A new species of zombies have appeared! They run faster than normal zombies");
-			tutorialText.size = 12;
-			add(tutorialText);
-			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
-			add(closeButton);
-		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-50, 16 * 7);
-			this.zombieGroup.add(new NormalZombie(25, 25));
-			this.zombieGroup.add(new FastZombie(65, 50));
-			this.zombieGroup.add(new FastZombie(105, 25));			
-			finish = new FinishLine(0, 16 * 7);
-			obstacleGroup.add(new Wall(210, 16 * 9 + 5, false));
-			obstacleGroup.add(new Wall(270, 100, true));
-			obstacleGroup.add(new Wall(195, 100, true));
-		}
-		
-		public function closeTutorial():void {
-			closeButton.exists = false;
-			tutorialBackground.exists = false;
-			tutorialText.exists = false;
+			bob = new BobFlx(180, 20);
+			this.zombieGroup.add(new FastZombie(175, 190));
+			this.zombieGroup.add(new FastZombie(195, 190));
+			this.zombieGroup.add(new FastZombie(185, 230));	
+			this.zombieGroup.add(new NormalZombie(90, 20));	
+			this.zombieGroup.add(new NormalZombie(FlxG.width - 50, 150));	
+			this.zombieGroup.add(new NormalZombie(FlxG.width - 70, 150));	
+			this.zombieGroup.add(new NormalZombie(FlxG.width- 60, 110));	
+			finish = new FinishLine(0, 16 * 14);
+			
+			obstacleGroup.add(new Wall(16, 16 * 11 + 5, false));
+			obstacleGroup.add(new Wall(65, 16 * 11 + 5, false));
+			obstacleGroup.add(new Wall(115, 16 * 11 + 5, false));
+			obstacleGroup.add(new Wall(162, 126, true));
+			obstacleGroup.add(new Wall(210, 126, true));
+			obstacleGroup.add(new Wall(210, 16 * 11 + 5, false));
+			obstacleGroup.add(new Wall(260, 16 * 11 + 5, false));
+			obstacleGroup.add(new Wall(310, 16 * 11 + 5, false));
+			obstacleGroup.add(new Wall(330, 16 * 11 + 5, false));
 		}
 	}
 

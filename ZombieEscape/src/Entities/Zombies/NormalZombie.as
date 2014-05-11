@@ -6,7 +6,7 @@ package Entities.Zombies
 	 */
 	public class NormalZombie extends Zombie 
 	{
-		public var SPEED:Number = .25
+		public var SPEED:Number = .4
 		public function NormalZombie(x:int, y:int) 
 		{
 			super(x, y, SPEED);
