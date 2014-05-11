@@ -329,7 +329,6 @@ package Entities.Levels
 		}
 		
 		public function pauseGame():void {
-			trace("it got here");
 			playState = PAUSED_STATE;
 			pauseScreen.visible = true;
 			resumeButton.visible = true;

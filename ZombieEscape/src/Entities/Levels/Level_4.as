@@ -107,6 +107,10 @@ package Entities.Levels
 			finish = new FinishLine(0, 16*14);
 		}
 		
+		override public function wonLevel():void {
+			FlxG.switchState(new WinState(4));
+		}
+		
 		
 		override protected function createGUI():void {
 			super.createGUI();

@@ -1,7 +1,11 @@
 package Entities.Levels 
 {
 	import Entities.FinishLine;
+	import flash.text.CSMSettings;
+	import mx.core.FlexSprite;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
+	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
@@ -16,6 +20,10 @@ package Entities.Levels
 	 */
 	public class Strong_1 extends ZELevel 
 	{
+		public var tutorialBackground:FlxSprite;
+		public var tutorialText:FlxText;
+		public var closeButton:FlxButton;
+		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -95,6 +103,19 @@ package Entities.Levels
             wallGroup.add(tiles);
 		}
 		
+		override protected function createGUI():void {
+			super.createGUI();
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground.loadGraphic(Assets.FIRST_TUT2);
+			add(tutorialBackground);
+			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Oh no!! Strong zombies have appeared. Strong zombies can push furniture. Be careful!");
+			tutorialText.size = 10;
+			add(tutorialText);
+			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
+			add(closeButton);
+			
+		}
+		
 		override protected function createPlayer():void {
 			bob = new BobFlx(16, 15*5);	
 			finish = new FinishLine(0, 16 * 7);
@@ -102,6 +123,12 @@ package Entities.Levels
 			obstacleGroup.add(new Lamp(60, 16 * 7));
 			
 			zombieGroup.add(new StrongZombie(40, 16 * 7));
+		}
+		
+		public function closeTutorial():void {
+			closeButton.exists = false;
+			tutorialBackground.exists = false;
+			tutorialText.exists = false;
 		}
 	}
 

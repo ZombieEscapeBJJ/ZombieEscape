@@ -128,6 +128,10 @@ package Entities.Levels
 			tutorialBackground.exists = false;
 			tutorialText.exists = false;
 		}
+		
+		override public function wonLevel():void {
+			FlxG.switchState(new WinState(3));
+		}
 	}
 
 }
