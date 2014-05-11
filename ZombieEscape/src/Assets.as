@@ -53,8 +53,15 @@ package
 		public static var WALL:Class;
 		[Embed(source = "../assets/sprites/verticalwall.png")]
 		public static var VWALL:Class;
+		[Embed(source = "../assets/sprites/background-tut-2.png")]
+		public static var FIRST_TUT:Class;
+		[Embed(source = "../assets/sprites/firstlevel-2.png")]
+		public static var FIRST_TUT2:Class;
+		[Embed(source = "../assets/sprites/furniture-tutorial.png")]
+		public static var FURNITURE_TUT:Class;
+		[Embed(source = "../assets/sprites/zone-tutorial.png")]
+		public static var ZONE_TUT:Class;
 		
-
 		public function Assets() 
 		{
 			

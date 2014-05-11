@@ -1,7 +1,9 @@
 package Entities.Levels 
 {
 	import Entities.FinishLine;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
+	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
@@ -14,6 +16,13 @@ package Entities.Levels
 	 * @author James Okada
 	 */
 	public class Level_4 extends ZELevel {
+		public var tutorialBackground:FlxSprite;
+		public var tutorialText:FlxText;
+		public var tutorialBackground2:FlxSprite;
+		public var tutorialText2:FlxText;
+		public var closeButton:FlxButton;
+		public var nextPrevButton:FlxButton;
+		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -103,6 +112,30 @@ package Entities.Levels
 		}
 		
 		
+		override protected function createGUI():void {
+			super.createGUI();
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground.loadGraphic(Assets.FURNITURE_TUT);
+			add(tutorialBackground);
+			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Place obstacles to block zombies out. Click on the obstacle button on the bottom and click where you want to place it on the map. You can only place furniture before the game starts!");
+			tutorialText.size = 10;
+			add(tutorialText);
+			closeButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground2.loadGraphic(Assets.ZONE_TUT);
+			add(tutorialBackground2);
+			tutorialText2 = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 110, 200, "Each zombie has a dispatch zone where furniture cannot be placed");
+			tutorialText2.size = 11;
+			add(tutorialText2);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
+			add(nextPrevButton);
+			
+			add(closeButton);
+			tutorialBackground2.visible = false;
+			tutorialText2.visible = false;
+			
+		}
+		
 		override public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50 || FlxG.mouse.y <= 16*9) {
 				return false;
@@ -128,7 +161,39 @@ package Entities.Levels
 			}
 			
 			return true;
+		}
+	
+		
+		public function nextStep():void {
+			tutorialBackground.visible = false;
+			tutorialText.visible = false;
 			
+			tutorialBackground2.visible = true;
+			tutorialText2.visible = true;
+			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
+			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.onUp = previousStep;
+		}
+		
+		public function previousStep():void {
+			tutorialBackground2.visible = false;
+			tutorialText2.visible = false;
+			
+			tutorialBackground.visible = true;
+			tutorialText.visible = true;
+			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
+			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.onUp = nextStep;
+
+		}
+		
+		public function closeTutorial():void {
+			closeButton.exists = false;
+			tutorialBackground2.exists = false;
+			tutorialText2.exists = false;
+			nextPrevButton.exists = false;
+			tutorialText.exists = false;
+			tutorialBackground.exists = false;
 			
 		}
 	}

@@ -1,7 +1,9 @@
 package Entities.Levels 
 {
 	import Entities.FinishLine;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
+	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
@@ -16,6 +18,10 @@ package Entities.Levels
 	 */
 	public class Level3 extends ZELevel 
 	{
+		public var tutorialBackground:FlxSprite;
+		public var tutorialText:FlxText;
+		public var closeButton:FlxButton;
+		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -93,6 +99,18 @@ package Entities.Levels
             );
             wallGroup.add(tiles);
 		}
+
+		override protected function createGUI():void {
+			super.createGUI();
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground.loadGraphic(Assets.FIRST_TUT2);
+			add(tutorialBackground);
+			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "A new species of zombies have appeared! They run faster than normal zombies");
+			tutorialText.size = 12;
+			add(tutorialText);
+			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
+			add(closeButton);
+		}
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, 16 * 7);
@@ -103,6 +121,12 @@ package Entities.Levels
 			obstacleGroup.add(new Wall(210, 16 * 9 + 5, false));
 			obstacleGroup.add(new Wall(270, 100, true));
 			obstacleGroup.add(new Wall(195, 100, true));
+		}
+		
+		public function closeTutorial():void {
+			closeButton.exists = false;
+			tutorialBackground.exists = false;
+			tutorialText.exists = false;
 		}
 		
 		override public function wonLevel():void {

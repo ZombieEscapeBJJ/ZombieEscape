@@ -73,6 +73,7 @@ package Entities.Levels
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
 		protected var resumeButton:FlxButton;
+		protected var levelSelectButton:FlxButton;
 		
 		protected var lampButton:FlxButton;
 		protected var couchButton:FlxButton;
@@ -85,6 +86,8 @@ package Entities.Levels
 		private var pauseScreen:PauseScreen;
 		private var gamePausedText:FlxText;
 		public var movementD:int;
+		
+		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
 			this.placedHolo = false;
@@ -104,10 +107,11 @@ package Entities.Levels
 			tableButton = new FlxButton(142, FlxG.height - 27, "x"+numTables);
 			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
 			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Pause Game", pauseGame);
-			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Resume Game", resumeGame);
+			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 - 20, "Resume Game", resumeGame);
 			holoButton = new FlxButton(4, FlxG.height - 27, "x" + numHolos);
 			holoButton.exists = false;
-			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2  + 20, "Restart Level", restartLevel);
+			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Restart Level", restartLevel);
+			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
 			this.create();
@@ -170,6 +174,8 @@ package Entities.Levels
 			add(pauseButton);
 			pauseButton.exists = false;
 			
+	
+			
 			var zoneRadius:int = 10;
 			for (var i:int = 0; i < zombieGroup.length; i++) {
 				var currentZombie:Zombie = zombieGroup.members[i];
@@ -184,8 +190,10 @@ package Entities.Levels
 			add(gamePausedText);
 			add(resumeButton);
 			add(restartButton);
+			add(levelSelectButton);
 			resumeButton.visible = false;
 			restartButton.visible = false;
+			levelSelectButton.visible = false;
 			pauseScreen.visible = false;
 			gamePausedText.visible = false;
 			add(playerRadius);
@@ -319,10 +327,12 @@ package Entities.Levels
 		}
 		
 		public function pauseGame():void {
+			trace("it got here");
 			playState = PAUSED_STATE;
 			pauseScreen.visible = true;
 			resumeButton.visible = true;
 			restartButton.visible = true;
+			levelSelectButton.visible = true;
 			gamePausedText.visible = true;
 			pauseButton.visible = false;
 
@@ -332,13 +342,18 @@ package Entities.Levels
 			playState = PLAYING_STATE;
 			pauseButton.visible = true;
 			gamePausedText.visible = false;
-			restartButton.visible = true;
+			restartButton.visible = false;
 			pauseScreen.visible = false;
 			resumeButton.visible = false;
+			levelSelectButton.visible = false;
 		}
 
 		public function restartLevel():void {
-
+			FlxG.switchState(new PlayState(currentLevel));
+		}
+		
+		public function levelSelect():void {
+			FlxG.switchState(new LevelMenuState());
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
