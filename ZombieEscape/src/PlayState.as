@@ -15,7 +15,7 @@ package
 		
 		public static var LEVEL:ZELevel = null;
 		
-		private var LEVELS:Array = [Level1, Level_2, Level3, Level_4, Level5, Holo_1, Holo_2, Strong_1, Level9];
+		private var LEVELS:Array = [Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9];
 		
 		public function PlayState(level:int) 
 		{

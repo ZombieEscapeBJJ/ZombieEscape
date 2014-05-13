@@ -68,8 +68,8 @@ package Entities.Levels
 		protected var numCouches:int;
 		protected var numTables:int;
 		protected var numHolos:int;
+		protected var startText:FlxText;
 		protected var bedButton:FlxButton;
-		protected var startButton:FlxButton;
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
 		protected var resumeButton:FlxButton;
@@ -104,8 +104,9 @@ package Entities.Levels
 			bedButton = new FlxButton(4, FlxG.height - 27, "x"+numBeds);
 			lampButton = new FlxButton(50, FlxG.height - 27, "x"+numLamps);
 			couchButton = new FlxButton(96, FlxG.height - 27, "x"+numCouches);
-			tableButton = new FlxButton(142, FlxG.height - 27, "x"+numTables);
-			startButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Start Game", startGame);
+			tableButton = new FlxButton(142, FlxG.height - 27, "x" + numTables);
+			
+			startText = new FlxText(FlxG.width - 90, FlxG.height - 27, 100, "Press Space to Start Game");
 			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Pause Game", pauseGame);
 			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 - 20, "Resume Game", resumeGame);
 			holoButton = new FlxButton(4, FlxG.height - 27, "x" + numHolos);
@@ -114,6 +115,7 @@ package Entities.Levels
 			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
+
 			this.create();
 		}
 
@@ -170,7 +172,7 @@ package Entities.Levels
 			holoButton.onDown = selectedHolo;
 			add(holoButton);
 			
-			add(startButton);
+			add(startText);
 			add(pauseButton);
 			pauseButton.exists = false;
 			
@@ -208,6 +210,9 @@ package Entities.Levels
 		
 		override public function update():void {
 			super.update();
+			if (FlxG.keys.SPACE) {
+				startGame();
+			}
 			bedButton.label.text = "x" + numBeds;
 			lampButton.label.text = "x" + numLamps;
 			couchButton.label.text = "x" + numCouches;
@@ -320,7 +325,7 @@ package Entities.Levels
 		public function startGame():void {
 			playState = PLAYING_STATE;
 			furnitureState = HOLO_STATE;
-			startButton.exists = false;
+			startText.exists = false;
 			pauseButton.exists = true;
 			lampButton.exists = false;
 			couchButton.exists = false;
