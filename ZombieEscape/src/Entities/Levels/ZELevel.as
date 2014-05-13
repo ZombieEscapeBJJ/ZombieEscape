@@ -101,6 +101,9 @@ package Entities.Levels
 		private var gamePausedText:FlxText;
 		public var movementD:int;
 		
+		private var oldX:Number;
+		private var oldY:Number;
+		
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
@@ -150,6 +153,9 @@ package Entities.Levels
 			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
+			oldX = FlxG.mouse.x;
+			oldY = FlxG.mouse.y;
+
 			this.create();
 		}
 
@@ -217,7 +223,7 @@ package Entities.Levels
 			for (var i:int = 0; i < zombieGroup.length; i++) {
 				var currentZombie:Zombie = zombieGroup.members[i];
 				playerRadius.makeGraphic(FlxG.width,FlxG.height, 0x000000);
-				Utils.drawRect(playerRadius, currentZombie, 10, 0xff33ff33, 1, 0x4433ff33);
+				Utils.drawRect(playerRadius, currentZombie, 10, 0xffff3333, 1, 0x44ff3333);
 				playerRadiusArray.push(new FlxObject(currentZombie.x - zoneRadius / 2, currentZombie.y - zoneRadius / 2, Zombie.SIZE.x + (zoneRadius  * 2), Zombie.SIZE.y + (zoneRadius * 2)));
 			}
 			var rectangle:FlxSprite = new FlxSprite();
@@ -268,6 +274,8 @@ package Entities.Levels
 						obstacleGroup.add(new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2));
 						numBeds--;
 						goneBeds++;
+						furnitureState = -1;
+						bedButton.loadGraphic(Assets.BED_BUTTON);
 					}
 				}
 			} else if (furnitureState == LAMP_STATE && numLamps > 0) {
@@ -277,6 +285,8 @@ package Entities.Levels
 						obstacleGroup.add(new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2, FlxG.mouse.y - Lamp.SIZE.y / 2));
 						numLamps--;
 						goneLamps++;
+						furnitureState = -1;
+						lampButton.loadGraphic(Assets.LAMP_BUTTON);
 					}
 				}
 			} else if (furnitureState == COUCH_STATE && numCouches > 0) {
@@ -286,6 +296,8 @@ package Entities.Levels
 						obstacleGroup.add(new Couch(FlxG.mouse.x - Couch.SIZE.x / 2, FlxG.mouse.y - Couch.SIZE.y / 2));
 						numCouches--;
 						goneCouches++;
+						furnitureState = -1;
+						couchButton.loadGraphic(Assets.COUCH_BUTTON);
 					}
 				}
 			} else if (furnitureState == TABLE_STATE && numTables > 0) {
@@ -295,6 +307,8 @@ package Entities.Levels
 						obstacleGroup.add(new Table(FlxG.mouse.x - Table.SIZE.x / 2, FlxG.mouse.y - Table.SIZE.y / 2));
 						numTables--;
 						goneTables++;
+						furnitureState = -1;
+						tableButton.loadGraphic(Assets.TABLE_BUTTON);
 					}
 				}
 			} else if (furnitureState == HOLO_STATE && numHolos > 0) {
@@ -312,22 +326,50 @@ package Entities.Levels
 			}
 			
 			for (var i:int = 0; i < obstacleGroup.length; i++) {
-				obstacleGroup.members[i].immovable = true;
-				FlxG.collide(obstacleGroup.members[i], bob);
+				var o:Obstacle = obstacleGroup.members[i];
+				
+				o.immovable = true;
+				FlxG.collide(o, bob);
+				if (o.isClicked && checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
+					var xDif:Number = FlxG.mouse.x - oldX;
+					var yDif:Number = FlxG.mouse.y - oldY;
+					o.x += xDif;
+					o.y += yDif;
+				}
+				
+				for (var j:int = 0; j < obstacleGroup.length; j++) {
+					var o2:Obstacle = obstacleGroup.members[j];
+					var m:FlxObject = new FlxObject(FlxG.mouse.x, FlxG.mouse.y);
+					if (j != i && Utils.checkWithinBounds(m, o) && Utils.checkWithinBounds(m, o2)) {
+						if (o.alive && o2.alive) {
+							o2.active = false;
+						}
+					} else {
+						o.active = true;
+						o2.active = true;
+					}
+				}
 			}
-			collideZombies();
-			FlxG.collide(zombieGroup, zombieGroup);
-			FlxG.collide(wallGroup, bob);
-			FlxG.collide(wallGroup, zombieGroup);
 			
-			if (FlxG.collide(bob, zombieGroup)) {
+			
+			if (playState == PLAYING_STATE) {
+				collideZombies();
+				FlxG.collide(zombieGroup, zombieGroup);
+				FlxG.collide(wallGroup, bob);
+				FlxG.collide(wallGroup, zombieGroup);
+				
+				if (FlxG.collide(bob, zombieGroup)) {
 				for (var k:int = 0; k < obstacleGroup.length; k++) {
 					PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
 				}
-				FlxG.switchState(new GameOverState(currentLevel));
-			} else if (FlxG.collide(bob, finish)) {
-				wonLevel();
+					FlxG.switchState(new GameOverState(currentLevel));
+				} else if (FlxG.collide(bob, finish)) {
+					wonLevel();
+				}
 			}
+			
+			oldX = FlxG.mouse.x;
+			oldY = FlxG.mouse.y;
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
@@ -425,6 +467,7 @@ package Entities.Levels
 		public function levelSelect():void {
 			FlxG.switchState(new LevelMenuState());
 		}
+		
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
 				//below map
@@ -446,6 +489,15 @@ package Entities.Levels
 					} 
 				}
 			}
+			
+			/*for (var k:int = 0; k < obstacleGroup.length; k++) {
+				var o:Obstacle = obstacleGroup.members[k];
+				
+				if (Utils.checkWithinBounds(new FlxObject(mouseX , mouseY, obstacleSize.x, obstacleSize.y), o)) {
+					//on furniture
+					return false;
+				}
+			}*/
 			
 			
 			return true;

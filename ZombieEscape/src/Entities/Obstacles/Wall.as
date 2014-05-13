@@ -1,5 +1,6 @@
 package Entities.Obstacles 
 {
+	import org.flixel.FlxPoint;
 	/**
 	 * ...
 	 * @author Brandon
@@ -15,6 +16,10 @@ package Entities.Obstacles
 			} else {
 				loadGraphic(Assets.VWALL);
 			}
+			type = Wall;
+		}
+		
+		override public function update():void {
 			
 		}
 		
