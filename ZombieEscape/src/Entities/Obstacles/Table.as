@@ -12,6 +12,7 @@ package Entities.Obstacles
 		{
 			super(x, y);
 			loadGraphic(Assets.TABLE);
+			type = Table;
 		}
 		
 	}

@@ -12,6 +12,7 @@ package Entities.Obstacles
 		{
 			super(X, Y);
 			loadGraphic(Assets.LAMP);
+			type = Lamp;
 		}
 		
 	}

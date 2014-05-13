@@ -139,25 +139,31 @@ package Entities.Levels
 			if (FlxG.mouse.y >= FlxG.height - 50 || FlxG.mouse.y <= 16*9) {
 				return false;
 			}
-			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
+			if (Utils.checkWithinBounds(new FlxObject(mouseX + obstacleSize.x / 2, mouseY + obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), bob)) {
+				//on bob
 				return false;
 			}
 			
-			if (FlxG.mouse.y <= FlxG.height - 50 && FlxG.mouse.y >= 16 * 9 &&
-				(FlxG.mouse.x < 16*4 || FlxG.mouse.x > 16*8)) {
+			if (FlxG.mouse.y <= FlxG.height - 16*4.5 && FlxG.mouse.y >= 16 * 9 &&
+				(FlxG.mouse.x < 16*5 || FlxG.mouse.x > 16*7 - 8)) {
 				return false;
 			}
 			
 			for (var j:int = 0; j < playerRadiusArray.length; j++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), playerRadiusArray[j])) {
-					return false;
+				var radiusX:Number = playerRadiusArray[j].x;
+				var radiusY:Number = playerRadiusArray[j].y;
+				if (mouseX > radiusX - 5 - obstacleSize.x / 2 && mouseX < radiusX + 30 + obstacleSize.x / 2) {
+					if ( mouseY < radiusY + 35 + obstacleSize.y / 2 && mouseY > radiusY - 5 - obstacleSize.y / 2) {
+						//in dispatch zone
+						return false;
+					} 
 				}
 			}
-			for (var i:int = 0; i < zombieGroup.length; i++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
-					return false;
-				}
-			}
+			//for (var i:int = 0; i < zombieGroup.length; i++) {
+				//if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
+					//return false;
+				//}
+			//}
 			
 			return true;
 		}
