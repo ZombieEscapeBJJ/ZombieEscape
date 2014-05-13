@@ -117,7 +117,7 @@ package Entities.Levels
 			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FURNITURE_TUT);
 			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Place obstacles to block zombies out. Click on the obstacle button on the bottom and click where you want to place it on the map. You can only place furniture before the game starts!");
+			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Place furniture to block zombies from getting to you. Select a type of furniture at the bottom and place them on the map before the game starts.");
 			tutorialText.size = 10;
 			add(tutorialText);
 			closeButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
@@ -133,7 +133,6 @@ package Entities.Levels
 			add(closeButton);
 			tutorialBackground2.visible = false;
 			tutorialText2.visible = false;
-			
 		}
 		
 		override public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
