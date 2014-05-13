@@ -164,7 +164,7 @@ package Entities.Levels
 			tableButton.onDown = selectedTable;
 			add(tableButton);
 			
-			holoButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 			holoButton.label.color = 0xFFFFFF;
 			holoButton.labelOffset = new FlxPoint(5, 5);
 			holoButton.onDown = selectedHolo;
@@ -226,7 +226,7 @@ package Entities.Levels
 				lampButton.loadGraphic(Assets.LAMP_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Lamp.SIZE)) {
-						obstacleGroup.add(new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2 , FlxG.mouse.y  - Lamp.SIZE.y / 2));
+						obstacleGroup.add(new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2, FlxG.mouse.y - Lamp.SIZE.y / 2));
 						numLamps--;
 					}
 				}
@@ -234,7 +234,7 @@ package Entities.Levels
 				couchButton.loadGraphic(Assets.COUCH_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Couch.SIZE)) {
-						obstacleGroup.add(new Couch(FlxG.mouse.x - Couch.SIZE.x / 2 , FlxG.mouse.y  - Couch.SIZE.y / 2));
+						obstacleGroup.add(new Couch(FlxG.mouse.x - Couch.SIZE.x / 2, FlxG.mouse.y - Couch.SIZE.y / 2));
 						numCouches--;
 					}
 				}
@@ -242,15 +242,15 @@ package Entities.Levels
 				tableButton.loadGraphic(Assets.TABLE_SELECTED);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
-						obstacleGroup.add(new Table(FlxG.mouse.x - Table.SIZE.x / 2 , FlxG.mouse.y  - Table.SIZE.y / 2));
+						obstacleGroup.add(new Table(FlxG.mouse.x - Table.SIZE.x / 2, FlxG.mouse.y - Table.SIZE.y / 2));
 						numTables--;
 					}
 				}
 			} else if (furnitureState == HOLO_STATE && numHolos > 0) {
-				holoButton.loadGraphic(Assets.BED_SELECTED);
+				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 				if (FlxG.mouse.justReleased()) {
-					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
-						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x, FlxG.mouse.y));
+					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
+						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x - Hologram.SIZE.x / 2, FlxG.mouse.y - Hologram.SIZE.y / 2));
 						placedHolo = true;
 						numHolos--;
 						var timer:Timer = new Timer(3000);
@@ -286,7 +286,7 @@ package Entities.Levels
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
-			holoButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 		}
 		
 		public function selectedCouch():void {
@@ -294,7 +294,7 @@ package Entities.Levels
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
-			holoButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 		}
 		
 		public function selectedLamp():void {
@@ -302,7 +302,7 @@ package Entities.Levels
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
 			tableButton.loadGraphic(Assets.TABLE_BUTTON);
-			holoButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 		}
 		
 		public function selectedTable():void {
@@ -310,7 +310,7 @@ package Entities.Levels
 			lampButton.loadGraphic(Assets.LAMP_BUTTON);
 			couchButton.loadGraphic(Assets.COUCH_BUTTON);
 			bedButton.loadGraphic(Assets.BED_BUTTON);
-			holoButton.loadGraphic(Assets.BED_BUTTON);
+			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 		}
 		
 		public function selectedHolo():void {
@@ -319,6 +319,7 @@ package Entities.Levels
 		
 		public function startGame():void {
 			playState = PLAYING_STATE;
+			furnitureState = HOLO_STATE;
 			startButton.exists = false;
 			pauseButton.exists = true;
 			lampButton.exists = false;
@@ -361,26 +362,52 @@ package Entities.Levels
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
+				//below map
 				return false;
 			}
-			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
+			
+			if (Utils.checkWithinBounds(new FlxObject(mouseX + obstacleSize.x / 2, mouseY + obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), bob)) {
+				//on bob
 				return false;
 			}
 			
 			for (var j:int = 0; j < playerRadiusArray.length; j++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), playerRadiusArray[j])) {
+				var radiusX:Number = playerRadiusArray[j].x;
+				var radiusY:Number = playerRadiusArray[j].y;
+				if (mouseX > radiusX - 5 - obstacleSize.x / 2 && mouseX < radiusX + 30 + obstacleSize.x / 2) {
+					if ( mouseY < radiusY + 35 + obstacleSize.y / 2 && mouseY > radiusY - 5 - obstacleSize.y / 2) {
+						//in dispatch zone
+						return false;
+					} 
+				}
+			}
+			
+			//for (var i:int = 0; i < zombieGroup.length; i++) {
+				//if (Utils.checkWithinBounds(new FlxObject(mouseX - obstacleSize.x / 2, mouseY - obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
+					//trace("on zombie");
+					//return false;
+				//}
+			//}
+			
+			return true;
+		}
+		
+		public function checkValidHoloPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
+			if (FlxG.mouse.y >= FlxG.height - 50) {
+				return false;
+			}
+			
+			for (var i:int = 0; i < zombieGroup.length; i++) {
+				if (Utils.checkWithinBounds(new FlxObject(mouseX - obstacleSize.x / 2, mouseY - obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
 					return false;
 				}
 			}
-			for (var i:int = 0; i < zombieGroup.length; i++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
-					return false;
-				}
+			
+			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
+				return false;
 			}
 			
 			return true;
-			
-			
 		}
 		
 		public function wonLevel():void {

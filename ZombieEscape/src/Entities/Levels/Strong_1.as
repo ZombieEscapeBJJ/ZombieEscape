@@ -117,12 +117,19 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(16, 15*5);	
-			finish = new FinishLine(0, 16 * 7);
-			
-			obstacleGroup.add(new Lamp(60, 16 * 7));
-			
-			zombieGroup.add(new StrongZombie(40, 16 * 7));
+			bob = new BobFlx(300, 16*8);	
+			finish = new FinishLine(0, 16 * 7);			
+			zombieGroup.add(new StrongZombie(100, 16 * 4));
+			zombieGroup.add(new StrongZombie(100, 16 * 6));
+			zombieGroup.add(new StrongZombie(100, 16 * 8));
+			zombieGroup.add(new StrongZombie(100, 16 * 10));
+			obstacleGroup.add(new Lamp(160, 16 * 2));
+			obstacleGroup.add(new Bed(160, 16 * 4));
+			obstacleGroup.add(new Lamp(160, 16 * 6));
+			obstacleGroup.add(new Bed(160, 16 * 8));
+			obstacleGroup.add(new Lamp(160, 16 * 10));
+			obstacleGroup.add(new Bed(160, 16 * 12));
+			obstacleGroup.add(new Lamp(160, 16 * 14));
 		}
 		
 		public function closeTutorial():void {

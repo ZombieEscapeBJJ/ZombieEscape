@@ -61,6 +61,10 @@ package
 		public static var FURNITURE_TUT:Class;
 		[Embed(source = "../assets/sprites/zone-tutorial.png")]
 		public static var ZONE_TUT:Class;
+		[Embed(source = "../assets/sprites/hologrambutton.png")]
+		public static var HOLOGRAM_BUTTON:Class;
+		[Embed(source = "../assets/sprites/fast_tut.png")]
+		public static var FAST_TUT:Class;
 		
 		public function Assets() 
 		{
