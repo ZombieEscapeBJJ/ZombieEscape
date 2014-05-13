@@ -31,8 +31,9 @@ package
 			LEVELS = new Array(one, two, three, four, five, six, seven, eight, nine);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+			//shared.clear();
+			//shared.data.nextLevel = 1;
 			var nextLevel:int = shared.data.nextLevel;
-			//trace(nextLevel);
 			
 			for (var i:int = 0; i < LEVELS.length; i++) {
 				var temp:FlxButton = LEVELS[i];
