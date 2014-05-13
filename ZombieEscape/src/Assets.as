@@ -65,6 +65,8 @@ package
 		public static var HOLOGRAM_BUTTON:Class;
 		[Embed(source = "../assets/sprites/fast_tut.png")]
 		public static var FAST_TUT:Class;
+		[Embed(source = "../assets/sprites/hologram-tut.png")]
+		public static var HOLO_TUT:Class;
 		
 		public function Assets() 
 		{
