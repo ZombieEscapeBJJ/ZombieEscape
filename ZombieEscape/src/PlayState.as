@@ -12,6 +12,7 @@ package
 	{
 		public static var LEVEL_SIZE:FlxPoint = new FlxPoint(400, 400);
 		public static var BLOCK_SIZE:FlxPoint = new FlxPoint(16, 16);
+		public static var LEVEL_FURNITURE:Array = new Array();
 		
 		public static var LEVEL:ZELevel = null;
 		

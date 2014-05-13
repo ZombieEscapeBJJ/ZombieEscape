@@ -3,6 +3,7 @@ package Entities.Levels
 	import adobe.utils.CustomActions;
 	import Entities.FinishLine;
 	import Entities.PauseScreen;
+	import flash.utils.getQualifiedClassName;
 	import GameOverState;
 	import org.flixel.FlxBasic;
 	import org.flixel.FlxGroup;
@@ -24,6 +25,9 @@ package Entities.Levels
 	import Entities.Hologram;
 	import flash.utils.Timer;
     import flash.events.TimerEvent;
+	import flash.net.SharedObject;
+    import flash.net.registerClassAlias;
+	import flash.utils.getAliasName;
 	
 	/**
 	 * ...
@@ -79,8 +83,18 @@ package Entities.Levels
 		protected var couchButton:FlxButton;
 		protected var tableButton:FlxButton;
 		protected var holoButton:FlxButton;
+		protected var resetFurnitureButton:FlxButton;
 		public var currentLevel:int;
-
+		
+		private var prevBeds:int = 0;
+		private var prevCouches:int = 0;
+		private var prevTables:int = 0;
+		private var prevLamps:int = 0;
+		private var goneBeds:int = 0;
+		private var goneCouches:int = 0;
+		private var goneTables:int = 0;
+		private var goneLamps:int = 0;
+		private var first:Boolean = true;
 		
 		// pause screen entities
 		private var pauseScreen:PauseScreen;
@@ -101,21 +115,41 @@ package Entities.Levels
 			this.guiGroup = new FlxGroup();
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
+			
+			for (var k:int = 0; k < PlayState.LEVEL_FURNITURE.length; k++) {
+				var curObstacle:Obstacle = PlayState.LEVEL_FURNITURE[k];
+				var className:String = getQualifiedClassName(curObstacle);
+				if (className == "Entities.Obstacles::Bed") {
+					obstacleGroup.add(new Bed(curObstacle.x, curObstacle.y));
+					prevBeds++;
+				} else if (className == "Entities.Obstacles::Couch") {
+					obstacleGroup.add(new Couch(curObstacle.x, curObstacle.y));
+					prevCouches++;
+				} else if (className == "Entities.Obstacles::Lamp") {
+					obstacleGroup.add(new Lamp(curObstacle.x, curObstacle.y));
+					prevLamps++;
+				} else if (className == "Entities.Obstacles::Table") {
+					obstacleGroup.add(new Table(curObstacle.x, curObstacle.y));
+					prevTables++;
+				}
+			}
 			bedButton = new FlxButton(4, FlxG.height - 27, "x"+numBeds);
 			lampButton = new FlxButton(50, FlxG.height - 27, "x"+numLamps);
 			couchButton = new FlxButton(96, FlxG.height - 27, "x"+numCouches);
 			tableButton = new FlxButton(142, FlxG.height - 27, "x" + numTables);
 			
-			startText = new FlxText(FlxG.width - 90, FlxG.height - 27, 100, "Press Space to Start Game");
+			startText = new FlxText(0 , FlxG.height / 2 - 20, FlxG.width, "Press Space to Start Game");
+			startText.alignment = "center";
+			startText.size = 15;
 			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Pause Game", pauseGame);
 			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 - 20, "Resume Game", resumeGame);
+			resetFurnitureButton = new FlxButton(FlxG.width / 2, FlxG.height - 27, "Reset Furniture", resetFurniture);
 			holoButton = new FlxButton(4, FlxG.height - 27, "x" + numHolos);
 			holoButton.exists = false;
 			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Restart Level", restartLevel);
 			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
-
 			this.create();
 		}
 
@@ -174,6 +208,7 @@ package Entities.Levels
 			
 			add(startText);
 			add(pauseButton);
+			add(resetFurnitureButton);
 			pauseButton.exists = false;
 			
 	
@@ -209,6 +244,13 @@ package Entities.Levels
 		}
 		
 		override public function update():void {
+			if (first) {
+				numBeds -= prevBeds;
+				numCouches -= prevCouches;
+				numTables -= prevTables;
+				numLamps -= prevLamps;
+				first = false;
+			}
 			super.update();
 			if (FlxG.keys.SPACE) {
 				startGame();
@@ -225,6 +267,7 @@ package Entities.Levels
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed.SIZE)) {
 						obstacleGroup.add(new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2));
 						numBeds--;
+						goneBeds++;
 					}
 				}
 			} else if (furnitureState == LAMP_STATE && numLamps > 0) {
@@ -233,6 +276,7 @@ package Entities.Levels
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Lamp.SIZE)) {
 						obstacleGroup.add(new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2, FlxG.mouse.y - Lamp.SIZE.y / 2));
 						numLamps--;
+						goneLamps++;
 					}
 				}
 			} else if (furnitureState == COUCH_STATE && numCouches > 0) {
@@ -241,6 +285,7 @@ package Entities.Levels
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Couch.SIZE)) {
 						obstacleGroup.add(new Couch(FlxG.mouse.x - Couch.SIZE.x / 2, FlxG.mouse.y - Couch.SIZE.y / 2));
 						numCouches--;
+						goneCouches++;
 					}
 				}
 			} else if (furnitureState == TABLE_STATE && numTables > 0) {
@@ -249,6 +294,7 @@ package Entities.Levels
 					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
 						obstacleGroup.add(new Table(FlxG.mouse.x - Table.SIZE.x / 2, FlxG.mouse.y - Table.SIZE.y / 2));
 						numTables--;
+						goneTables++;
 					}
 				}
 			} else if (furnitureState == HOLO_STATE && numHolos > 0) {
@@ -275,6 +321,9 @@ package Entities.Levels
 			FlxG.collide(wallGroup, zombieGroup);
 			
 			if (FlxG.collide(bob, zombieGroup)) {
+				for (var k:int = 0; k < obstacleGroup.length; k++) {
+					PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
+				}
 				FlxG.switchState(new GameOverState(currentLevel));
 			} else if (FlxG.collide(bob, finish)) {
 				wonLevel();
@@ -362,6 +411,17 @@ package Entities.Levels
 			FlxG.switchState(new PlayState(currentLevel));
 		}
 		
+		public function resetFurniture():void {
+			obstacleGroup.clear();
+			numBeds += goneBeds;
+			numCouches += goneCouches;
+			numLamps += goneLamps;
+			numTables += goneTables;
+			goneBeds = 0;
+			goneCouches = 0;
+			goneLamps = 0;
+			goneTables = 0;
+		}
 		public function levelSelect():void {
 			FlxG.switchState(new LevelMenuState());
 		}
@@ -387,12 +447,6 @@ package Entities.Levels
 				}
 			}
 			
-			//for (var i:int = 0; i < zombieGroup.length; i++) {
-				//if (Utils.checkWithinBounds(new FlxObject(mouseX - obstacleSize.x / 2, mouseY - obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
-					//trace("on zombie");
-					//return false;
-				//}
-			//}
 			
 			return true;
 		}

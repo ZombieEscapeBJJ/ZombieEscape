@@ -11,6 +11,7 @@ package
 		protected var LEVELS:Array;
 		override public function create():void
 		{
+			PlayState.LEVEL_FURNITURE.splice(0);
 			var title:FlxText = new FlxText(100, 30, 300, "SELECT LEVEL");
 			title.size = 24;
 			add(title);

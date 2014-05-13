@@ -67,6 +67,8 @@ package
 		public static var FAST_TUT:Class;
 		[Embed(source = "../assets/sprites/hologram-tut.png")]
 		public static var HOLO_TUT:Class;
+		[Embed(source = "../assets/sprites/Bob.png")]
+		public static var BOB:Class;
 		
 		public function Assets() 
 		{

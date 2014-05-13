@@ -87,7 +87,7 @@ package Entities.Levels
 			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FIRST_TUT);
 			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "Move with the arrow keys and try to reach the goal!");
+			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "Move with the arrow keys or WASD and try to reach the goal!");
 			tutorialText.size = 12;
 			add(tutorialText);
 			

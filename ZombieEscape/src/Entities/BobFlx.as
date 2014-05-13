@@ -19,7 +19,7 @@ package Entities
 			drag.y = RUN_SPEED * 8;
 			maxVelocity.x = RUN_SPEED;
 			maxVelocity.y = RUN_SPEED;loadGraphic(
-				Assets.RANGER_SPRITE, // image to use
+				Assets.BOB, // image to use
 				true, // animated
 				false, // don't generate "flipped" images since they're already in the image
 				SIZE.x, // width of each frame (in pixels)
@@ -33,13 +33,13 @@ package Entities
 			acceleration.x = 0;
 			acceleration.y = 0;
 			if (PlayState.LEVEL.playState == PlayState.LEVEL.PLAYING_STATE) {
-				if (FlxG.keys.LEFT) {
+				if (FlxG.keys.LEFT || FlxG.keys.A) {
 					acceleration.x = -drag.x;
-				} else if (FlxG.keys.RIGHT) {
+				} else if (FlxG.keys.RIGHT || FlxG.keys.D) {
 					acceleration.x = drag.x;
-				} else if (FlxG.keys.UP) {
+				} else if (FlxG.keys.UP || FlxG.keys.W) {
 					acceleration.y = -drag.y;
-				} else if (FlxG.keys.DOWN) {
+				} else if (FlxG.keys.DOWN || FlxG.keys.S) {
 					acceleration.y = drag.y;
 				}
 			}

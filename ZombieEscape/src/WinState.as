@@ -12,6 +12,7 @@ package
 		
 		public function WinState(level:int) 
 		{
+			PlayState.LEVEL_FURNITURE.splice(0);
 			FlxG.mouse.show();
 			
 			currentLevel = level;
