@@ -260,7 +260,10 @@ package Entities.Levels
 				}
 			}
 			
-			FlxG.collide(bob, obstacleGroup);
+			for (var i:int = 0; i < obstacleGroup.length; i++) {
+				obstacleGroup.members[i].immovable = true;
+				FlxG.collide(obstacleGroup.members[i], bob);
+			}
 			collideZombies();
 			FlxG.collide(zombieGroup, zombieGroup);
 			FlxG.collide(wallGroup, bob);
