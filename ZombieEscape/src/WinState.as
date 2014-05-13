@@ -29,11 +29,13 @@ package
 		
 		override public function create():void
 		{
-			add(new FlxText(FlxG.width /2 - 20, 20, 100, "You Win!"));
+			var title:FlxText = new FlxText(FlxG.width / 2 - 55, 20, 200, "You Win!");
+			title.size = 24;
+			add(title);
 			add(new FlxButton(FlxG.width / 3 - 50 , 100, "Continue", Continue));
-			add(new FlxButton(FlxG.width *2 / 3 - 50 , 100, "Restart", Restart));
+			add(new FlxButton(FlxG.width *2 / 3 - 30 , 100, "Restart", Restart));
 			add(new FlxButton(FlxG.width / 3 - 50 , 150, "Level Select", SelectLevel));
-			add(new FlxButton(FlxG.width *2 / 3 - 50 , 150, "Main Menu", MainMenu));
+			add(new FlxButton(FlxG.width *2 / 3 - 30 , 150, "Main Menu", MainMenu));
 			FlxG.mouse.show();
 		}
 		

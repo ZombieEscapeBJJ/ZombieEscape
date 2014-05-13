@@ -1,28 +1,30 @@
 package Entities.Levels 
 {
-	import Entities.FinishLine;
-	import org.flixel.FlxSprite;
+	import Entities.Obstacles.*;
 	import org.flixel.FlxState;
 	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
+	import org.flixel.FlxSprite;
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
-	import org.flixel.FlxObject;
+	import Entities.FinishLine;
+	
 	/**
 	 * ...
 	 * @author James Okada
 	 */
-	public class Level_4 extends ZELevel {
+	public class Level1 extends ZELevel {
 		public var tutorialBackground:FlxSprite;
-		public var tutorialText:FlxText;
 		public var tutorialBackground2:FlxSprite;
+		public var tutorialText:FlxText;
 		public var tutorialText2:FlxText;
-		public var closeButton:FlxButton;
 		public var nextPrevButton:FlxButton;
-		
+		public var nextStepButton:FlxButton;
+		public var previousStepButton:FlxButton;
+		public var closeTutorialButton:FlxButton;
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -50,33 +52,59 @@ package Entities.Levels
          * Wall layer
          */
         protected static var WALLS:Array = new Array(
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            1, 2, 2, 1, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+            1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level_4(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+		public function Level1(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			super(state, levelSize, blockSize);
-			this.numCouches = 1;
-			currentLevel = 4;
+			this.numBeds = 0;
+			this.numLamps = 0;
+			this.numCouches = 0;
+			this.numTables = 0;
+			currentLevel = 1;
+			this.numHolos = 0;
 		}
-		
+		override protected function createGUI():void {
+			super.createGUI();
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground.loadGraphic(Assets.FIRST_TUT);
+			add(tutorialBackground);
+			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "Move with the arrow keys and try to reach the goal!");
+			tutorialText.size = 12;
+			add(tutorialText);
+			
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
+			closeTutorialButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground2.loadGraphic(Assets.FIRST_TUT2);
+			add(tutorialBackground2);
+			tutorialText2 = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "Make sure to avoid the zombies on the way!");
+			tutorialText2.size = 12;
+			add(tutorialText2);
+			tutorialBackground2.visible = false;
+			tutorialText2.visible = false;
+			add(closeTutorialButton);
+			add(nextPrevButton);
+
+		}
 		override protected function createMap():void {
 			var tiles:FlxTilemap;
 			tiles = new FlxTilemap();
@@ -102,66 +130,14 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-30, FlxG.height-63);
-			this.zombieGroup.add(new FastZombie(85, 150));		
-			finish = new FinishLine(0, 16*14);
+			this.finish = new FinishLine(0, 16);
+			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
+			this.zombieGroup.add(new NormalZombie(100, 50));
 		}
 		
 		override public function wonLevel():void {
-			FlxG.switchState(new WinState(4));
+			FlxG.switchState(new WinState(1));
 		}
-		
-		
-		override protected function createGUI():void {
-			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
-			tutorialBackground.loadGraphic(Assets.FURNITURE_TUT);
-			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Place furniture to block zombies from getting to you. Select a type of furniture at the bottom and place them on the map before the game starts.");
-			tutorialText.size = 10;
-			add(tutorialText);
-			closeButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
-			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
-			tutorialBackground2.loadGraphic(Assets.ZONE_TUT);
-			add(tutorialBackground2);
-			tutorialText2 = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 110, 200, "Each zombie has a dispatch zone where furniture cannot be placed");
-			tutorialText2.size = 11;
-			add(tutorialText2);
-			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
-			add(nextPrevButton);
-			
-			add(closeButton);
-			tutorialBackground2.visible = false;
-			tutorialText2.visible = false;
-		}
-		
-		override public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
-			if (FlxG.mouse.y >= FlxG.height - 50 || FlxG.mouse.y <= 16*9) {
-				return false;
-			}
-			if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), bob)) {
-				return false;
-			}
-			
-			if (FlxG.mouse.y <= FlxG.height - 50 && FlxG.mouse.y >= 16 * 9 &&
-				(FlxG.mouse.x < 16*4 || FlxG.mouse.x > 16*8)) {
-				return false;
-			}
-			
-			for (var j:int = 0; j < playerRadiusArray.length; j++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), playerRadiusArray[j])) {
-					return false;
-				}
-			}
-			for (var i:int = 0; i < zombieGroup.length; i++) {
-				if (Utils.checkWithinBounds(new FlxObject(mouseX, mouseY, obstacleSize.x, obstacleSize.y), zombieGroup.members[i])) {
-					return false;
-				}
-			}
-			
-			return true;
-		}
-	
 		
 		public function nextStep():void {
 			tutorialBackground.visible = false;
@@ -187,7 +163,7 @@ package Entities.Levels
 		}
 		
 		public function closeTutorial():void {
-			closeButton.exists = false;
+			closeTutorialButton.exists = false;
 			tutorialBackground2.exists = false;
 			tutorialText2.exists = false;
 			nextPrevButton.exists = false;
@@ -195,6 +171,7 @@ package Entities.Levels
 			tutorialBackground.exists = false;
 			
 		}
+		
 	}
 
 }
