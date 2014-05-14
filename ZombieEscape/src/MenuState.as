@@ -7,9 +7,7 @@ package
 	 * @author James Okada
 	 */
 	public class MenuState extends FlxState
-	{
-		public var logger:Logger;
-		
+	{		
 		override public function create():void
 		{
 			var background:FlxSprite = new FlxSprite(0, 0);
@@ -25,8 +23,6 @@ package
 			button.loadGraphic(Assets.LEVEL_SELECTION_BUTTON);
 			add(button);
 			FlxG.mouse.show();
-			
-			logger = new Logger("zombie_escape4", 104, "2bbdad86d57942666f08d86f9385395d", 1, 1);
 		}
 		override public function update():void
 		{
