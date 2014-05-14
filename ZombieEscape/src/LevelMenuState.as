@@ -23,7 +23,7 @@ package
 			PlayState.LEVEL_FURNITURE.splice(0);
 			
 			add(new FlxButton(160, FlxG.height - 60, "Main Menu", MainMenu));
-			trace(FlxG.width);
+
 			var one:FlxButton = new FlxButton(60, 80, "", function():void { FlxG.switchState(new PlayState(1)) });
 			one.loadGraphic(Assets.LEVEL1_BUTTON);
 			var two:FlxButton = new FlxButton(120, 80, "", function():void { FlxG.switchState(new PlayState(2)) } );
@@ -47,6 +47,10 @@ package
 			
 			LEVELS = new Array(one, two, three, four, five, six, seven, eight, nine);
 			
+			var GREYS:Array = new Array(Assets.LEVEL1_BUTTON_GREY, Assets.LEVEL2_BUTTON_GREY, Assets.LEVEL3_BUTTON_GREY,
+										Assets.LEVEL4_BUTTON_GREY, Assets.LEVEL5_BUTTON_GREY, Assets.LEVEL6_BUTTON_GREY,
+										Assets.LEVEL7_BUTTON_GREY, Assets.LEVEL8_BUTTON_GREY, Assets.LEVEL9_BUTTON_GREY);
+			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 			//shared.clear();
 			//shared.data.nextLevel = 1;
@@ -55,10 +59,11 @@ package
 			for (var i:int = 0; i < LEVELS.length; i++) {
 				var temp:FlxButton = LEVELS[i];
 				if (nextLevel <= i) {
+					temp.loadGraphic(GREYS[i]);
 					temp.on = true;
 					temp.onUp = function():void { temp.status = 0; };
 					temp.onDown = function():void {temp.status = 0;};
-				} 
+				}
 				add(temp);
 			}
 			
