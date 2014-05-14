@@ -9,10 +9,15 @@ package
 	{
 		override public function create():void
 		{
-			var text:FlxText = new FlxText(0, 50, FlxG.width, "ZOMBIE ESCAPE 4");
-			text.alignment = "center";
-			text.size = 24;
-			add(text);
+			var background:FlxSprite = new FlxSprite(0, 0);
+			background.loadGraphic(
+				Assets.SPLASH_SCREEN, // image to use
+				true, // animated
+				false, // don't generate "flipped" images since they're already in the image
+				FlxG.width, // width of each frame (in pixels)
+				FlxG.height // height of each frame (in pixels)
+			);
+			add(background);
 			var button:FlxButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height - 60, "Level Select", Start);
 			add(button);
 			FlxG.mouse.show();

@@ -18,7 +18,8 @@ package Entities
 			drag.x = RUN_SPEED * 8;
 			drag.y = RUN_SPEED * 8;
 			maxVelocity.x = RUN_SPEED;
-			maxVelocity.y = RUN_SPEED;loadGraphic(
+			maxVelocity.y = RUN_SPEED;
+			loadGraphic(
 				Assets.BOB, // image to use
 				true, // animated
 				false, // don't generate "flipped" images since they're already in the image
@@ -95,17 +96,14 @@ package Entities
 		}
 		protected function createAnimations():void {
 			addAnimation("idle_up", [1]);
-			addAnimation("idle_right", [5]);
-			addAnimation("idle_down", [9]);
-			addAnimation("idle_left", [13]);
+			addAnimation("idle_right", [4]);
+			addAnimation("idle_down", [7]);
+			addAnimation("idle_left", [10]);
 			addAnimation("walk_up", [0, 1, 2], 12); // 12 = frames per second for this animation
-			addAnimation("walk_right", [4, 5, 6], 12);
-			addAnimation("walk_down", [8, 9, 10], 12);
-			addAnimation("walk_left", [12, 13, 14], 12);
-			addAnimation("attack_up", [16, 17, 18, 19], 12, false); // false = don't loop the animation
-			addAnimation("attack_right", [20, 21, 22, 23], 12, false);
-			addAnimation("attack_down", [24, 25, 26, 27], 12, false);
-			addAnimation("attack_left", [28, 29, 30, 31], 12, false);
+			addAnimation("walk_right", [3, 4, 5], 12);
+			addAnimation("walk_down", [6, 7, 8], 12);
+			addAnimation("walk_left", [9, 10, 11], 12);
+			
 		}
 	}
 

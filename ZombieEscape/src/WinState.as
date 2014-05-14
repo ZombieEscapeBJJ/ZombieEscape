@@ -12,6 +12,15 @@ package
 		
 		public function WinState(level:int) 
 		{
+			var background:FlxSprite = new FlxSprite(0, 0);
+			background.loadGraphic(
+				Assets.PASSED_SCREEN, // image to use
+				true, // animated
+				false, // don't generate "flipped" images since they're already in the image
+				FlxG.width, // width of each frame (in pixels)
+				FlxG.height // height of each frame (in pixels)
+			);
+			add(background);
 			PlayState.LEVEL_FURNITURE.splice(0);
 			FlxG.mouse.show();
 			
@@ -30,9 +39,6 @@ package
 		
 		override public function create():void
 		{
-			var title:FlxText = new FlxText(FlxG.width / 2 - 55, 20, 200, "You Win!");
-			title.size = 24;
-			add(title);
 			add(new FlxButton(FlxG.width / 3 - 50 , 100, "Continue", Continue));
 			add(new FlxButton(FlxG.width *2 / 3 - 30 , 100, "Restart", Restart));
 			add(new FlxButton(FlxG.width / 3 - 50 , 150, "Level Select", SelectLevel));

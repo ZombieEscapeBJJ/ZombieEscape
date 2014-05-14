@@ -433,6 +433,7 @@ package Entities.Levels
 			couchButton.exists = false;
 			tableButton.exists = false;
 			playerRadius.exists = false;
+			holoButton.visible = false;
 			resetFurnitureButton.exists = false;
 			bedButton.exists = false;
 			if (numHolos > 0) {
@@ -453,6 +454,7 @@ package Entities.Levels
 				lampButton.visible = false;
 				resetFurnitureButton.visible = false;
 				playerRadius.visible = false;
+				holoButton.visible = false;
 			}
 			resumeButton.visible = true;
 			playState = PAUSED_STATE;
@@ -480,10 +482,33 @@ package Entities.Levels
 		
 		public function resetFurniture():void {
 			obstacleGroup.clear();
-			numBeds += goneBeds;
-			numCouches += goneCouches;
-			numLamps += goneLamps;
-			numTables += goneTables;
+			if (prevBeds != 0) {
+				numBeds += prevBeds
+				prevBeds = 0;
+			} else {
+				numBeds += goneBeds;
+			}
+			
+			if (prevCouches != 0) {
+				numBeds += prevCouches;
+				prevBeds = 0;
+			} else {
+				numCouches += goneCouches;
+			}
+			
+			if (prevLamps != 0) {
+				numLamps += prevLamps;
+				prevLamps = 0;
+			} else {
+				numLamps += goneLamps;
+			}
+			
+			if (prevTables != 0) {
+				numTables += prevTables;
+				prevTables = 0;
+			} else {
+				numTables += goneTables;
+			}
 			goneBeds = 0;
 			goneCouches = 0;
 			goneLamps = 0;
@@ -507,6 +532,7 @@ package Entities.Levels
 			lampButton.visible = true;
 			resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
+			holoButton.visible = true;
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {

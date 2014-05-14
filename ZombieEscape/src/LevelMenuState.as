@@ -11,10 +11,17 @@ package
 		protected var LEVELS:Array;
 		override public function create():void
 		{
+			var background:FlxSprite = new FlxSprite(0, 0);
+			background.loadGraphic(
+				Assets.LEVEL_SCREEN, // image to use
+				true, // animated
+				false, // don't generate "flipped" images since they're already in the image
+				FlxG.width, // width of each frame (in pixels)
+				FlxG.height // height of each frame (in pixels)
+			);
+			add(background);
 			PlayState.LEVEL_FURNITURE.splice(0);
-			var title:FlxText = new FlxText(100, 30, 300, "SELECT LEVEL");
-			title.size = 24;
-			add(title);
+			
 			var one:FlxButton = new FlxButton(40, 100, "1", function():void{FlxG.switchState(new PlayState(1))});
 			var two:FlxButton = new FlxButton(160, 100, "2", function():void{FlxG.switchState(new PlayState(2))});
 			var three:FlxButton = new FlxButton(280, 100, "3", function():void { FlxG.switchState(new PlayState(3)) } );
