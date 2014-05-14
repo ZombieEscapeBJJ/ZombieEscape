@@ -16,7 +16,16 @@ package
 		
 		override public function create():void
 		{
-			add(new FlxText(FlxG.width /2 - 20, 0, 100, "You Died!!"));
+			var background:FlxSprite = new FlxSprite(0, 0);
+			background.loadGraphic(
+				Assets.FAILED_SCREEN, // image to use
+				true, // animated
+				false, // don't generate "flipped" images since they're already in the image
+				FlxG.width, // width of each frame (in pixels)
+				FlxG.height // height of each frame (in pixels)
+			);
+			add(background);
+			
 			add(new FlxButton(FlxG.width / 4 - 20, FlxG.height - 20, "Level Select", Levels));
 			add(new FlxButton(FlxG.width * 2 / 4 - 20, FlxG.height - 20, "Restart", Restart));
 			add(new FlxButton(FlxG.width * 3 / 4 - 20, FlxG.height - 20, "Main Menu", MainMenu));

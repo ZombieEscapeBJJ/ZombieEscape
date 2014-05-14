@@ -31,8 +31,6 @@ package
 		public static var LAMP_BUTTON:Class;
 		[Embed(source = "../assets/sprites/lampbuttonselected.png")]
 		public static var LAMP_SELECTED:Class;
-		[Embed(source = "../assets/sprites/ranger (opengameart - Antifarea - ccby30).png")]
-		public static var RANGER_SPRITE:Class;
 		[Embed(source = "../assets/sprites/lamp.png")]
 		public static var LAMP:Class;
 		[Embed(source = "../assets/sprites/couch.png")]
@@ -69,6 +67,20 @@ package
 		public static var HOLO_TUT:Class;
 		[Embed(source = "../assets/sprites/Bob.png")]
 		public static var BOB:Class;
+		[Embed(source = "../assets/sprites/NormalZombie.png")]
+		public static var NORMAL_ZOMBIE:Class;
+		[Embed(source = "../assets/sprites/FastZombie.png")]
+		public static var FAST_ZOMBIE:Class;
+		[Embed(source = "../assets/sprites/StrongZombie.png")]
+		public static var STRONG_ZOMBIE:Class;
+		[Embed(source = "../assets/sprites/SplashScreen.png")]
+		public static var SPLASH_SCREEN:Class;
+		[Embed(source = "../assets/sprites/LevelSelectionScreen.png")]
+		public static var LEVEL_SCREEN:Class;
+		[Embed(source = "../assets/sprites/PassedScreen.png")]
+		public static var PASSED_SCREEN:Class;
+		[Embed(source = "../assets/sprites/FailedScreen.png")]
+		public static var FAILED_SCREEN:Class;
 		
 		public function Assets() 
 		{

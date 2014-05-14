@@ -39,8 +39,70 @@ package Entities.Zombies
 				x -= velocity.x;
 				y -= velocity.y;
 			}
+			updateAnimations();
 		}
 
+		/**
+		 * Based on current state, show the correct animation
+		 * FFV: use state machine if it gets more complex than this
+		 */
+		protected function updateAnimations():void {
+			// use abs() so that we can animate for the dominant motion
+			// ex: if we're moving slightly up and largely right, animate right
+			var absX:Number = Math.abs(velocity.x);
+			var absY:Number = Math.abs(velocity.y);
+			// determine facing
+			if (velocity.y < 0 && absY >= absX)
+				facing = UP;
+			else if (velocity.y > 0 && absY >= absX)
+				facing = DOWN;
+			else if (velocity.x > 0 && absX >= absY)
+				facing = RIGHT;
+			else if (velocity.x < 0 && absX >= absY)
+				facing = LEFT
+			
+			// up
+			if (facing == UP) {
+				if (velocity.y != 0 || velocity.x != 0)
+					play("walk_up");
+				else
+					play("idle_up");
+			}
+			// down
+			else if (facing == DOWN) {
+				if (velocity.y != 0 || velocity.x != 0)
+					play("walk_down");
+				else
+					play("idle_down");
+			}
+			// right
+			else if (facing == RIGHT) {
+				if (velocity.x != 0)
+					play("walk_right");
+				else
+					play("idle_right");
+			}
+			// left
+			else if (facing == LEFT) {
+				if (velocity.x != 0)
+					play("walk_left");
+				else
+					play("idle_left");
+			}
+		}
+		
+		protected function createAnimations():void {
+			addAnimation("idle_up", [1]);
+			addAnimation("idle_right", [4]);
+			addAnimation("idle_down", [7]);
+			addAnimation("idle_left", [10]);
+			addAnimation("walk_up", [0, 1, 2], 12); // 12 = frames per second for this animation
+			addAnimation("walk_right", [3, 4, 5], 12);
+			addAnimation("walk_down", [6, 7, 8], 12);
+			addAnimation("walk_left", [9, 10, 11], 12);
+			
+		}
+		
 	}
 
 }

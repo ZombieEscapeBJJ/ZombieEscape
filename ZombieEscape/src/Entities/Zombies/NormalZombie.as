@@ -11,6 +11,14 @@ package Entities.Zombies
 		{
 			super(x, y, SPEED);
 			ZOMBIE_TYPE = 0;
+			loadGraphic(
+				Assets.NORMAL_ZOMBIE, // image to use
+				true, // animated
+				false, // don't generate "flipped" images since they're already in the image
+				SIZE.x, // width of each frame (in pixels)
+				SIZE.y // height of each frame (in pixels)
+			);
+			createAnimations();
 		}
 		
 	}
