@@ -104,7 +104,9 @@ package Entities.Levels
 		private var oldX:Number;
 		private var oldY:Number;
 		
-		private var timer:Timer = new Timer(3000);
+		private var timer:Timer = new Timer(1000, 3);
+		private var timeLeft:int = 3;
+		private var timeText:FlxText;
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
@@ -321,6 +323,8 @@ package Entities.Levels
 						numHolos--;
 						timer.addEventListener(TimerEvent.TIMER, turnOffHologram);
 						timer.start();
+						timeText = new FlxText(holo.x + holo.width, holo.y, holo.width, ""+timeLeft);
+						add(timeText);
 					}
 				}
 			}
@@ -382,8 +386,12 @@ package Entities.Levels
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
-			furnitureState = 0;
-			placedHolo = false;
+			timeLeft--;
+			timeText.text = "" + timeLeft;
+			if (timer.currentCount == 3) {
+				furnitureState = 0;
+				placedHolo = false;
+			}
 		}
 		
 		public function selectedBed():void {
@@ -423,6 +431,13 @@ package Entities.Levels
 		}
 		
 		public function startGame():void {
+			// make furniture unmovable
+			for (var i:int = 0; i < obstacleGroup.length; i++) {
+				var o:Obstacle = obstacleGroup.members[i];
+				o.isClicked = false;
+				o.onDown = null;
+			}
+			
 			pauseButton.label = new FlxText(0, 0, 80, "Pause Game");
 			pauseButton.label.setFormat(null,8,0x333333,"center");
 			playState = PLAYING_STATE;
@@ -511,6 +526,18 @@ package Entities.Levels
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
 				//below map
+				return false;
+			}
+			if (FlxG.mouse.y <= 16) {
+				//above
+				return false;
+			}
+			if (FlxG.mouse.x >= FlxG.width - 16) {
+				//right
+				return false;
+			}
+			if (FlxG.mouse.x <= 16) {
+				//left
 				return false;
 			}
 			
