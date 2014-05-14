@@ -31,7 +31,6 @@ package Entities.Obstacles
 		
 		public function up():void {
 			isClicked = false;
-			//trace("MOUSE UP");
 		}
 	}
 }
