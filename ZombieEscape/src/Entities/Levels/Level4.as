@@ -121,9 +121,9 @@ package Entities.Levels
 			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.ZONE_TUT);
 			add(tutorialBackground2);
-			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
 			add(nextPrevButton);
-			
+			closeButton.visible = false;
 			add(closeButton);
 			tutorialBackground2.visible = false;
 			pauseButton.exists = false;
@@ -184,6 +184,8 @@ package Entities.Levels
 			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = previousStep;
+			closeButton.visible = true;
+			nextPrevButton.x = FlxG.width / 2 - 90;
 		}
 		
 		public function previousStep():void {
@@ -193,6 +195,8 @@ package Entities.Levels
 			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
+			nextPrevButton.x = FlxG.width / 2 - 30;
+			closeButton.visible = false;
 
 		}
 		

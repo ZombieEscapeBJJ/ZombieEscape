@@ -87,7 +87,7 @@ package Entities.Levels
 			tutorialBackground.loadGraphic(Assets.FIRST_TUT);
 			add(tutorialBackground);
 			
-			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
 			closeTutorialButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
 			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.FIRST_TUT2);
@@ -97,6 +97,7 @@ package Entities.Levels
 			add(closeTutorialButton);
 			add(nextPrevButton);
 			pauseButton.exists = false;
+			closeTutorialButton.visible = false;
 			resetFurnitureButton.exists = false;
 		}
 		override protected function createMap():void {
@@ -138,7 +139,9 @@ package Entities.Levels
 			
 			tutorialBackground2.visible = true;
 			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
-			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.label.setFormat(null, 8, 0x333333, "center");
+			nextPrevButton.x = FlxG.width / 2 - 90;
+			closeTutorialButton.visible = true;
 			nextPrevButton.onUp = previousStep;
 		}
 		
@@ -149,6 +152,8 @@ package Entities.Levels
 			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
+			nextPrevButton.x = FlxG.width / 2 - 30;
+			closeTutorialButton.visible = false;
 
 		}
 		
