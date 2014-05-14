@@ -52,9 +52,9 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
@@ -107,15 +107,15 @@ package Entities.Levels
 			this.zombieGroup.add(new NormalZombie(FlxG.width- 60, 110));	
 			finish = new FinishLine(0, 16 * 14);
 			
-			obstacleGroup.add(new Wall(16, 16 * 11 + 5, false));
-			obstacleGroup.add(new Wall(65, 16 * 11 + 5, false));
-			obstacleGroup.add(new Wall(115, 16 * 11 + 5, false));
-			obstacleGroup.add(new Wall(162, 126, true));
-			obstacleGroup.add(new Wall(210, 126, true));
-			obstacleGroup.add(new Wall(210, 16 * 11 + 5, false));
-			obstacleGroup.add(new Wall(260, 16 * 11 + 5, false));
-			obstacleGroup.add(new Wall(310, 16 * 11 + 5, false));
-			obstacleGroup.add(new Wall(330, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(16, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(65, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(115, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(162, 126, true));
+			//obstacleGroup.add(new Wall(210, 126, true));
+			//obstacleGroup.add(new Wall(210, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(260, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(310, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(330, 16 * 11 + 5, false));
 		}
 	}
 
