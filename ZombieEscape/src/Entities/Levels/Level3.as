@@ -19,7 +19,6 @@ package Entities.Levels
 	public class Level3 extends ZELevel 
 	{
 		public var tutorialBackground:FlxSprite;
-		public var tutorialText:FlxText;
 		public var closeButton:FlxButton;
 		
 		protected static var FLOORS:Array = new Array(
@@ -105,9 +104,6 @@ package Entities.Levels
 			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FAST_TUT);
 			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "A new species of zombies have appeared! They run faster than normal zombies");
-			tutorialText.size = 12;
-			add(tutorialText);
 			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
 			add(closeButton);
 		}
@@ -126,7 +122,6 @@ package Entities.Levels
 		public function closeTutorial():void {
 			closeButton.exists = false;
 			tutorialBackground.exists = false;
-			tutorialText.exists = false;
 		}
 		
 		override public function wonLevel():void {

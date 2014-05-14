@@ -139,6 +139,19 @@ package Entities.Levels
 			if (FlxG.mouse.y >= FlxG.height - 50 || FlxG.mouse.y <= 16*9) {
 				return false;
 			}
+			
+			if (FlxG.mouse.y <= 16) {
+				//above
+				return false;
+			}
+			if (FlxG.mouse.x >= FlxG.width - 16) {
+				//right
+				return false;
+			}
+			if (FlxG.mouse.x <= 16) {
+				//left
+				return false;
+			}
 			if (Utils.checkWithinBounds(new FlxObject(mouseX + obstacleSize.x / 2, mouseY + obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), bob)) {
 				//on bob
 				return false;

@@ -19,8 +19,6 @@ package Entities.Levels
 	public class Level1 extends ZELevel {
 		public var tutorialBackground:FlxSprite;
 		public var tutorialBackground2:FlxSprite;
-		public var tutorialText:FlxText;
-		public var tutorialText2:FlxText;
 		public var nextPrevButton:FlxButton;
 		public var nextStepButton:FlxButton;
 		public var previousStepButton:FlxButton;
@@ -87,20 +85,14 @@ package Entities.Levels
 			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FIRST_TUT);
 			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "Move with the arrow keys or WASD and try to reach the goal!");
-			tutorialText.size = 12;
-			add(tutorialText);
 			
 			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
 			closeTutorialButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
 			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.FIRST_TUT2);
 			add(tutorialBackground2);
-			tutorialText2 = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 100, 200, "Make sure to avoid the zombies on the way!");
-			tutorialText2.size = 12;
-			add(tutorialText2);
+			
 			tutorialBackground2.visible = false;
-			tutorialText2.visible = false;
 			add(closeTutorialButton);
 			add(nextPrevButton);
 
@@ -141,10 +133,8 @@ package Entities.Levels
 		
 		public function nextStep():void {
 			tutorialBackground.visible = false;
-			tutorialText.visible = false;
 			
 			tutorialBackground2.visible = true;
-			tutorialText2.visible = true;
 			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = previousStep;
@@ -152,10 +142,8 @@ package Entities.Levels
 		
 		public function previousStep():void {
 			tutorialBackground2.visible = false;
-			tutorialText2.visible = false;
 			
 			tutorialBackground.visible = true;
-			tutorialText.visible = true;
 			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
@@ -165,9 +153,7 @@ package Entities.Levels
 		public function closeTutorial():void {
 			closeTutorialButton.exists = false;
 			tutorialBackground2.exists = false;
-			tutorialText2.exists = false;
 			nextPrevButton.exists = false;
-			tutorialText.exists = false;
 			tutorialBackground.exists = false;
 			
 		}
