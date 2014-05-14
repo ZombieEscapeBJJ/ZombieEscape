@@ -90,6 +90,7 @@ package Entities.Levels
 		private var oldX:Number;
 		private var oldY:Number;
 		
+		private var timer:Timer = new Timer(3000);
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
@@ -112,8 +113,8 @@ package Entities.Levels
 			startText = new FlxText(FlxG.width - 90, FlxG.height - 27, 100, "Press Space to Start Game");
 			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 27, "Pause Game", pauseGame);
 			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 - 20, "Resume Game", resumeGame);
-			holoButton = new FlxButton(4, FlxG.height - 27, "x" + numHolos);
-			holoButton.exists = false;
+			holoButton = new FlxButton(188, FlxG.height - 27, "x" + numHolos);
+			//holoButton.exists = false;
 			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Restart Level", restartLevel);
 			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
 			this.playerRadius = new FlxSprite();
@@ -272,7 +273,6 @@ package Entities.Levels
 						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x - Hologram.SIZE.x / 2, FlxG.mouse.y - Hologram.SIZE.y / 2));
 						placedHolo = true;
 						numHolos--;
-						var timer:Timer = new Timer(3000);
 						timer.addEventListener(TimerEvent.TIMER, turnOffHologram);
 						timer.start();
 					}
@@ -284,11 +284,20 @@ package Entities.Levels
 				
 				o.immovable = true;
 				FlxG.collide(o, bob);
+				
 				if (o.isClicked && checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 					var xDif:Number = FlxG.mouse.x - oldX;
 					var yDif:Number = FlxG.mouse.y - oldY;
 					o.x += xDif;
 					o.y += yDif;
+				}
+				
+				if (o.isClicked) {
+					if (FlxG.mouse.x < o.x || FlxG.mouse.x > o.x + o.width ||
+						FlxG.mouse.y < o.y || FlxG.mouse.y > o.y + o.height) {
+						FlxG.mouse.x = o.x + o.width / 2;
+						FlxG.mouse.y = o.y + o.height / 2;
+					}
 				}
 				
 				for (var j:int = 0; j < obstacleGroup.length; j++) {
@@ -361,7 +370,7 @@ package Entities.Levels
 		}
 		
 		public function selectedHolo():void {
-			furnitureState = HOLO_STATE;
+			//furnitureState = HOLO_STATE;
 		}
 		
 		public function startGame():void {
