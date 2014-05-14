@@ -145,11 +145,11 @@ package Entities.Levels
 			startText = new FlxText(0 , FlxG.height / 2 - 20, FlxG.width, "Press Space to Start Game");
 			startText.alignment = "center";
 			startText.size = 15;
-			pauseButton = new FlxButton(FlxG.width - 90, FlxG.height - 25, "Show Menu", pauseGame);
+			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "Show Menu", pauseGame);
 			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 - 20, "Close Menu", closeInGameMenu);
 			holoButton = new FlxButton(188, FlxG.height - 27, "x" + numHolos);
 			//holoButton.exists = false;
-			resetFurnitureButton = new FlxButton(FlxG.width / 2, FlxG.height - 25, "Reset Furniture", resetFurniture);
+			resetFurnitureButton = new FlxButton(FlxG.width / 2 + 32, FlxG.height - 25, "Reset Furniture", resetFurniture);
 			resetFurnitureButton.label.size = 7;
 			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Restart Level", restartLevel);
 			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
