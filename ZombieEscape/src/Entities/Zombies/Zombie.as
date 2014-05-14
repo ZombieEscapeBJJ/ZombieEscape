@@ -10,7 +10,7 @@ package Entities.Zombies
 	public class Zombie extends FlxSprite {
 		
 		private var speed:Number = 0.1;
-		public static const SIZE:FlxPoint = new FlxPoint(14, 25);
+		public static const SIZE:FlxPoint = new FlxPoint(16, 18);
 		public var ZOMBIE_TYPE:int = 0;
 		
 		public function Zombie(X:int, Y:int, speed:Number) {
@@ -63,31 +63,39 @@ package Entities.Zombies
 			
 			// up
 			if (facing == UP) {
-				if (velocity.y != 0 || velocity.x != 0)
+				trace("got up");
+				if (velocity.y != 0 || velocity.x != 0) {
 					play("walk_up");
-				else
+				} else {
 					play("idle_up");
+				}
 			}
 			// down
 			else if (facing == DOWN) {
-				if (velocity.y != 0 || velocity.x != 0)
+				trace("got down");
+				if (velocity.y != 0 || velocity.x != 0) {
 					play("walk_down");
-				else
+				} else {
 					play("idle_down");
+				}
 			}
 			// right
 			else if (facing == RIGHT) {
-				if (velocity.x != 0)
+				trace("got right");
+				if (velocity.x != 0) {
 					play("walk_right");
-				else
+				} else {
 					play("idle_right");
+				}
 			}
 			// left
 			else if (facing == LEFT) {
-				if (velocity.x != 0)
+				trace("got left");
+				if (velocity.x != 0) {
 					play("walk_left");
-				else
+				} else {
 					play("idle_left");
+				}
 			}
 		}
 		
