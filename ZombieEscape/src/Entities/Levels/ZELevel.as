@@ -385,9 +385,10 @@ package Entities.Levels
 				FlxG.collide(wallGroup, zombieGroup);
 				
 				if (FlxG.collide(bob, zombieGroup)) {
-				for (var k:int = 0; k < obstacleGroup.length; k++) {
-					PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
-				}
+					for (var k:int = 0; k < obstacleGroup.length; k++) {
+						PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
+					}
+					timer.stop();
 					FlxG.switchState(new GameOverState(currentLevel));
 				} else if (FlxG.collide(bob, finish)) {
 					wonLevel();
