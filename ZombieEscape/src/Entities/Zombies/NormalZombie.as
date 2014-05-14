@@ -4,6 +4,7 @@ package Entities.Zombies
 	 * ...
 	 * @author Brandon
 	 */
+	import org.flixel.FlxPoint;
 	public class NormalZombie extends Zombie 
 	{
 		public var SPEED:Number = .4
@@ -11,6 +12,7 @@ package Entities.Zombies
 		{
 			super(x, y, SPEED);
 			ZOMBIE_TYPE = 0;
+			
 			loadGraphic(
 				Assets.NORMAL_ZOMBIE, // image to use
 				true, // animated

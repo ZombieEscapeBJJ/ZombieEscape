@@ -73,6 +73,7 @@ package Entities.Levels
 		{
 			super(state, levelSize, tileSize);
 			currentLevel = 3;
+			this.tutorial = true;
 		}
 		
 		override protected function createMap():void {
@@ -106,6 +107,8 @@ package Entities.Levels
 			add(tutorialBackground);
 			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
 			add(closeButton);
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
 		}
 		
 		override protected function createPlayer():void {
@@ -122,6 +125,9 @@ package Entities.Levels
 		public function closeTutorial():void {
 			closeButton.exists = false;
 			tutorialBackground.exists = false;
+			this.tutorial = false;
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
 		}
 		
 		override public function wonLevel():void {
