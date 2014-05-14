@@ -130,10 +130,6 @@ package Entities.Levels
 			this.zombieGroup.add(new NormalZombie(100, 50));
 		}
 		
-		override public function wonLevel():void {
-			FlxG.switchState(new WinState(1));
-		}
-		
 		public function nextStep():void {
 			tutorialBackground.visible = false;
 			

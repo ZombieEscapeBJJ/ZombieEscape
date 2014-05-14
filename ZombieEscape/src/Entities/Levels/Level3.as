@@ -129,10 +129,6 @@ package Entities.Levels
 			pauseButton.exists = true;
 			resetFurnitureButton.exists = true;
 		}
-		
-		override public function wonLevel():void {
-			FlxG.switchState(new WinState(3));
-		}
 	}
 
 }

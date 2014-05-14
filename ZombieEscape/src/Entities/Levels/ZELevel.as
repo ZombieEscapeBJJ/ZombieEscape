@@ -170,6 +170,8 @@ package Entities.Levels
 			createMap();
 			createPlayer();
 			createGUI();
+			
+			ZombieEscape.logger.logLevelStart(currentLevel, null);
 		}
 		
 		protected function createMap():void {
@@ -630,6 +632,7 @@ package Entities.Levels
 		
 		public function wonLevel():void {
 			FlxG.switchState(new WinState(currentLevel));
+			ZombieEscape.logger.logLevelEnd(currentLevel);
 		}
 
 		public function collideZombies():void {

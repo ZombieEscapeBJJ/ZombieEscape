@@ -7,6 +7,7 @@ package
 	import org.flixel.*;
 	import PlayState;
 	import flash.net.SharedObject;
+	import Logger;
 	
 	[SWF(width = "800", height = "600", backgroundColor = "#000000")] //Set the size and color of the Flash file
 	
@@ -14,6 +15,7 @@ package
 	{
 		public var nextLevel:int = 1;
 		public var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+		public static var logger:Logger;
 		
 		public function ZombieEscape() 
 		{
@@ -23,6 +25,7 @@ package
 				shared.data.nextLevel = nextLevel;
 				shared.flush();
 			}
+			logger = new Logger("zombie_escape4", 104, "2bbdad86d57942666f08d86f9385395d", 1, 1);
 			super(400, 300, MenuState, 2);
 		}
 		
