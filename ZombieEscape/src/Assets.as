@@ -9,14 +9,12 @@ package
 	public class Assets 
 	{
 		
-		[Embed(source = "../assets/tiles/walls (opengameart - daniel siegmund - ccby30).png")]
+		[Embed(source = "../assets/tiles/WallTileset.png")]
 		public static var WALLS_TILE:Class;
 		[Embed(source="../assets/tiles/floor_wood (opengameart - Redshrike - ccby30).png")]
 		public static var FLOORS_TILE:Class;
-		[Embed(source = "../assets/tiles/checker_large.png")]
+		[Embed(source = "../assets/tiles/finish_line.png")]
 		public static var FINISH_TILE:Class;
-		[Embed(source="../assets/sprites/bookcase (opengameart - Redshrike - ccby30).png")]
-		public static var BOOKCASE:Class;
 		[Embed(source = "../assets/sprites/armor (opengameart - Redshrike - ccby30).png")]
 		public static var ARMOR:Class;
 		[Embed(source = "../assets/tiles/carpettile.jpg")]
@@ -51,20 +49,22 @@ package
 		public static var WALL:Class;
 		[Embed(source = "../assets/sprites/verticalwall.png")]
 		public static var VWALL:Class;
-		[Embed(source = "../assets/sprites/background-tut-2.png")]
+		[Embed(source = "../assets/sprites/bob_tutorial.png")]
 		public static var FIRST_TUT:Class;
-		[Embed(source = "../assets/sprites/firstlevel-2.png")]
+		[Embed(source = "../assets/sprites/zombie_tutorial.png")]
 		public static var FIRST_TUT2:Class;
-		[Embed(source = "../assets/sprites/furniture-tutorial.png")]
+		[Embed(source = "../assets/sprites/furniture_tutorial.png")]
 		public static var FURNITURE_TUT:Class;
 		[Embed(source = "../assets/sprites/zone-tutorial.png")]
 		public static var ZONE_TUT:Class;
 		[Embed(source = "../assets/sprites/hologrambutton.png")]
 		public static var HOLOGRAM_BUTTON:Class;
-		[Embed(source = "../assets/sprites/fast_tut.png")]
+		[Embed(source = "../assets/sprites/fast_tutorial.png")]
 		public static var FAST_TUT:Class;
-		[Embed(source = "../assets/sprites/hologram-tut.png")]
+		[Embed(source = "../assets/sprites/hologram_tutorial1.png")]
 		public static var HOLO_TUT:Class;
+		[Embed(source = "../assets/sprites/hologram_tutorial2.png")]
+		public static var HOLO_TUT1:Class;
 		[Embed(source = "../assets/sprites/Bob.png")]
 		public static var BOB:Class;
 		[Embed(source = "../assets/sprites/NormalZombie.png")]
