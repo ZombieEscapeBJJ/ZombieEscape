@@ -12,7 +12,7 @@ package Entities.Zombies
 		{
 			super(x, y, SPEED);
 			ZOMBIE_TYPE = 2;
-			this.color = 0x0000FF;
+			//this.color = 0x0000FF;
 			loadGraphic(
 				Assets.STRONG_ZOMBIE, // image to use
 				true, // animated

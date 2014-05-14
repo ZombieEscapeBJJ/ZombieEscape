@@ -63,36 +63,36 @@ package Entities.Zombies
 			
 			// up
 			if (facing == UP) {
-				trace("got up");
+				//trace("got up");
 				if (velocity.y != 0 || velocity.x != 0) {
-					play("walk_up");
+					play("walk_down");
 				} else {
 					play("idle_up");
 				}
 			}
 			// down
 			else if (facing == DOWN) {
-				trace("got down");
+				//trace("got down");
 				if (velocity.y != 0 || velocity.x != 0) {
-					play("walk_down");
+					play("walk_up");
 				} else {
 					play("idle_down");
 				}
 			}
 			// right
 			else if (facing == RIGHT) {
-				trace("got right");
+				//trace("got right");
 				if (velocity.x != 0) {
-					play("walk_right");
+					play("walk_left");
 				} else {
 					play("idle_right");
 				}
 			}
 			// left
 			else if (facing == LEFT) {
-				trace("got left");
+				//trace("got left");
 				if (velocity.x != 0) {
-					play("walk_left");
+					play("walk_right");
 				} else {
 					play("idle_left");
 				}

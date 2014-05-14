@@ -11,7 +11,7 @@ package Entities.Zombies
 		{
 			super(x, y, SPEED);
 			ZOMBIE_TYPE = 1;
-			this.color = 0x00FF00;
+			//this.color = 0x00FF00;
 			loadGraphic(
 				Assets.FAST_ZOMBIE, // image to use
 				true, // animated
