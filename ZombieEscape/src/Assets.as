@@ -103,6 +103,12 @@ package
 		[Embed(source = "../assets/sprites/Level10Button.png")]
 		public static var LEVEL10_BUTTON:Class;
 
+		[Embed(source = "../assets/sprites/LevelSelectionButton2.png")]
+		public static var LEVEL_SELECTION_BUTTON:Class;
+		[Embed(source = "../assets/sprites/ContinueButton.png")]
+		public static var CONTINUE_BUTTON:Class;
+		[Embed(source = "../assets/sprites/TryAgainButton.png")]
+		public static var RESTART_BUTTON:Class;
 		public function Assets() 
 		{
 			

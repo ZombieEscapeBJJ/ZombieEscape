@@ -18,7 +18,8 @@ package
 				FlxG.height // height of each frame (in pixels)
 			);
 			add(background);
-			var button:FlxButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height - 60, "Level Select", Start);
+			var button:FlxButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height - 60, "", Start);
+			button.loadGraphic(Assets.LEVEL_SELECTION_BUTTON);
 			add(button);
 			FlxG.mouse.show();
 		}
