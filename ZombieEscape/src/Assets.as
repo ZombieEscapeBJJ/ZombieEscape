@@ -109,6 +109,7 @@ package
 		public static var CONTINUE_BUTTON:Class;
 		[Embed(source = "../assets/sprites/TryAgainButton.png")]
 		public static var RESTART_BUTTON:Class;
+		
 		public function Assets() 
 		{
 			
