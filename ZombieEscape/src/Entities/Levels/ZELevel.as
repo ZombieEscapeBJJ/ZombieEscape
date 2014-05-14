@@ -508,8 +508,8 @@ package Entities.Levels
 			}
 			
 			if (prevCouches != 0) {
-				numBeds += prevCouches;
-				prevBeds = 0;
+				numCouches += prevCouches;
+				prevCouches = 0;
 			} else {
 				numCouches += goneCouches;
 			}
