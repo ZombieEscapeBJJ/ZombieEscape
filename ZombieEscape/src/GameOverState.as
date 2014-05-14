@@ -26,13 +26,15 @@ package
 			);
 			add(background);
 			
-			var restartButton:FlxButton = new FlxButton(FlxG.width * 2 / 4 - 15, FlxG.height - 25, "", Restart);
+			var restartButton:FlxButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height - 45, "", Restart);
 			restartButton.loadGraphic(Assets.RESTART_BUTTON);
 			add(restartButton);
-			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 4 - 25, FlxG.height - 25, "", Levels);
+			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 2 - 145, FlxG.height - 45, "", Levels);
 			levelSelectButton.loadGraphic(Assets.LEVEL_SELECTION_BUTTON);
 			add(levelSelectButton);
-			add(new FlxButton(FlxG.width * 3 / 4 - 20, FlxG.height - 20, "Main Menu", MainMenu));
+			var mainMenuButton:FlxButton = new FlxButton(FlxG.width / 2 + 45, FlxG.height - 45, "", MainMenu);
+			mainMenuButton.loadGraphic(Assets.MAIN_BUTTON);
+			add(mainMenuButton);
 			FlxG.mouse.show();
 		}
 		override public function update():void

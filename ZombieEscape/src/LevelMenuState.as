@@ -22,8 +22,9 @@ package
 			add(background);
 			PlayState.LEVEL_FURNITURE.splice(0);
 			
-			add(new FlxButton(160, FlxG.height - 60, "Main Menu", MainMenu));
-
+			var main:FlxButton = new FlxButton(FlxG.width / 2 - 49, FlxG.height - 60, "", MainMenu);
+			main.loadGraphic(Assets.MAIN_BUTTON);
+			
 			var one:FlxButton = new FlxButton(60, 80, "", function():void { FlxG.switchState(new PlayState(1)) });
 			one.loadGraphic(Assets.LEVEL1_BUTTON);
 			var two:FlxButton = new FlxButton(120, 80, "", function():void { FlxG.switchState(new PlayState(2)) } );
@@ -66,7 +67,7 @@ package
 				}
 				add(temp);
 			}
-			
+			add(main);
 			FlxG.mouse.show();
 		}
 		override public function update():void

@@ -39,16 +39,15 @@ package
 		
 		override public function create():void
 		{
-			var continueButton:FlxButton = new FlxButton(FlxG.width / 3 - 50 , 100, "", Continue);
+			var continueButton:FlxButton = new FlxButton(FlxG.width / 2 - 60 - 75 , FlxG.height - 45, "", Continue);
 			continueButton.loadGraphic(Assets.CONTINUE_BUTTON);
 			add(continueButton);
-			var restartButton:FlxButton = new FlxButton(FlxG.width * 2 / 3 - 30 , 100, "", Restart);
-			restartButton.loadGraphic(Assets.RESTART_BUTTON);
-			add(restartButton);
-			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 3 - 50 , 150, "", SelectLevel);
+			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 2 - 50 , FlxG.height - 45, "", SelectLevel);
 			levelSelectButton.loadGraphic(Assets.LEVEL_SELECTION_BUTTON);
 			add(levelSelectButton);
-			add(new FlxButton(FlxG.width *2 / 3 - 30 , 150, "Main Menu", MainMenu));
+			var mainButton:FlxButton = new FlxButton(FlxG.width / 2 + 50 + 10, FlxG.height - 45, "", MainMenu);
+			mainButton.loadGraphic(Assets.MAIN_BUTTON);
+			add(mainButton);
 			FlxG.mouse.show();
 		}
 		
