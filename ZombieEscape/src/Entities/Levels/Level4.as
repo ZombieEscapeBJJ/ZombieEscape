@@ -71,9 +71,9 @@ package Entities.Levels
         );
 		
 		public function Level4(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+			currentLevel = 4;
 			super(state, levelSize, blockSize);
 			this.numCouches = 1;
-			currentLevel = 4;
 			this.tutorial = true;
 		}
 		

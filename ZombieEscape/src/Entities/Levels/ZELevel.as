@@ -111,6 +111,7 @@ package Entities.Levels
 		protected var tutorial:Boolean;
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
+			ZombieEscape.logger.logLevelStart(currentLevel, null);
 			super();
 			this.placedHolo = false;
 			this.state = state;
@@ -170,8 +171,6 @@ package Entities.Levels
 			createMap();
 			createPlayer();
 			createGUI();
-			
-			ZombieEscape.logger.logLevelStart(currentLevel, null);
 		}
 		
 		protected function createMap():void {

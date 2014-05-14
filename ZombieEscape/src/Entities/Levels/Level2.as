@@ -64,8 +64,8 @@ package Entities.Levels
         );
 		
 		public function Level2(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			super(state, levelSize, blockSize);
 			currentLevel = 2;
+			super(state, levelSize, blockSize);
 		}
 		
 		override protected function createMap():void {

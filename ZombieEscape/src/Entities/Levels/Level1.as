@@ -72,12 +72,12 @@ package Entities.Levels
         );
 		
 		public function Level1(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+			currentLevel = 1;
 			super(state, levelSize, blockSize);
 			this.numBeds = 0;
 			this.numLamps = 0;
 			this.numCouches = 0;
 			this.numTables = 0;
-			currentLevel = 1;
 			this.numHolos = 0;
 			this.tutorial = true;
 		}

@@ -71,8 +71,8 @@ package Entities.Levels
 		
 		public function Level3(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
 		{
-			super(state, levelSize, tileSize);
 			currentLevel = 3;
+			super(state, levelSize, tileSize);
 			this.tutorial = true;
 		}
 		
