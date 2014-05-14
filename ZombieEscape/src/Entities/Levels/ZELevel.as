@@ -335,6 +335,9 @@ package Entities.Levels
 			for (var i:int = 0; i < obstacleGroup.length; i++) {
 				var o:Obstacle = obstacleGroup.members[i];
 				
+				if (FlxG.mouse.justReleased())
+					o.isClicked = false;
+				
 				o.immovable = true;
 				FlxG.collide(o, bob);
 				
@@ -383,6 +386,8 @@ package Entities.Levels
 					wonLevel();
 				}
 			}
+			
+			
 			
 			oldX = FlxG.mouse.x;
 			oldY = FlxG.mouse.y;
