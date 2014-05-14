@@ -355,20 +355,26 @@ package Entities.Levels
 						FlxG.mouse.y = o.y + o.height / 2;
 					}
 				}
-				
-				for (var j:int = 0; j < obstacleGroup.length; j++) {
-					var o2:Obstacle = obstacleGroup.members[j];
-					var m:FlxObject = new FlxObject(FlxG.mouse.x, FlxG.mouse.y);
-					if (j != i && Utils.checkWithinBounds(m, o) && Utils.checkWithinBounds(m, o2)) {
-						if (o.alive && o2.alive) {
-							o2.active = false;
-						}
-					} else {
-						o.active = true;
+			}
+			
+			
+			// only move the top furniture piece if stacked
+			var oneClicked:Boolean = false;
+			for (var j:int = obstacleGroup.length - 1; j >= 0; j--) {
+				var o2:Obstacle = obstacleGroup.members[j];
+				var m:FlxObject = new FlxObject(FlxG.mouse.x, FlxG.mouse.y);
+				if (Utils.checkWithinBounds(m, o2)) {
+					if (oneClicked)
+						o2.active = false;
+					else {
 						o2.active = true;
+						oneClicked = true;
 					}
+				} else {
+					o.active = true;
 				}
 			}
+			oneClicked = false;
 			
 			
 			if (playState == PLAYING_STATE) {

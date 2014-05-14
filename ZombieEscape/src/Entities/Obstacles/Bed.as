@@ -8,7 +8,7 @@ package Entities.Obstacles
 	 */
 	public class Bed extends Obstacle 
 	{
-		public static var SIZE:FlxPoint = new FlxPoint(28, 21);
+		public static var SIZE:FlxPoint = new FlxPoint(14, 21);
 		public function Bed(X:int, Y:int) 
 		{
 			super(X, Y);
