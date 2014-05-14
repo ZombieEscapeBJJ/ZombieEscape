@@ -78,6 +78,7 @@ package Entities.Levels
 			super(state, levelSize, tileSize);
 			currentLevel = 6;
 			this.numHolos = 1;
+			this.tutorial = true;
 		}
 		
 		override protected function createGUI():void {
@@ -94,7 +95,8 @@ package Entities.Levels
 			tutorialBackground2.visible = false;
 			add(closeTutorialButton);
 			add(nextPrevButton);
-
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
 		}
 		
 		override protected function createMap():void {
@@ -153,7 +155,9 @@ package Entities.Levels
 			tutorialBackground2.exists = false;
 			nextPrevButton.exists = false;
 			tutorialBackground.exists = false;
-			
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
+			this.tutorial = false;
 		}
 	}
 

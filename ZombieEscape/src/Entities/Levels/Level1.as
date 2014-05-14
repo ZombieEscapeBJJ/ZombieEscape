@@ -79,6 +79,7 @@ package Entities.Levels
 			this.numTables = 0;
 			currentLevel = 1;
 			this.numHolos = 0;
+			this.tutorial = true;
 		}
 		override protected function createGUI():void {
 			super.createGUI();
@@ -95,7 +96,8 @@ package Entities.Levels
 			tutorialBackground2.visible = false;
 			add(closeTutorialButton);
 			add(nextPrevButton);
-
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
 		}
 		override protected function createMap():void {
 			var tiles:FlxTilemap;
@@ -155,7 +157,9 @@ package Entities.Levels
 			tutorialBackground2.exists = false;
 			nextPrevButton.exists = false;
 			tutorialBackground.exists = false;
-			
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
+			this.tutorial = false;
 		}
 		
 	}

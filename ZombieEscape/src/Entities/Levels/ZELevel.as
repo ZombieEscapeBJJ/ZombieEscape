@@ -108,6 +108,8 @@ package Entities.Levels
 		private var timeLeft:int = 3;
 		private var timeText:FlxText;
 		
+		protected var tutorial:Boolean;
+		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			super();
 			this.placedHolo = false;
@@ -121,6 +123,7 @@ package Entities.Levels
 			this.guiGroup = new FlxGroup();
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
+			this.tutorial = false;
 			
 			for (var k:int = 0; k < PlayState.LEVEL_FURNITURE.length; k++) {
 				var curObstacle:Obstacle = PlayState.LEVEL_FURNITURE[k];
@@ -261,7 +264,7 @@ package Entities.Levels
 				first = false;
 			}
 			super.update();
-			if (FlxG.keys.SPACE) {
+			if (FlxG.keys.SPACE && !tutorial) {
 				startGame();
 			}
 			bedButton.label.text = "x" + numBeds;
@@ -448,7 +451,7 @@ package Entities.Levels
 			couchButton.exists = false;
 			tableButton.exists = false;
 			playerRadius.exists = false;
-			holoButton.visible = false;
+			holoButton.visible = true;
 			resetFurnitureButton.exists = false;
 			bedButton.exists = false;
 			if (numHolos > 0) {

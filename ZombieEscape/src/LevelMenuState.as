@@ -22,7 +22,8 @@ package
 			add(background);
 			PlayState.LEVEL_FURNITURE.splice(0);
 			
-			var one:FlxButton = new FlxButton(40, 100, "1", function():void{FlxG.switchState(new PlayState(1))});
+			var one:FlxButton = new FlxButton(40, 100, "", function():void { FlxG.switchState(new PlayState(1)) });
+			//one.loadGraphic(Assets.LEVEL1_BUTTON);
 			var two:FlxButton = new FlxButton(160, 100, "2", function():void{FlxG.switchState(new PlayState(2))});
 			var three:FlxButton = new FlxButton(280, 100, "3", function():void { FlxG.switchState(new PlayState(3)) } );
 			var four:FlxButton = new FlxButton(40, 130, "4", function():void { FlxG.switchState(new PlayState(4)) } );

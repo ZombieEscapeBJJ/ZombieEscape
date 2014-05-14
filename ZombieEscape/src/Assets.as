@@ -59,6 +59,8 @@ package
 		public static var HOLOGRAM_BUTTON:Class;
 		[Embed(source = "../assets/sprites/fast_tutorial.png")]
 		public static var FAST_TUT:Class;
+		[Embed(source = "../assets/sprites/strong_tutorial.png")]
+		public static var STRONG_TUT:Class;
 		[Embed(source = "../assets/sprites/hologram_tutorial1.png")]
 		public static var HOLO_TUT:Class;
 		[Embed(source = "../assets/sprites/hologram_tutorial2.png")]
@@ -79,10 +81,32 @@ package
 		public static var PASSED_SCREEN:Class;
 		[Embed(source = "../assets/sprites/FailedScreen.png")]
 		public static var FAILED_SCREEN:Class;
-		[Embed(source = "../assets/sprites/LevelSelectionButton2.png")]
-		public static var LEVEL_SELECTION_BUTTON:Class;
 		[Embed(source = "../assets/tiles/carpettile.jpg")]
 		public static var CARPET_TILE:Class;
+		
+		[Embed(source = "../assets/sprites/Level1Button.png")]
+		public static var LEVEL1_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level2Button.png")]
+		public static var LEVEL2_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level3Button.png")]
+		public static var LEVEL3_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level4Button.png")]
+		public static var LEVEL4_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level5Button.png")]
+		public static var LEVEL5_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level6Button.png")]
+		public static var LEVEL6_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level7Button.png")]
+		public static var LEVEL7_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level8Button.png")]
+		public static var LEVEL8_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level9Button.png")]
+		public static var LEVEL9_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level10Button.png")]
+		public static var LEVEL10_BUTTON:Class;
+
+		[Embed(source = "../assets/sprites/LevelSelectionButton2.png")]
+		public static var LEVEL_SELECTION_BUTTON:Class;
 		[Embed(source = "../assets/sprites/ContinueButton.png")]
 		public static var CONTINUE_BUTTON:Class;
 		[Embed(source = "../assets/sprites/TryAgainButton.png")]

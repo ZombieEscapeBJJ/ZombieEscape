@@ -21,7 +21,6 @@ package Entities.Levels
 	public class Level8 extends ZELevel 
 	{
 		public var tutorialBackground:FlxSprite;
-		public var tutorialText:FlxText;
 		public var closeButton:FlxButton;
 		
 		protected static var FLOORS:Array = new Array(
@@ -60,7 +59,7 @@ package Entities.Levels
             1, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            1, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            4, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
@@ -76,7 +75,7 @@ package Entities.Levels
 		{
 			super(state, levelSize, tileSize);
 			currentLevel = 8;
-			this.numHolos = 1;
+			this.tutorial = true;
 		}
 		
 		override protected function createMap():void {
@@ -101,16 +100,15 @@ package Entities.Levels
                 tileSize.y // height of each tile (in pixels)
             );
             wallGroup.add(tiles);
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
 		}
 		
 		override protected function createGUI():void {
 			super.createGUI();
 			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
-			tutorialBackground.loadGraphic(Assets.FIRST_TUT2);
+			tutorialBackground.loadGraphic(Assets.STRONG_TUT);
 			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Oh no!! Strong zombies have appeared. Strong zombies can push furniture. Be careful!");
-			tutorialText.size = 10;
-			add(tutorialText);
 			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
 			add(closeButton);
 			
@@ -135,7 +133,9 @@ package Entities.Levels
 		public function closeTutorial():void {
 			closeButton.exists = false;
 			tutorialBackground.exists = false;
-			tutorialText.exists = false;
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
+			this.tutorial = false;	
 		}
 	}
 

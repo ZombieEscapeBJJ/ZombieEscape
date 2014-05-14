@@ -17,7 +17,6 @@ package Entities.Levels
 	 */
 	public class Level4 extends ZELevel {
 		public var tutorialBackground:FlxSprite;
-		public var tutorialText:FlxText;
 		public var tutorialBackground2:FlxSprite;
 		public var tutorialText2:FlxText;
 		public var closeButton:FlxButton;
@@ -58,14 +57,14 @@ package Entities.Levels
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            1, 2, 2, 1, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+            0, 0, 0, 1, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 2, 2, 1, 0, 0, 0, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -75,6 +74,7 @@ package Entities.Levels
 			super(state, levelSize, blockSize);
 			this.numCouches = 1;
 			currentLevel = 4;
+			this.tutorial = true;
 		}
 		
 		override protected function createMap():void {
@@ -117,22 +117,17 @@ package Entities.Levels
 			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FURNITURE_TUT);
 			add(tutorialBackground);
-			tutorialText = new FlxText(FlxG.width / 2 - 103, FlxG.height / 2 - 110, 225, "Place furniture to block zombies from getting to you. Select a type of furniture at the bottom and place them on the map before the game starts.");
-			tutorialText.size = 10;
-			add(tutorialText);
 			closeButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
 			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.ZONE_TUT);
 			add(tutorialBackground2);
-			tutorialText2 = new FlxText(FlxG.width / 2 - 90, FlxG.height / 2 - 110, 200, "Each zombie has a dispatch zone where furniture cannot be placed");
-			tutorialText2.size = 11;
-			add(tutorialText2);
 			nextPrevButton = new FlxButton(FlxG.width / 2 - 90, FlxG.height / 2 + 20, "Next", nextStep);
 			add(nextPrevButton);
 			
 			add(closeButton);
 			tutorialBackground2.visible = false;
-			tutorialText2.visible = false;
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
 		}
 		
 		override public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
@@ -184,10 +179,8 @@ package Entities.Levels
 		
 		public function nextStep():void {
 			tutorialBackground.visible = false;
-			tutorialText.visible = false;
 			
 			tutorialBackground2.visible = true;
-			tutorialText2.visible = true;
 			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = previousStep;
@@ -195,10 +188,8 @@ package Entities.Levels
 		
 		public function previousStep():void {
 			tutorialBackground2.visible = false;
-			tutorialText2.visible = false;
 			
 			tutorialBackground.visible = true;
-			tutorialText.visible = true;
 			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
@@ -208,11 +199,11 @@ package Entities.Levels
 		public function closeTutorial():void {
 			closeButton.exists = false;
 			tutorialBackground2.exists = false;
-			tutorialText2.exists = false;
 			nextPrevButton.exists = false;
-			tutorialText.exists = false;
 			tutorialBackground.exists = false;
-			
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
+			this.tutorial = false;
 		}
 	}
 
