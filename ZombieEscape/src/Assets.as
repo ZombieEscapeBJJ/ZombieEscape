@@ -15,12 +15,8 @@ package
 		public static var FLOORS_TILE:Class;
 		[Embed(source = "../assets/tiles/checker_large.png")]
 		public static var FINISH_TILE:Class;
-		[Embed(source="../assets/sprites/bookcase (opengameart - Redshrike - ccby30).png")]
-		public static var BOOKCASE:Class;
 		[Embed(source = "../assets/sprites/armor (opengameart - Redshrike - ccby30).png")]
 		public static var ARMOR:Class;
-		[Embed(source = "../assets/tiles/carpettile.jpg")]
-		public static var CARPET_TILE:Class;
 		[Embed(source = "../assets/sprites/bed (opengameart - Redshrike - ccby30).png")]
 		public static var BED:Class;
 		[Embed(source = "../assets/sprites/bedbutton.png")]
@@ -81,7 +77,7 @@ package
 		public static var PASSED_SCREEN:Class;
 		[Embed(source = "../assets/sprites/FailedScreen.png")]
 		public static var FAILED_SCREEN:Class;
-		
+
 		public function Assets() 
 		{
 			
