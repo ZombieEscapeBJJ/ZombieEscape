@@ -26,8 +26,12 @@ package
 			);
 			add(background);
 			
-			add(new FlxButton(FlxG.width / 4 - 20, FlxG.height - 20, "Level Select", Levels));
-			add(new FlxButton(FlxG.width * 2 / 4 - 20, FlxG.height - 20, "Restart", Restart));
+			var restartButton:FlxButton = new FlxButton(FlxG.width * 2 / 4 - 15, FlxG.height - 25, "", Restart);
+			restartButton.loadGraphic(Assets.RESTART_BUTTON);
+			add(restartButton);
+			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 4 - 25, FlxG.height - 25, "", Levels);
+			levelSelectButton.loadGraphic(Assets.LEVEL_SELECTION_BUTTON);
+			add(levelSelectButton);
 			add(new FlxButton(FlxG.width * 3 / 4 - 20, FlxG.height - 20, "Main Menu", MainMenu));
 			FlxG.mouse.show();
 		}

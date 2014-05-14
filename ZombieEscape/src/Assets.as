@@ -79,7 +79,15 @@ package
 		public static var PASSED_SCREEN:Class;
 		[Embed(source = "../assets/sprites/FailedScreen.png")]
 		public static var FAILED_SCREEN:Class;
-
+		[Embed(source = "../assets/sprites/LevelSelectionButton2.png")]
+		public static var LEVEL_SELECTION_BUTTON:Class;
+		[Embed(source = "../assets/tiles/carpettile.jpg")]
+		public static var CARPET_TILE:Class;
+		[Embed(source = "../assets/sprites/ContinueButton.png")]
+		public static var CONTINUE_BUTTON:Class;
+		[Embed(source = "../assets/sprites/TryAgainButton.png")]
+		public static var RESTART_BUTTON:Class;
+		
 		public function Assets() 
 		{
 			
