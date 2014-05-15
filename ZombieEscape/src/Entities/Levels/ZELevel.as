@@ -562,6 +562,9 @@ package Entities.Levels
 		
 		public function closeInGameMenu():void {
 			menu = false;
+			if (ppressed) {
+				playState = PLAYING_STATE;
+			}
 			ppressed = false;
 			pauseButton.visible = true;
 			gamePausedText.visible = false;
@@ -577,7 +580,8 @@ package Entities.Levels
 			resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
 			holoButton.visible = true;
-			playState = PLAYING_STATE;
+			
+			
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {

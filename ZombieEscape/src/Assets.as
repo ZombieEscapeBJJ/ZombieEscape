@@ -104,6 +104,8 @@ package
 		public static var LEVEL9_BUTTON:Class;
 		[Embed(source = "../assets/sprites/Level10Button.png")]
 		public static var LEVEL10_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level11Button.png")]
+		public static var LEVEL11_BUTTON:Class;
 		
 		[Embed(source = "../assets/sprites/Level1ButtonGrey.png")]
 		public static var LEVEL1_BUTTON_GREY:Class;
@@ -125,6 +127,9 @@ package
 		public static var LEVEL9_BUTTON_GREY:Class;
 		[Embed(source = "../assets/sprites/Level10ButtonGrey.png")]
 		public static var LEVEL10_BUTTON_GREY:Class;
+		[Embed(source = "../assets/sprites/Level11ButtonGrey.png")]
+		public static var LEVEL11_BUTTON_GREY:Class;
+		
 
 		[Embed(source = "../assets/sprites/LevelSelectionButton2.png")]
 		public static var LEVEL_SELECTION_BUTTON:Class;
