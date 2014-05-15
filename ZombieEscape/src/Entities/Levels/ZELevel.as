@@ -370,6 +370,7 @@ package Entities.Levels
 								}
 								
 								o.exists = false;
+								obstacleGroup.remove(o, true);
 								//break;
 							}
 							o.isClicked = false;
