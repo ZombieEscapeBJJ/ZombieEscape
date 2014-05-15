@@ -14,7 +14,7 @@ package Entities.Levels
 	 * ...
 	 * @author James Okada
 	 */
-	public class Level6 extends ZELevel {
+	public class Level13 extends ZELevel {
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -63,8 +63,8 @@ package Entities.Levels
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level6(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			currentLevel = 6;
+		public function Level13(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
+			currentLevel = 13;
 			super(state, levelSize, blockSize);
 		}
 		

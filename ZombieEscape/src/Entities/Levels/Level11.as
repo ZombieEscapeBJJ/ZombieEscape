@@ -9,6 +9,8 @@ package Entities.Levels
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
 	import Entities.Obstacles.*;
+	import org.flixel.FlxSprite;
+	import org.flixel.FlxText;
 	
 	/**
 	 * ...
@@ -16,6 +18,12 @@ package Entities.Levels
 	 */
 	public class Level11 extends ZELevel 
 	{
+		public var tutorialBackground:FlxSprite;
+		public var tutorialBackground2:FlxSprite;
+		public var nextPrevButton:FlxButton;
+		public var nextStepButton:FlxButton;
+		public var previousStepButton:FlxButton;
+		public var closeTutorialButton:FlxButton;
 		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -44,23 +52,23 @@ package Entities.Levels
          * Wall layer
          */
         protected static var WALLS:Array = new Array(
-            1, 2, 2, 3, 2, 2, 3, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
-            6, 0, 0, 8, 0, 0, 11, 2, 2, 2, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 8, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 2, 2, 3, 0, 0, 2, 3, 8,
-            6, 0, 0, 0, 0, 0, 6, 0, 0, 1, 2, 2, 2, 0, 0, 0, 6, 0, 0, 8, 0, 0, 0, 11, 3,
-            6, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 2, 10, 0, 0, 11, 2, 0, 0, 0, 8,
-            6, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 6, 0, 0, 8,
-            6, 0, 0, 11, 2, 2, 2, 0, 0, 6, 0, 0, 2, 2, 10, 0, 0, 0, 0, 0, 0, 6, 0, 0, 8,
-            0, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 3, 6, 0, 0, 8,
-            0, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 8, 6, 0, 0, 8,
-            6, 9, 9, 5, 0, 0, 1, 2, 2, 10, 0, 0, 8, 0, 0, 1, 2, 10, 0, 0, 11, 10, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 8, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 8, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 1, 2, 2, 10, 0, 0, 8, 0, 0, 11, 2, 2, 10, 0, 0, 13, 9, 9, 12, 0, 0, 8,
-            6, 0, 0, 6, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 6, 0, 0, 8,
-			6, 0, 0, 6, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 6, 0, 0, 8,
-            4, 9, 9, 9, 9, 9, 9, 9, 9, 5, 9, 9, 9, 9, 9, 9, 9, 9, 5, 0, 0, 4, 9, 9, 5,
+            1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
@@ -70,9 +78,26 @@ package Entities.Levels
 			currentLevel = 11;
 			super(state, levelSize, tileSize);
 			this.numHolos = 1;
-			this.numLamps = 2;
-			this.numCouches = 2;
+			this.tutorial = true;
+		}
+		
+		override protected function createGUI():void {
+			super.createGUI();
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground.loadGraphic(Assets.HOLO_TUT);
+			add(tutorialBackground);
 			
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
+			closeTutorialButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground2.loadGraphic(Assets.HOLO_TUT1);
+			add(tutorialBackground2);
+			tutorialBackground2.visible = false;
+			add(closeTutorialButton);
+			add(nextPrevButton);
+			closeTutorialButton.visible = false;
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
 		}
 		
 		override protected function createMap():void {
@@ -100,15 +125,43 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-42, 16 * 15);
-			this.zombieGroup.add(new FastZombie(16 * 4, 16 * 14));
-			this.zombieGroup.add(new FastZombie(16 * 1, 16 * 14));
-			this.zombieGroup.add(new NormalZombie(16 * 23, 16));
-			this.zombieGroup.add(new StrongZombie(16 * 18 - 5, 16 * 5));
-			this.zombieGroup.add(new NormalZombie(16 * 20, 16 * 6 + 5));
-			this.zombieGroup.add(new FastZombie(16, 16));
-			finish = new FinishLine(0, 16 *8);
+			bob = new BobFlx(FlxG.width-50, 16 * 7);
+			this.zombieGroup.add(new FastZombie(25, 25));
+			this.zombieGroup.add(new FastZombie(65, 50));
+			this.zombieGroup.add(new FastZombie(105, 25));			
+			finish = new FinishLine(0, 16 * 7);
+		}
+		
+		public function nextStep():void {
+			tutorialBackground.visible = false;
+			nextPrevButton.x = FlxG.width / 2 - 90;
+			closeTutorialButton.visible = true;
+			tutorialBackground2.visible = true;
+			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
+			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.onUp = previousStep;
+		}
+		
+		public function previousStep():void {
+			tutorialBackground2.visible = false;
+			closeTutorialButton.visible = false;
+			nextPrevButton.x = FlxG.width / 2 - 30;
+			tutorialBackground.visible = true;
+			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
+			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.onUp = nextStep;
+
+		}
+		
+		public function closeTutorial():void {
+			closeTutorialButton.exists = false;
+			tutorialBackground2.exists = false;
+			nextPrevButton.exists = false;
+			tutorialBackground.exists = false;
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
+			this.tutorial = false;
 		}
 	}
-		
+
 }

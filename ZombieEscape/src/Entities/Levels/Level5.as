@@ -1,21 +1,27 @@
 package Entities.Levels 
 {
 	import Entities.FinishLine;
+	import org.flixel.FlxSprite;
 	import org.flixel.FlxState;
+	import org.flixel.FlxText;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxButton;
 	import org.flixel.FlxG;
 	import Entities.BobFlx;
 	import Entities.Zombies.*;
-	import Entities.Obstacles.*;
-	
+	import org.flixel.FlxObject;
 	/**
 	 * ...
-	 * @author Brandon
+	 * @author James Okada
 	 */
-	public class Level5 extends ZELevel 
-	{		
+	public class Level5 extends ZELevel {
+		public var tutorialBackground:FlxSprite;
+		public var tutorialBackground2:FlxSprite;
+		public var tutorialText2:FlxText;
+		public var closeButton:FlxButton;
+		public var nextPrevButton:FlxButton;
+		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -51,27 +57,24 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 1, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            1, 2, 2, 10, 0, 0, 0, 11, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level5(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
-		{
+		public function Level5(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			currentLevel = 5;
-			super(state, levelSize, tileSize);
-			this.numBeds = 1;
-			this.numCouches = 2;
-			this.numLamps = 2;
-			this.numTables = 1;
+			super(state, levelSize, blockSize);
+			this.numCouches = 1;
+			this.tutorial = true;
 		}
 		
 		override protected function createMap():void {
@@ -99,14 +102,61 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-50, 16 * 2);
-			this.zombieGroup.add(new NormalZombie(25, 25));
-			this.zombieGroup.add(new FastZombie(65, 25));
-			this.zombieGroup.add(new NormalZombie(105, 25));			
-			this.zombieGroup.add(new NormalZombie(55, 16 * 13));
-			this.zombieGroup.add(new FastZombie(195, 16 * 13));
-			this.zombieGroup.add(new NormalZombie(335, 16 * 13));	
-			finish = new FinishLine(0, 16 * 13);
+			bob = new BobFlx(FlxG.width-30, FlxG.height-63);
+			this.zombieGroup.add(new FastZombie(85, 150));		
+			finish = new FinishLine(0, 16*14);
+		}
+		
+		override protected function createGUI():void {
+			super.createGUI();
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground.loadGraphic(Assets.FURNITURE_TUT);
+			add(tutorialBackground);
+			closeButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground2.loadGraphic(Assets.ZONE_TUT);
+			add(tutorialBackground2);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
+			add(nextPrevButton);
+			closeButton.visible = false;
+			add(closeButton);
+			tutorialBackground2.visible = false;
+			pauseButton.exists = false;
+			resetFurnitureButton.exists = false;
+		}
+		
+		public function nextStep():void {
+			tutorialBackground.visible = false;
+			
+			tutorialBackground2.visible = true;
+			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
+			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.onUp = previousStep;
+			closeButton.visible = true;
+			nextPrevButton.x = FlxG.width / 2 - 90;
+		}
+		
+		public function previousStep():void {
+			tutorialBackground2.visible = false;
+			
+			tutorialBackground.visible = true;
+			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
+			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.onUp = nextStep;
+			nextPrevButton.x = FlxG.width / 2 - 30;
+			closeButton.visible = false;
+
+		}
+		
+		public function closeTutorial():void {
+			closeButton.exists = false;
+			tutorialBackground2.exists = false;
+			nextPrevButton.exists = false;
+			tutorialBackground.exists = false;
+			pauseButton.exists = true;
+			resetFurnitureButton.exists = true;
+			this.tutorial = false;
 		}
 	}
+
 }
