@@ -73,6 +73,7 @@ package Entities.Levels
 		
 		public function Level8(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
 		{
+			PlayState.LEVEL_FURNITURE.splice(0);
 			currentLevel = 8;
 			super(state, levelSize, tileSize);
 			this.tutorial = true;

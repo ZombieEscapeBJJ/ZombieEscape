@@ -387,6 +387,7 @@ package Entities.Levels
 				FlxG.collide(wallGroup, zombieGroup);
 				
 				if (FlxG.collide(bob, zombieGroup)) {
+					PlayState.LEVEL_FURNITURE.splice(0);
 					for (var k:int = 0; k < obstacleGroup.length; k++) {
 						PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
 					}
