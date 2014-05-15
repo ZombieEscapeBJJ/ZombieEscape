@@ -322,7 +322,8 @@ package Entities.Levels
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
-						ZombieEscape.logger.logAction(2, null);
+						var data_holo:Object = {"Holo_x":FlxG.mouse.x,"Holo_y":FlxG.mouse.y};
+						ZombieEscape.logger.logAction(2, data_holo);
 						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x - Hologram.SIZE.x / 2, FlxG.mouse.y - Hologram.SIZE.y / 2));
 						placedHolo = true;
 						numHolos--;
@@ -390,7 +391,8 @@ package Entities.Levels
 						PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
 					}
 					timer.stop();
-					ZombieEscape.logger.logAction(1, null);
+					var data_died:Object = {"Died_x":bob.x,"Died_y":bob.y};
+					ZombieEscape.logger.logAction(1, data_died);
 					FlxG.switchState(new GameOverState(currentLevel));
 				} else if (FlxG.collide(bob, finish)) {
 					wonLevel();
