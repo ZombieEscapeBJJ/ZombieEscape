@@ -288,52 +288,8 @@ package Entities.Levels
 			couchButton.label.text = "x" + numCouches;
 			tableButton.label.text = "x" + numTables;
 			holoButton.label.text = "x" + numHolos;
-
-			if (furnitureState == BED_STATE && numBeds > 0) {
-				bedButton.loadGraphic(Assets.BED_SELECTED);
-				if (FlxG.mouse.justReleased()) {
-					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Bed.SIZE)) {
-						obstacleGroup.add(new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2));
-						numBeds--;
-						goneBeds++;
-						furnitureState = -1;
-						bedButton.loadGraphic(Assets.BED_BUTTON);
-					}
-				}
-			} else if (furnitureState == LAMP_STATE && numLamps > 0) {
-				lampButton.loadGraphic(Assets.LAMP_SELECTED);
-				if (FlxG.mouse.justReleased()) {
-					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Lamp.SIZE)) {
-						obstacleGroup.add(new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2, FlxG.mouse.y - Lamp.SIZE.y / 2));
-						numLamps--;
-						goneLamps++;
-						furnitureState = -1;
-						lampButton.loadGraphic(Assets.LAMP_BUTTON);
-					}
-				}
-			} else if (furnitureState == COUCH_STATE && numCouches > 0) {
-				couchButton.loadGraphic(Assets.COUCH_SELECTED);
-				if (FlxG.mouse.justReleased()) {
-					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Couch.SIZE)) {
-						obstacleGroup.add(new Couch(FlxG.mouse.x - Couch.SIZE.x / 2, FlxG.mouse.y - Couch.SIZE.y / 2));
-						numCouches--;
-						goneCouches++;
-						furnitureState = -1;
-						couchButton.loadGraphic(Assets.COUCH_BUTTON);
-					}
-				}
-			} else if (furnitureState == TABLE_STATE && numTables > 0) {
-				tableButton.loadGraphic(Assets.TABLE_SELECTED);
-				if (FlxG.mouse.justReleased()) {
-					if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
-						obstacleGroup.add(new Table(FlxG.mouse.x - Table.SIZE.x / 2, FlxG.mouse.y - Table.SIZE.y / 2));
-						numTables--;
-						goneTables++;
-						furnitureState = -1;
-						tableButton.loadGraphic(Assets.TABLE_BUTTON);
-					}
-				}
-			} else if (furnitureState == HOLO_STATE && numHolos > 0) {
+			
+			if (furnitureState == HOLO_STATE && numHolos > 0) {
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
@@ -348,52 +304,112 @@ package Entities.Levels
 						add(timeText);
 					}
 				}
-			}
-			
-			for (var i:int = 0; i < obstacleGroup.length; i++) {
-				var o:Obstacle = obstacleGroup.members[i];
-				
-				if (FlxG.mouse.justReleased())
-					o.isClicked = false;
-				
-				o.immovable = true;
-				FlxG.collide(o, bob);
-				
-				if (o.isClicked && checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
-					var xDif:Number = FlxG.mouse.x - oldX;
-					var yDif:Number = FlxG.mouse.y - oldY;
-					o.x += xDif;
-					o.y += yDif;
-				}
-				
-				if (o.isClicked) {
-					if (FlxG.mouse.x < o.x || FlxG.mouse.x > o.x + o.width ||
-						FlxG.mouse.y < o.y || FlxG.mouse.y > o.y + o.height) {
-						FlxG.mouse.x = o.x + o.width / 2;
-						FlxG.mouse.y = o.y + o.height / 2;
+			} else {
+				for (var i:int = 0; i < obstacleGroup.length; i++) {
+					var o:Obstacle = obstacleGroup.members[i];
+					if (o.exists) {
+						
+						if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
+							switch(o.type) {
+								case Bed:
+									o.loadGraphic(Assets.BOB);
+									break;
+								case Lamp:
+									o.loadGraphic(Assets.BOB);
+									break;
+								case Couch:
+									o.loadGraphic(Assets.BOB);
+									break;
+								case Table:
+									o.loadGraphic(Assets.BOB);
+									break;
+							}
+						} else {
+							switch(o.type) {
+								case Bed:
+									o.loadGraphic(Assets.BED);
+									break;
+								case Lamp:
+									o.loadGraphic(Assets.LAMP);
+									break;
+								case Couch:
+									o.loadGraphic(Assets.COUCH);
+									break;
+								case Table:
+									o.loadGraphic(Assets.TABLE);
+									break;
+							}
+						}
+						
+						if (FlxG.mouse.justReleased()) {
+							if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
+								o.isClicked = false;
+								switch(o.type) {
+									case Bed:
+										numBeds++;
+										goneBeds--;
+										break;
+									case Lamp:
+										numLamps++;
+										goneLamps--;
+										break;
+									case Couch:
+										numCouches++;
+										goneCouches--;
+										break;
+									case Table:
+										numTables++;
+										goneTables--;
+										break;
+								}
+								
+								o.exists = false;
+								//break;
+							}
+							o.isClicked = false;
+						}
+							
+						o.immovable = true;
+						FlxG.collide(o, bob);
+						
+						if (o.isClicked){// && checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
+							var xDif:Number = FlxG.mouse.x - oldX;
+							var yDif:Number = FlxG.mouse.y - oldY;
+							o.x += xDif;
+							o.y += yDif;
+						}
+						
+						if (o.isClicked) {
+							if (FlxG.mouse.x < o.x || FlxG.mouse.x > o.x + o.width ||
+								FlxG.mouse.y < o.y || FlxG.mouse.y > o.y + o.height) {
+								FlxG.mouse.x = o.x + o.width / 2;
+								FlxG.mouse.y = o.y + o.height / 2;
+							}
+						}
 					}
 				}
-			}
-			
-			
-			// only move the top furniture piece if stacked
-			var oneClicked:Boolean = false;
-			for (var j:int = obstacleGroup.length - 1; j >= 0; j--) {
-				var o2:Obstacle = obstacleGroup.members[j];
-				var m:FlxObject = new FlxObject(FlxG.mouse.x, FlxG.mouse.y);
-				if (Utils.checkWithinBounds(m, o2)) {
-					if (oneClicked)
-						o2.active = false;
-					else {
-						o2.active = true;
-						oneClicked = true;
+				
+				
+				// only move the top furniture piece if stacked
+				var oneClicked:Boolean = false;
+				for (var j:int = obstacleGroup.length - 1; j >= 0; j--) {
+					var o2:Obstacle = obstacleGroup.members[j];
+					if (o2.exists) {
+						var m:FlxObject = new FlxObject(FlxG.mouse.x, FlxG.mouse.y);
+						if (Utils.checkWithinBounds(m, o2)) {
+							if (oneClicked)
+								o2.active = false;
+							else {
+								o2.active = true;
+								oneClicked = true;
+							}
+						} else {
+							o.active = true;
+						}
 					}
-				} else {
-					o.active = true;
 				}
+				oneClicked = false;
 			}
-			oneClicked = false;
-			
 			
 			if (playState == PLAYING_STATE) {
 				collideZombies();
@@ -431,35 +447,63 @@ package Entities.Levels
 		}
 		
 		public function selectedBed():void {
-			furnitureState = BED_STATE;
-			couchButton.loadGraphic(Assets.COUCH_BUTTON);
-			lampButton.loadGraphic(Assets.LAMP_BUTTON);
-			tableButton.loadGraphic(Assets.TABLE_BUTTON);
-			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			if (numBeds > 0) {
+				var bed:Bed = new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2);
+				bed.isClicked = true;
+				obstacleGroup.add(bed);
+				numBeds--;
+				goneBeds++;
+				//furnitureState = BED_STATE;
+				couchButton.loadGraphic(Assets.COUCH_BUTTON);
+				lampButton.loadGraphic(Assets.LAMP_BUTTON);
+				tableButton.loadGraphic(Assets.TABLE_BUTTON);
+				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			}
 		}
 		
 		public function selectedCouch():void {
-			furnitureState = COUCH_STATE;
-			lampButton.loadGraphic(Assets.LAMP_BUTTON);
-			bedButton.loadGraphic(Assets.BED_BUTTON);
-			tableButton.loadGraphic(Assets.TABLE_BUTTON);
-			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			if (numCouches > 0) {
+				var couch:Couch = new Couch(FlxG.mouse.x - Couch.SIZE.x / 2 , FlxG.mouse.y  - Couch.SIZE.y / 2);
+				couch.isClicked = true;
+				obstacleGroup.add(couch);
+				numCouches--;
+				goneCouches++;
+				//furnitureState = COUCH_STATE;
+				lampButton.loadGraphic(Assets.LAMP_BUTTON);
+				bedButton.loadGraphic(Assets.BED_BUTTON);
+				tableButton.loadGraphic(Assets.TABLE_BUTTON);
+				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			}
 		}
 		
 		public function selectedLamp():void {
-			furnitureState = LAMP_STATE;
-			couchButton.loadGraphic(Assets.COUCH_BUTTON);
-			bedButton.loadGraphic(Assets.BED_BUTTON);
-			tableButton.loadGraphic(Assets.TABLE_BUTTON);
-			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			if (numLamps > 0) {
+				var lamp:Lamp = new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2 , FlxG.mouse.y  - Lamp.SIZE.y / 2);
+				lamp.isClicked = true;
+				obstacleGroup.add(lamp);
+				numLamps--;
+				goneLamps++;
+				//furnitureState = LAMP_STATE;
+				couchButton.loadGraphic(Assets.COUCH_BUTTON);
+				bedButton.loadGraphic(Assets.BED_BUTTON);
+				tableButton.loadGraphic(Assets.TABLE_BUTTON);
+				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			}
 		}
 		
 		public function selectedTable():void {
-			furnitureState = TABLE_STATE;
-			lampButton.loadGraphic(Assets.LAMP_BUTTON);
-			couchButton.loadGraphic(Assets.COUCH_BUTTON);
-			bedButton.loadGraphic(Assets.BED_BUTTON);
-			holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			if (numTables > 0) {
+				var table:Table = new Table(FlxG.mouse.x - Table.SIZE.x / 2 , FlxG.mouse.y  - Table.SIZE.y / 2);
+				table.isClicked = true;
+				obstacleGroup.add(table);
+				numTables--;
+				goneTables++;
+				//furnitureState = TABLE_STATE;
+				lampButton.loadGraphic(Assets.LAMP_BUTTON);
+				couchButton.loadGraphic(Assets.COUCH_BUTTON);
+				bedButton.loadGraphic(Assets.BED_BUTTON);
+				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+			}
 		}
 		
 		public function selectedHolo():void {
