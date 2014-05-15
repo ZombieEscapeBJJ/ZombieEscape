@@ -109,6 +109,7 @@ package Entities.Levels
 		private var timeText:FlxText;
 		
 		protected var tutorial:Boolean;
+		protected var menu:Boolean;
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			ZombieEscape.logger.logLevelStart(currentLevel, null);
@@ -125,7 +126,7 @@ package Entities.Levels
 			this.zombieGroup = new FlxGroup();
 			this.obstacleGroup = new FlxGroup();
 			this.tutorial = false;
-			
+			this.menu = false;
 			for (var k:int = 0; k < PlayState.LEVEL_FURNITURE.length; k++) {
 				var curObstacle:Obstacle = PlayState.LEVEL_FURNITURE[k];
 				var className:String = getQualifiedClassName(curObstacle);
@@ -265,7 +266,7 @@ package Entities.Levels
 				first = false;
 			}
 			super.update();
-			if (FlxG.keys.SPACE && !tutorial) {
+			if (FlxG.keys.SPACE && !tutorial && !menu) {
 				startGame();
 			}
 			bedButton.label.text = "x" + numBeds;
@@ -478,6 +479,7 @@ package Entities.Levels
 		}
 		
 		public function pauseGame():void {
+			menu = true;
 			if (playState != PAUSED_STATE) {
 				gamePausedText.text = "Game Paused";
 				resumeButton.label = new FlxText(0, 0, 80, "Close");
@@ -555,6 +557,7 @@ package Entities.Levels
 		}
 		
 		public function closeInGameMenu():void {
+			menu = false;
 			pauseButton.visible = true;
 			gamePausedText.visible = false;
 			restartButton.visible = false;

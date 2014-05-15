@@ -57,14 +57,16 @@ package Entities
 			var absX:Number = Math.abs(velocity.x);
 			var absY:Number = Math.abs(velocity.y);
 			// determine facing
-			if (velocity.y < 0 && absY >= absX)
+			facing = LEFT;
+			if (velocity.y < 0 && absY >= absX) {
 				facing = UP;
-			else if (velocity.y > 0 && absY >= absX)
+			} else if (velocity.y > 0 && absY >= absX) {
 				facing = DOWN;
-			else if (velocity.x > 0 && absX >= absY)
+			} else if (velocity.x > 0 && absX >= absY) {
 				facing = RIGHT;
-			else if (velocity.x < 0 && absX >= absY)
-				facing = LEFT
+			}else if (velocity.x < 0 && absX >= absY) {
+				facing = LEFT;
+			}
 			// up
 			if (facing == UP) {
 				if (velocity.y != 0 || velocity.x != 0)

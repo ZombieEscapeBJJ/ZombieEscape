@@ -38,6 +38,9 @@ package Entities.Zombies
 			
 				x -= velocity.x;
 				y -= velocity.y;
+			} else {
+				velocity.x = 0;
+				velocity.y = 0;
 			}
 			updateAnimations();
 		}
@@ -52,6 +55,7 @@ package Entities.Zombies
 			var absX:Number = Math.abs(velocity.x);
 			var absY:Number = Math.abs(velocity.y);
 			// determine facing
+			facing = DOWN;
 			if (velocity.y < 0 && absY >= absX)
 				facing = UP;
 			else if (velocity.y > 0 && absY >= absX)

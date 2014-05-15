@@ -15,15 +15,13 @@ package
 		public static var LEVEL_FURNITURE:Array = new Array();
 		
 		public static var LEVEL:ZELevel = null;
-		
-		private var LEVELS:Array = [Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10];
+	
+		public var LEVELS:Array = [Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10];
+		public static var MAX_LEVELS:int = 10;
 		
 		public function PlayState(level:int) 
 		{
 			FlxG.mouse.show();
-			
-			if (level > LEVELS.length)
-				level = LEVELS.length;
 			
 			LEVEL = new LEVELS[level - 1](this, LEVEL_SIZE, BLOCK_SIZE);
 			
