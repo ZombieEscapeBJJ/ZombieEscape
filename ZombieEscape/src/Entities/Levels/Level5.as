@@ -68,10 +68,10 @@ package Entities.Levels
 		{
 			currentLevel = 5;
 			super(state, levelSize, tileSize);
-			this.numBeds = 2;
-			this.numCouches = 3;
-			this.numLamps = 3;
-			this.numTables = 3;
+			this.numBeds = 1;
+			this.numCouches = 2;
+			this.numLamps = 2;
+			this.numTables = 1;
 		}
 		
 		override protected function createMap():void {
