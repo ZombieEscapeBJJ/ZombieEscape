@@ -1,0 +1,2 @@
+1 - player dies
+2 - player uses hologram

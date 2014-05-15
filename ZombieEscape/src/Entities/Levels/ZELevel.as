@@ -322,6 +322,7 @@ package Entities.Levels
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
+						ZombieEscape.logger.logAction(2, null);
 						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x - Hologram.SIZE.x / 2, FlxG.mouse.y - Hologram.SIZE.y / 2));
 						placedHolo = true;
 						numHolos--;
