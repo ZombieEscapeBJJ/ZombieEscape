@@ -43,14 +43,16 @@ package
 			eight.loadGraphic(Assets.LEVEL8_BUTTON);
 			var nine:FlxButton = new FlxButton(240, 140, "", function():void { FlxG.switchState(new PlayState(9)) } );
 			nine.loadGraphic(Assets.LEVEL9_BUTTON);
+			var ten:FlxButton = new FlxButton(280, 140, "", function():void { FlxG.switchState(new PlayState(10)) } );
+			ten.loadGraphic(Assets.LEVEL9_BUTTON);
+				
 			
-			
-			
-			LEVELS = new Array(one, two, three, four, five, six, seven, eight, nine);
+			LEVELS = new Array(one, two, three, four, five, six, seven, eight, nine, ten);
 			
 			var GREYS:Array = new Array(Assets.LEVEL1_BUTTON_GREY, Assets.LEVEL2_BUTTON_GREY, Assets.LEVEL3_BUTTON_GREY,
 										Assets.LEVEL4_BUTTON_GREY, Assets.LEVEL5_BUTTON_GREY, Assets.LEVEL6_BUTTON_GREY,
-										Assets.LEVEL7_BUTTON_GREY, Assets.LEVEL8_BUTTON_GREY, Assets.LEVEL9_BUTTON_GREY);
+										Assets.LEVEL7_BUTTON_GREY, Assets.LEVEL8_BUTTON_GREY, Assets.LEVEL9_BUTTON_GREY,
+										Assets.LEVEL9_BUTTON_GREY);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 			//shared.clear();
