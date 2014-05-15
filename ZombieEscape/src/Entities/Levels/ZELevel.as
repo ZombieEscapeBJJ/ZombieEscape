@@ -28,6 +28,7 @@ package Entities.Levels
 	import flash.net.SharedObject;
     import flash.net.registerClassAlias;
 	import flash.utils.getAliasName;
+	import org.flixel.system.FlxList;
 	
 	/**
 	 * ...
@@ -191,6 +192,11 @@ package Entities.Levels
 			add(finish);
 			add(zombieGroup);
 			add(obstacleGroup);
+			/*for (var i:int = 0; i < obstacleGroup.length; i++) {
+				var o:Obstacle = obstacleGroup.members[i];
+				if (o.exists)
+					add(o);
+			}*/
 			add(guiGroup);
 			
 			bedButton.loadGraphic(Assets.BED_BUTTON);
@@ -230,8 +236,8 @@ package Entities.Levels
 	
 			
 			var zoneRadius:int = 10;
-			for (var i:int = 0; i < zombieGroup.length; i++) {
-				var currentZombie:Zombie = zombieGroup.members[i];
+			for (var j:int = 0; j < zombieGroup.length; j++) {
+				var currentZombie:Zombie = zombieGroup.members[j];
 				playerRadius.makeGraphic(FlxG.width,FlxG.height, 0x000000);
 				Utils.drawRect(playerRadius, currentZombie, 10, 0xffff3333, 1, 0x44ff3333);
 				playerRadiusArray.push(new FlxObject(currentZombie.x - zoneRadius / 2, currentZombie.y - zoneRadius / 2, Zombie.SIZE.x + (zoneRadius  * 2), Zombie.SIZE.y + (zoneRadius * 2)));
@@ -312,16 +318,16 @@ package Entities.Levels
 						if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 							switch(o.type) {
 								case Bed:
-									o.loadGraphic(Assets.BOB);
+									o.loadGraphic(Assets.RED_BED);
 									break;
 								case Lamp:
-									o.loadGraphic(Assets.BOB);
+									o.loadGraphic(Assets.RED_LAMP);
 									break;
 								case Couch:
-									o.loadGraphic(Assets.BOB);
+									o.loadGraphic(Assets.RED_COUCH);
 									break;
 								case Table:
-									o.loadGraphic(Assets.BOB);
+									o.loadGraphic(Assets.RED_TABLE);
 									break;
 							}
 						} else {
@@ -435,6 +441,15 @@ package Entities.Levels
 			
 			oldX = FlxG.mouse.x;
 			oldY = FlxG.mouse.y;
+			
+			//var newGroup:FlxGroup = new FlxGroup();
+			for (var x:int = 0; x < obstacleGroup.length; x++) {
+				var ob:Obstacle = obstacleGroup.members[x];
+				if (!ob.exists) {
+					obstacleGroup.remove(ob, true);
+				}
+			}
+			//obstacleGroup = newGroup;
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
@@ -563,6 +578,7 @@ package Entities.Levels
 		}
 
 		public function restartLevel():void {
+			timer.stop();
 			FlxG.switchState(new PlayState(currentLevel));
 		}
 		
@@ -601,6 +617,7 @@ package Entities.Levels
 			goneTables = 0;
 		}
 		public function levelSelect():void {
+			timer.stop();
 			FlxG.switchState(new LevelMenuState());
 		}
 		
@@ -693,6 +710,7 @@ package Entities.Levels
 		}
 		
 		public function wonLevel():void {
+			timer.stop();
 			FlxG.switchState(new WinState(currentLevel));
 			ZombieEscape.logger.logLevelEnd(currentLevel);
 		}

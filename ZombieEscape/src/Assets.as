@@ -84,6 +84,16 @@ package
 		[Embed(source = "../assets/tiles/carpettile.jpg")]
 		public static var CARPET_TILE:Class;
 		
+		[Embed(source = "../assets/sprites/redbed.png")]
+		public static var RED_BED:Class;
+		[Embed(source = "../assets/sprites/redcouch.png")]
+		public static var RED_COUCH:Class;
+		[Embed(source = "../assets/sprites/redlamp.png")]
+		public static var RED_LAMP:Class;
+		[Embed(source = "../assets/sprites/redtable.png")]
+		public static var RED_TABLE:Class;
+		
+		
 		[Embed(source = "../assets/sprites/Level1Button.png")]
 		public static var LEVEL1_BUTTON:Class;
 		[Embed(source = "../assets/sprites/Level2Button.png")]
