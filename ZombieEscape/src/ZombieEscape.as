@@ -19,7 +19,7 @@ package
 		
 		public function ZombieEscape() 
 		{
-			//shared.clear();
+			shared.clear();
 		
 			if (shared.data.nextLevel == null) {
 				shared.data.nextLevel = nextLevel;
