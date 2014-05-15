@@ -108,6 +108,14 @@ package
 		public static var LEVEL10_BUTTON:Class;
 		[Embed(source = "../assets/sprites/Level11Button.png")]
 		public static var LEVEL11_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level12Button.png")]
+		public static var LEVEL12_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level13Button.png")]
+		public static var LEVEL13_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level14Button.png")]
+		public static var LEVEL14_BUTTON:Class;
+		[Embed(source = "../assets/sprites/Level15Button.png")]
+		public static var LEVEL15_BUTTON:Class;
 		
 		[Embed(source = "../assets/sprites/Level1ButtonGrey.png")]
 		public static var LEVEL1_BUTTON_GREY:Class;
@@ -131,6 +139,14 @@ package
 		public static var LEVEL10_BUTTON_GREY:Class;
 		[Embed(source = "../assets/sprites/Level11ButtonGrey.png")]
 		public static var LEVEL11_BUTTON_GREY:Class;
+		[Embed(source = "../assets/sprites/Level12ButtonGrey.png")]
+		public static var LEVEL12_BUTTON_GREY:Class;
+		[Embed(source = "../assets/sprites/Level13ButtonGrey.png")]
+		public static var LEVEL13_BUTTON_GREY:Class;
+		[Embed(source = "../assets/sprites/Level14ButtonGrey.png")]
+		public static var LEVEL14_BUTTON_GREY:Class;
+		[Embed(source = "../assets/sprites/Level15ButtonGrey.png")]
+		public static var LEVEL15_BUTTON_GREY:Class;
 		
 
 		[Embed(source = "../assets/sprites/LevelSelectionButton2.png")]
