@@ -269,15 +269,17 @@ package Entities.Levels
 			}
 			super.update();
 
-			if (FlxG.keys.P && playState == PLAYING_STATE) {
+			if (FlxG.keys.justPressed("P") && playState == PLAYING_STATE) {
 				ppressed = true;
 				pauseGame();
 				return;
 			}
 			
-			if (FlxG.keys.P && playState == PAUSED_STATE) {
+			if (FlxG.keys.justPressed("P") && playState == PAUSED_STATE) {
 				closeInGameMenu();
+				return;
 			}
+			
 			if (FlxG.keys.SPACE && !tutorial && !menu) {
 				startGame();
 			}
@@ -560,6 +562,9 @@ package Entities.Levels
 		
 		public function closeInGameMenu():void {
 			menu = false;
+			if (ppressed) {
+				playState = PLAYING_STATE;
+			}
 			ppressed = false;
 			pauseButton.visible = true;
 			gamePausedText.visible = false;
@@ -575,7 +580,8 @@ package Entities.Levels
 			resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
 			holoButton.visible = true;
-			playState = PLAYING_STATE;
+			
+			
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
