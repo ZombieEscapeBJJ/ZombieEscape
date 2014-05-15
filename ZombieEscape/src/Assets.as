@@ -53,7 +53,7 @@ package
 		public static var FIRST_TUT2:Class;
 		[Embed(source = "../assets/sprites/furniture_tutorial.png")]
 		public static var FURNITURE_TUT:Class;
-		[Embed(source = "../assets/sprites/zone-tutorial.png")]
+		[Embed(source = "../assets/sprites/zone_tutorial.png")]
 		public static var ZONE_TUT:Class;
 		[Embed(source = "../assets/sprites/hologrambutton.png")]
 		public static var HOLOGRAM_BUTTON:Class;
