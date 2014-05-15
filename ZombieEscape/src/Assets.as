@@ -11,12 +11,8 @@ package
 		
 		[Embed(source = "../assets/tiles/WallTileset.png")]
 		public static var WALLS_TILE:Class;
-		[Embed(source="../assets/tiles/floor_wood (opengameart - Redshrike - ccby30).png")]
-		public static var FLOORS_TILE:Class;
 		[Embed(source = "../assets/tiles/finish_line.png")]
 		public static var FINISH_TILE:Class;
-		[Embed(source = "../assets/sprites/armor (opengameart - Redshrike - ccby30).png")]
-		public static var ARMOR:Class;
 		[Embed(source = "../assets/sprites/bed (opengameart - Redshrike - ccby30).png")]
 		public static var BED:Class;
 		[Embed(source = "../assets/sprites/bedbutton.png")]
@@ -43,10 +39,6 @@ package
 		public static var TABLE_SELECTED:Class;
 		[Embed(source = "../assets/sprites/decoy.png")]
 		public static var HOLOGRAM:Class;
-		[Embed(source = "../assets/sprites/horizontalwall.png")]
-		public static var WALL:Class;
-		[Embed(source = "../assets/sprites/verticalwall.png")]
-		public static var VWALL:Class;
 		[Embed(source = "../assets/sprites/bob_tutorial.png")]
 		public static var FIRST_TUT:Class;
 		[Embed(source = "../assets/sprites/zombie_tutorial.png")]
@@ -149,6 +141,22 @@ package
 		public static var RESTART_BUTTON:Class;
 		[Embed(source = "../assets/sprites/MainMenuButton.png")]
 		public static var MAIN_BUTTON:Class;
+		[Embed(source = "../assets/sprites/ResetButton.png")]
+		public static var RESET_BUTTON:Class;
+		[Embed(source = "../assets/sprites/MenuButton.png")]
+		public static var MENU_BUTTON:Class;
+		[Embed(source = "../assets/sprites/MenuHeader.png")]
+		public static var MENU_HEADER:Class;
+		[Embed(source = "../assets/sprites/PauseHeader.png")]
+		public static var PAUSE_HEADER:Class;
+		[Embed(source = "../assets/sprites/PauseButton.png")]
+		public static var PAUSE_BUTTON:Class;
+		[Embed(source = "../assets/sprites/ResumeGameButton.png")]
+		public static var RESUME_BUTTON:Class;
+		[Embed(source = "../assets/sprites/RestartLevelButton.png")]
+		public static var RESTART_BUTTON1:Class;
+		[Embed(source = "../assets/sprites/SelectLevelButton.png")]
+		public static var SELECT_BUTTON:Class;
 		
 		public function Assets() 
 		{

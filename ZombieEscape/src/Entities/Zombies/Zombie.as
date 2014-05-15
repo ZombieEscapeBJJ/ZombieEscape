@@ -15,7 +15,6 @@ package Entities.Zombies
 		
 		public function Zombie(X:int, Y:int, speed:Number) {
 			super(X, Y);
-			loadGraphic(Assets.ARMOR);
 			velocity.x = 0;
 			velocity.y = 0;
 			this.speed = speed;

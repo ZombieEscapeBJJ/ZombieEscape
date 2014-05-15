@@ -99,7 +99,7 @@ package Entities.Levels
 		
 		// pause screen entities
 		private var pauseScreen:PauseScreen;
-		private var gamePausedText:FlxText;
+		private var menuHeader:FlxSprite;
 		public var movementD:int;
 		
 		private var oldX:Number;
@@ -155,18 +155,23 @@ package Entities.Levels
 			startText = new FlxText(0 , FlxG.height / 2 - 20, FlxG.width, "Press Space to Start Game");
 			startText.alignment = "center";
 			startText.size = 15;
-			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "Show Menu", pauseGame);
-			resumeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 - 20, "Close Menu", closeInGameMenu);
+			
+			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
+			pauseButton.loadGraphic(Assets.MENU_BUTTON);
+			resumeButton = new FlxButton(FlxG.width / 2 - 50, FlxG.height / 2 - 50, "", closeInGameMenu);
 			holoButton = new FlxButton(188, FlxG.height - 27, "x" + numHolos);
 			//holoButton.exists = false;
-			resetFurnitureButton = new FlxButton(FlxG.width / 2 + 32, FlxG.height - 25, "Reset Furniture", resetFurniture);
-			resetFurnitureButton.label.size = 7;
-			restartButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2, "Restart Level", restartLevel);
-			levelSelectButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "Select Level", levelSelect);
+			resetFurnitureButton = new FlxButton(FlxG.width / 2 + 40, FlxG.height - 25, "", resetFurniture);
+			resetFurnitureButton.loadGraphic(Assets.RESET_BUTTON);
+			restartButton = new FlxButton(FlxG.width / 2 - 50, FlxG.height / 2 - 50 + 27, "", restartLevel);
+			restartButton.loadGraphic(Assets.RESTART_BUTTON1);
+			levelSelectButton = new FlxButton(FlxG.width / 2 - 50, FlxG.height / 2 - 50 + 27 + 27, "", levelSelect);
+			levelSelectButton.loadGraphic(Assets.SELECT_BUTTON);
 			this.playerRadius = new FlxSprite();
 			this.playerRadiusArray = new Array();
 			oldX = FlxG.mouse.x;
 			oldY = FlxG.mouse.y;
+			
 
 			this.create();
 		}
@@ -244,9 +249,9 @@ package Entities.Levels
 			}
 			var rectangle:FlxSprite = new FlxSprite();
 			add(pauseScreen = new PauseScreen());
-			gamePausedText = new FlxText(FlxG.width / 2 - 60, 50, 150, "In Game Menu");
-			gamePausedText.size = 15;
-			add(gamePausedText);
+			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
+			menuHeader.exists = false;
+			add(menuHeader);
 			add(resumeButton);
 			add(restartButton);
 			add(levelSelectButton);
@@ -254,7 +259,6 @@ package Entities.Levels
 			restartButton.visible = false;
 			levelSelectButton.visible = false;
 			pauseScreen.visible = false;
-			gamePausedText.visible = false;
 			add(playerRadius);
 		}
 		
@@ -539,6 +543,7 @@ package Entities.Levels
 			playState = PLAYING_STATE;
 			furnitureState = HOLO_STATE;
 			startText.exists = false;
+			pauseButton.loadGraphic(Assets.PAUSE_BUTTON);
 			pauseButton.exists = true;
 			lampButton.exists = false;
 			couchButton.exists = false;
@@ -554,14 +559,15 @@ package Entities.Levels
 		
 		public function pauseGame():void {
 			menu = true;
-			if (ppressed) {
-				gamePausedText.text = "Game Paused";
-				resumeButton.label = new FlxText(0, 0, 80, "Resume Game");
-				resumeButton.label.setFormat(null, 8, 0x333333, "center");
+			if (ppressed || playState == PLAYING_STATE) {
+				ppressed = true;
+				menuHeader.loadGraphic(Assets.PAUSE_HEADER);
+				menuHeader.exists = true;
+				resumeButton.loadGraphic(Assets.RESUME_BUTTON);
 			} else {
-				gamePausedText.text = "In Game Menu";
-				resumeButton.label = new FlxText(0, 0, 80, "Close Menu");
-				resumeButton.label.setFormat(null, 8, 0x333333, "center");
+				menuHeader.loadGraphic(Assets.MENU_HEADER);
+				menuHeader.exists = true;
+				resumeButton.loadGraphic(Assets.RESUME_BUTTON);
 			}
 				bedButton.visible = false;
 				couchButton.visible = false;
@@ -575,7 +581,6 @@ package Entities.Levels
 			pauseScreen.visible = true;
 			restartButton.visible = true;
 			levelSelectButton.visible = true;
-			gamePausedText.visible = true;
 			pauseButton.visible = false;
 
 		}
@@ -631,8 +636,8 @@ package Entities.Levels
 			}
 			ppressed = false;
 			pauseButton.visible = true;
-			gamePausedText.visible = false;
 			restartButton.visible = false;
+			menuHeader.exists = false;
 			pauseScreen.visible = false;
 			resumeButton.visible = false;
 			levelSelectButton.visible = false;
@@ -644,8 +649,6 @@ package Entities.Levels
 			resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
 			holoButton.visible = true;
-			
-			
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
