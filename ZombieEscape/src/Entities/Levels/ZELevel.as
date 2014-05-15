@@ -450,6 +450,8 @@ package Entities.Levels
 				}
 			}
 			//obstacleGroup = newGroup;
+			
+			FlxG.collide(obstacleGroup, bob);
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
