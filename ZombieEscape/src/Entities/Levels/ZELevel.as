@@ -269,15 +269,17 @@ package Entities.Levels
 			}
 			super.update();
 
-			if (FlxG.keys.P && playState == PLAYING_STATE) {
+			if (FlxG.keys.justPressed("P") && playState == PLAYING_STATE) {
 				ppressed = true;
 				pauseGame();
 				return;
 			}
 			
-			if (FlxG.keys.P && playState == PAUSED_STATE) {
+			if (FlxG.keys.justPressed("P") && playState == PAUSED_STATE) {
 				closeInGameMenu();
+				return;
 			}
+			
 			if (FlxG.keys.SPACE && !tutorial && !menu) {
 				startGame();
 			}
