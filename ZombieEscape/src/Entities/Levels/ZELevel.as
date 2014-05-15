@@ -389,6 +389,7 @@ package Entities.Levels
 						PlayState.LEVEL_FURNITURE.push(obstacleGroup.members[k]);
 					}
 					timer.stop();
+					ZombieEscape.logger.logAction(1, null);
 					FlxG.switchState(new GameOverState(currentLevel));
 				} else if (FlxG.collide(bob, finish)) {
 					wonLevel();
