@@ -110,6 +110,7 @@ package Entities.Levels
 		
 		protected var tutorial:Boolean;
 		protected var menu:Boolean;
+		protected var ppressed:Boolean;
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			ZombieEscape.logger.logLevelStart(currentLevel, null);
@@ -127,6 +128,7 @@ package Entities.Levels
 			this.obstacleGroup = new FlxGroup();
 			this.tutorial = false;
 			this.menu = false;
+			this.ppressed = false;
 			for (var k:int = 0; k < PlayState.LEVEL_FURNITURE.length; k++) {
 				var curObstacle:Obstacle = PlayState.LEVEL_FURNITURE[k];
 				var className:String = getQualifiedClassName(curObstacle);
@@ -266,6 +268,16 @@ package Entities.Levels
 				first = false;
 			}
 			super.update();
+
+			if (FlxG.keys.P && playState == PLAYING_STATE) {
+				ppressed = true;
+				pauseGame();
+				return;
+			}
+			
+			if (FlxG.keys.P && playState == PAUSED_STATE) {
+				closeInGameMenu();
+			}
 			if (FlxG.keys.SPACE && !tutorial && !menu) {
 				startGame();
 			}
@@ -460,8 +472,6 @@ package Entities.Levels
 				o.onDown = null;
 			}
 			
-			pauseButton.label = new FlxText(0, 0, 80, "Pause Game");
-			pauseButton.label.setFormat(null,8,0x333333,"center");
 			playState = PLAYING_STATE;
 			furnitureState = HOLO_STATE;
 			startText.exists = false;
@@ -480,12 +490,15 @@ package Entities.Levels
 		
 		public function pauseGame():void {
 			menu = true;
-			if (playState != PAUSED_STATE) {
+			if (ppressed) {
 				gamePausedText.text = "Game Paused";
-				resumeButton.label = new FlxText(0, 0, 80, "Close");
+				resumeButton.label = new FlxText(0, 0, 80, "Resume Game");
 				resumeButton.label.setFormat(null, 8, 0x333333, "center");
-				resumeButton.onUp = resumeGame;
 			} else {
+				gamePausedText.text = "In Game Menu";
+				resumeButton.label = new FlxText(0, 0, 80, "Close Menu");
+				resumeButton.label.setFormat(null, 8, 0x333333, "center");
+			}
 				bedButton.visible = false;
 				couchButton.visible = false;
 				tableButton.visible = false;
@@ -493,7 +506,6 @@ package Entities.Levels
 				resetFurnitureButton.visible = false;
 				playerRadius.visible = false;
 				holoButton.visible = false;
-			}
 			resumeButton.visible = true;
 			playState = PAUSED_STATE;
 			pauseScreen.visible = true;
@@ -502,16 +514,6 @@ package Entities.Levels
 			gamePausedText.visible = true;
 			pauseButton.visible = false;
 
-		}
-		
-		public function resumeGame():void {
-			playState = PLAYING_STATE;
-			pauseButton.visible = true;
-			gamePausedText.visible = false;
-			restartButton.visible = false;
-			pauseScreen.visible = false;
-			resumeButton.visible = false;
-			levelSelectButton.visible = false;
 		}
 
 		public function restartLevel():void {
@@ -558,6 +560,7 @@ package Entities.Levels
 		
 		public function closeInGameMenu():void {
 			menu = false;
+			ppressed = false;
 			pauseButton.visible = true;
 			gamePausedText.visible = false;
 			restartButton.visible = false;
@@ -572,6 +575,7 @@ package Entities.Levels
 			resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
 			holoButton.visible = true;
+			playState = PLAYING_STATE;
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {

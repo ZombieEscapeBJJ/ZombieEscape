@@ -35,6 +35,7 @@ package
 				shared.data.nextLevel = nextLevel;
 				shared.flush();
 			}
+		
 		}
 		
 		override public function create():void
@@ -54,6 +55,9 @@ package
 		override public function update():void
 		{
 			super.update();
+			if (FlxG.keys.SPACE) {
+				Continue();
+			}
 		}
 		
 		public function SelectLevel():void {
