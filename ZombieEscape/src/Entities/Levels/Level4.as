@@ -126,6 +126,15 @@ package Entities.Levels
 			pauseButton.exists = true;
 			resetFurnitureButton.exists = true;
 		}
+		
+		override public function update():void {
+
+			if (FlxG.keys.justReleased("SPACE")) {
+				closeTutorial();
+			}
+			
+			super.update();
+		}
 	}
 
 }

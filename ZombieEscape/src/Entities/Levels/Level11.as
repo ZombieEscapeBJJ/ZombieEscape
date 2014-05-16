@@ -24,6 +24,7 @@ package Entities.Levels
 		public var nextStepButton:FlxButton;
 		public var previousStepButton:FlxButton;
 		public var closeTutorialButton:FlxButton;
+		private var firstPage:Boolean;
 		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -98,6 +99,7 @@ package Entities.Levels
 			closeTutorialButton.visible = false;
 			pauseButton.exists = false;
 			resetFurnitureButton.exists = false;
+			firstPage = true;
 		}
 		
 		override protected function createMap():void {
@@ -132,7 +134,23 @@ package Entities.Levels
 			finish = new FinishLine(0, 16 * 7);
 		}
 		
+		override public function update():void {
+
+			if (FlxG.keys.justReleased("SPACE")) {
+				if (firstPage) {
+					nextStep();
+					return;
+				} else {
+					closeTutorial();
+					return;
+				}
+			}
+			
+			super.update();
+		}
+		
 		public function nextStep():void {
+			firstPage = false;
 			tutorialBackground.visible = false;
 			nextPrevButton.x = FlxG.width / 2 - 90;
 			closeTutorialButton.visible = true;
@@ -143,6 +161,7 @@ package Entities.Levels
 		}
 		
 		public function previousStep():void {
+			firstPage = true;
 			tutorialBackground2.visible = false;
 			closeTutorialButton.visible = false;
 			nextPrevButton.x = FlxG.width / 2 - 30;

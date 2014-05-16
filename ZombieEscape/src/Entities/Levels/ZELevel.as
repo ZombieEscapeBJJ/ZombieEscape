@@ -29,7 +29,6 @@ package Entities.Levels
     import flash.net.registerClassAlias;
 	import flash.utils.getAliasName;
 	import org.flixel.system.FlxList;
-	import FinalState;
 	
 	/**
 	 * ...
@@ -244,8 +243,15 @@ package Entities.Levels
 			var zoneRadius:int = 10;
 			for (var j:int = 0; j < zombieGroup.length; j++) {
 				var currentZombie:Zombie = zombieGroup.members[j];
-				playerRadius.makeGraphic(FlxG.width,FlxG.height, 0x000000);
-				Utils.drawRect(playerRadius, currentZombie, 10, 0xffff3333, 1, 0x44ff3333);
+				playerRadius.makeGraphic(FlxG.width, FlxG.height, 0x000000);
+				var className:String = getQualifiedClassName(currentZombie);
+				if (className == "Entities.Zombies::NormalZombie") {
+					Utils.drawRect(playerRadius, currentZombie, 10, 0xffff3333, 1, 0x44ff3333);
+				} else if (className == "Entities.Zombies::FastZombie") {
+					Utils.drawRect(playerRadius, currentZombie, 10, 0xffffff33, 1, 0x44ffff33);
+				} else {
+					Utils.drawRect(playerRadius, currentZombie, 10, 0xff3333ff, 1, 0x443333ff);
+				}
 				playerRadiusArray.push(new FlxObject(currentZombie.x - zoneRadius / 2, currentZombie.y - zoneRadius / 2, Zombie.SIZE.x + (zoneRadius  * 2), Zombie.SIZE.y + (zoneRadius * 2)));
 			}
 			var rectangle:FlxSprite = new FlxSprite();
@@ -724,12 +730,7 @@ package Entities.Levels
 		public function wonLevel():void {
 			ZombieEscape.logger.logLevelEnd(currentLevel);
 			timer.stop();
-
-			if (currentLevel == 15) {
-				FlxG.switchState(new FinalState());
-			} else {
-				FlxG.switchState(new WinState(currentLevel));
-			}
+			FlxG.switchState(new WinState(currentLevel));
 		}
 
 		public function collideZombies():void {

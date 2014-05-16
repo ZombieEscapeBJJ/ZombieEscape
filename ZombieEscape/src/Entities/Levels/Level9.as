@@ -138,6 +138,15 @@ package Entities.Levels
 			resetFurnitureButton.exists = true;
 			this.tutorial = false;	
 		}
+		
+		override public function update():void {
+
+			if (FlxG.keys.justReleased("SPACE")) {
+				closeTutorial();
+			}
+			
+			super.update();
+		}
 	}
 
 }

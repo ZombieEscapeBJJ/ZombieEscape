@@ -23,6 +23,8 @@ package Entities.Levels
 		public var nextStepButton:FlxButton;
 		public var previousStepButton:FlxButton;
 		public var closeTutorialButton:FlxButton;
+		
+		private var firstPage:Boolean;
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -80,6 +82,7 @@ package Entities.Levels
 			this.numTables = 0;
 			this.numHolos = 0;
 			this.tutorial = true;
+			this.firstPage = true;
 		}
 		override protected function createGUI():void {
 			super.createGUI();
@@ -124,6 +127,20 @@ package Entities.Levels
             wallGroup.add(tiles);
 		}
 		
+		override public function update():void {
+
+			if (FlxG.keys.justReleased("SPACE")) {
+				if (firstPage) {
+					nextStep();
+					return;
+				} else {
+					closeTutorial();
+					return;
+				}
+			}
+			
+			super.update();
+		}
 		override protected function createPlayer():void {
 			this.finish = new FinishLine(0, 16);
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
@@ -131,6 +148,7 @@ package Entities.Levels
 		}
 		
 		public function nextStep():void {
+			firstPage = false;
 			tutorialBackground.visible = false;
 			
 			tutorialBackground2.visible = true;
@@ -142,6 +160,7 @@ package Entities.Levels
 		}
 		
 		public function previousStep():void {
+			firstPage = true;
 			tutorialBackground2.visible = false;
 			
 			tutorialBackground.visible = true;
