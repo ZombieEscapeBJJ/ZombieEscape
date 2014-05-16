@@ -248,6 +248,10 @@ package Entities.Levels
 				playerRadiusArray.push(new FlxObject(currentZombie.x - zoneRadius / 2, currentZombie.y - zoneRadius / 2, Zombie.SIZE.x + (zoneRadius  * 2), Zombie.SIZE.y + (zoneRadius * 2)));
 			}
 			var rectangle:FlxSprite = new FlxSprite();
+			
+			add(playerRadius);
+			add(startText);
+			
 			add(pauseScreen = new PauseScreen());
 			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
 			menuHeader.exists = false;
@@ -259,8 +263,6 @@ package Entities.Levels
 			restartButton.visible = false;
 			levelSelectButton.visible = false;
 			pauseScreen.visible = false;
-			add(playerRadius);
-			add(startText);
 		}
 		
 		protected function createCamera():void {
