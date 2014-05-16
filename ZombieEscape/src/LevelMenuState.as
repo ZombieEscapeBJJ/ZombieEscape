@@ -66,8 +66,10 @@ package
 										Assets.LEVEL13_BUTTON_GREY, Assets.LEVEL14_BUTTON_GREY, Assets.LEVEL15_BUTTON_GREY);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+
 			//shared.clear();
 			//shared.data.nextLevel = 1;
+
 			var nextLevel:int = shared.data.nextLevel;
 			
 			for (var i:int = 0; i < LEVELS.length; i++) {

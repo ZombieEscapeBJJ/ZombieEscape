@@ -65,11 +65,7 @@ package
 		}
 		
 		public function Continue():void {
-			if (currentLevel + 1 > PlayState.MAX_LEVELS) {
-				FlxG.switchState(new EscapedState);
-			} else {
-				FlxG.switchState(new PlayState(currentLevel+1));
-			}
+			FlxG.switchState(new PlayState(currentLevel+1));
 		}
 		public function Restart():void {
 			FlxG.switchState(new PlayState(currentLevel));
