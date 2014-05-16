@@ -730,7 +730,10 @@ package Entities.Levels
 		public function wonLevel():void {
 			ZombieEscape.logger.logLevelEnd(currentLevel);
 			timer.stop();
-			FlxG.switchState(new WinState(currentLevel));
+			if (currentLevel < 15)
+				FlxG.switchState(new WinState(currentLevel));
+			else
+				FlxG.switchState(new EscapedState);
 		}
 
 		public function collideZombies():void {
