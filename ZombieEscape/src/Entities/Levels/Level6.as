@@ -66,6 +66,10 @@ package Entities.Levels
 		public function Level6(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			currentLevel = 6;
 			super(state, levelSize, blockSize);
+			this.numLamps = 3;
+			this.numBeds = 3;
+			this.numTables = 3;
+			this.numCouches = 3;
 		}
 		
 		override protected function createMap():void {
@@ -94,9 +98,12 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, FlxG.height-75);
-			this.zombieGroup.add(new NormalZombie(100, 50));
-			this.zombieGroup.add(new NormalZombie(100, 100));
-			this.zombieGroup.add(new NormalZombie(100, 150));			
+			this.zombieGroup.add(new FastZombie(32, 110));
+			this.zombieGroup.add(new NormalZombie(32, 150));
+			this.zombieGroup.add(new NormalZombie(150, 220));		
+			this.zombieGroup.add(new FastZombie(200, 220));
+			this.zombieGroup.add(new NormalZombie(150, 30));		
+			this.zombieGroup.add(new FastZombie(200, 30));
 			finish = new FinishLine(0, 16);
 		}
 	}
