@@ -70,7 +70,7 @@ package Entities.Levels
 			currentLevel = 15;
 			super(state, levelSize, tileSize);
 			this.numHolos = 1;
-			this.numLamps = 2;
+			this.numLamps = 1;
 			this.numCouches = 2;
 			
 		}

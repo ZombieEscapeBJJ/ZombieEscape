@@ -728,8 +728,6 @@ package Entities.Levels
 			} else {
 				FlxG.switchState(new WinState(currentLevel));
 			}
-			
-			ZombieEscape.logger.logLevelEnd(currentLevel);
 		}
 
 		public function collideZombies():void {
