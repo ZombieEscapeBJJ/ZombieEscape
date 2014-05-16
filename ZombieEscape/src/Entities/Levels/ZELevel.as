@@ -155,6 +155,7 @@ package Entities.Levels
 			startText = new FlxText(0 , FlxG.height / 2 - 20, FlxG.width, "Press Space to Start Game");
 			startText.alignment = "center";
 			startText.size = 15;
+			//startText.color = 0x000000;
 			
 			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
 			pauseButton.loadGraphic(Assets.MENU_BUTTON);
@@ -234,7 +235,6 @@ package Entities.Levels
 			holoButton.onDown = selectedHolo;
 			add(holoButton);
 			
-			add(startText);
 			add(pauseButton);
 			add(resetFurnitureButton);
 			
@@ -260,6 +260,7 @@ package Entities.Levels
 			levelSelectButton.visible = false;
 			pauseScreen.visible = false;
 			add(playerRadius);
+			add(startText);
 		}
 		
 		protected function createCamera():void {
@@ -381,7 +382,8 @@ package Entities.Levels
 						}
 							
 						o.immovable = true;
-						FlxG.collide(o, bob);
+						if (playState == PLAYING_STATE)
+							FlxG.collide(o, bob);
 						
 						if (o.isClicked){// && checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 							var xDif:Number = FlxG.mouse.x - oldX;
@@ -456,7 +458,8 @@ package Entities.Levels
 			}
 			//obstacleGroup = newGroup;
 			
-			FlxG.collide(obstacleGroup, bob);
+			if (playState == PLAYING_STATE)
+				FlxG.collide(obstacleGroup, bob);
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
@@ -469,7 +472,7 @@ package Entities.Levels
 		}
 		
 		public function selectedBed():void {
-			if (numBeds > 0) {
+			if (numBeds > 0 && !this.tutorial) {
 				var bed:Bed = new Bed(FlxG.mouse.x - Bed.SIZE.x / 2 , FlxG.mouse.y  - Bed.SIZE.y / 2);
 				bed.isClicked = true;
 				obstacleGroup.add(bed);
@@ -484,7 +487,7 @@ package Entities.Levels
 		}
 		
 		public function selectedCouch():void {
-			if (numCouches > 0) {
+			if (numCouches > 0 && !this.tutorial) {
 				var couch:Couch = new Couch(FlxG.mouse.x - Couch.SIZE.x / 2 , FlxG.mouse.y  - Couch.SIZE.y / 2);
 				couch.isClicked = true;
 				obstacleGroup.add(couch);
@@ -499,7 +502,7 @@ package Entities.Levels
 		}
 		
 		public function selectedLamp():void {
-			if (numLamps > 0) {
+			if (numLamps > 0 && !this.tutorial) {
 				var lamp:Lamp = new Lamp(FlxG.mouse.x - Lamp.SIZE.x / 2 , FlxG.mouse.y  - Lamp.SIZE.y / 2);
 				lamp.isClicked = true;
 				obstacleGroup.add(lamp);
@@ -514,7 +517,7 @@ package Entities.Levels
 		}
 		
 		public function selectedTable():void {
-			if (numTables > 0) {
+			if (numTables > 0 && !this.tutorial) {
 				var table:Table = new Table(FlxG.mouse.x - Table.SIZE.x / 2 , FlxG.mouse.y  - Table.SIZE.y / 2);
 				table.isClicked = true;
 				obstacleGroup.add(table);
@@ -716,9 +719,9 @@ package Entities.Levels
 		}
 		
 		public function wonLevel():void {
+			ZombieEscape.logger.logLevelEnd(currentLevel);
 			timer.stop();
 			FlxG.switchState(new WinState(currentLevel));
-			ZombieEscape.logger.logLevelEnd(currentLevel);
 		}
 
 		public function collideZombies():void {
