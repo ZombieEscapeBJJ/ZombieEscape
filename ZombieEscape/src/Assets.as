@@ -73,6 +73,8 @@ package
 		public static var PASSED_SCREEN:Class;
 		[Embed(source = "../assets/sprites/FailedScreen.png")]
 		public static var FAILED_SCREEN:Class;
+		[Embed(source = "../assets/sprites/FinishedScreen.png")]
+		public static var FINISHED_SCREEN:Class;
 		[Embed(source = "../assets/tiles/carpettile.jpg")]
 		public static var CARPET_TILE:Class;
 		
