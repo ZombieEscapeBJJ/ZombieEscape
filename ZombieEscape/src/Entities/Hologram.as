@@ -14,6 +14,7 @@ package Entities
 		{
 			super(X, Y);
 			loadGraphic(Assets.HOLOGRAM);
+			type = Hologram;
 		}
 		
 	}

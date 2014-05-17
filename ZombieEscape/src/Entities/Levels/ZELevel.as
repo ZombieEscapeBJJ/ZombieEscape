@@ -315,7 +315,9 @@ package Entities.Levels
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
 						var data_holo:Object = {"Holo_x":FlxG.mouse.x,"Holo_y":FlxG.mouse.y};
 						ZombieEscape.logger.logAction(2, data_holo);
-						obstacleGroup.add(holo = new Hologram(FlxG.mouse.x - Hologram.SIZE.x / 2, FlxG.mouse.y - Hologram.SIZE.y / 2));
+						holo = new Hologram(FlxG.mouse.x - Hologram.SIZE.x / 2, FlxG.mouse.y - Hologram.SIZE.y / 2);
+						holo.onDown = null;
+						obstacleGroup.add(holo);
 						placedHolo = true;
 						numHolos--;
 						timer.addEventListener(TimerEvent.TIMER, turnOffHologram);
@@ -328,7 +330,6 @@ package Entities.Levels
 				for (var i:int = 0; i < obstacleGroup.length; i++) {
 					var o:Obstacle = obstacleGroup.members[i];
 					if (o.exists) {
-						
 						if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 							switch(o.type) {
 								case Bed:
@@ -391,7 +392,7 @@ package Entities.Levels
 						}
 							
 						o.immovable = true;
-						if (playState == PLAYING_STATE)
+						if (playState == PLAYING_STATE && o.type != Hologram)
 							FlxG.collide(o, bob);
 						
 						if (o.isClicked){// && checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
@@ -438,6 +439,8 @@ package Entities.Levels
 				FlxG.collide(zombieGroup, zombieGroup);
 				FlxG.collide(wallGroup, bob);
 				FlxG.collide(wallGroup, zombieGroup);
+				FlxG.collide(obstacleGroup, obstacleGroup);
+				//FlxG.collide(wallGroup, obstacleGroup);
 				
 				if (FlxG.collide(bob, zombieGroup)) {
 					PlayState.LEVEL_FURNITURE.splice(0);
@@ -467,8 +470,13 @@ package Entities.Levels
 			}
 			//obstacleGroup = newGroup;
 			
-			if (playState == PLAYING_STATE)
-				FlxG.collide(obstacleGroup, bob);
+			if (playState == PLAYING_STATE) {
+				for (var z:int = 0; z < obstacleGroup.length; z++) {
+					var obst:Obstacle = obstacleGroup.members[z];
+					if (obst.type != Hologram)
+						FlxG.collide(obst, bob);
+				}
+			}
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
@@ -749,7 +757,8 @@ package Entities.Levels
 				for (var i:int = 0; i < obstacleGroup.length; i++) {
 					var curObstacle:Obstacle = obstacleGroup.members[i];
 					curObstacle.immovable = canMove;
-					FlxG.collide(curZombie, curObstacle);
+					if (curObstacle.type != Hologram)
+						FlxG.collide(curZombie, curObstacle);
 				}
 			}
 		}
