@@ -679,7 +679,8 @@ package Entities.Levels
 			couchButton.visible = true;
 			tableButton.visible = true;
 			lampButton.visible = true;
-			resetFurnitureButton.visible = true;
+			if (playState != PLAYING_STATE)
+				resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
 			holoButton.visible = true;
 			//furnitureState = prevState;
