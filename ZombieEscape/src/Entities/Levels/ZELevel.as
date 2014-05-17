@@ -441,8 +441,8 @@ package Entities.Levels
 				FlxG.collide(zombieGroup, zombieGroup);
 				FlxG.collide(wallGroup, bob);
 				FlxG.collide(wallGroup, zombieGroup);
+				
 				FlxG.collide(obstacleGroup, obstacleGroup);
-				//FlxG.collide(wallGroup, obstacleGroup);
 				
 				if (FlxG.collide(bob, zombieGroup)) {
 					PlayState.LEVEL_FURNITURE.splice(0);
@@ -473,8 +473,9 @@ package Entities.Levels
 			if (playState == PLAYING_STATE) {
 				for (var z:int = 0; z < obstacleGroup.length; z++) {
 					var obst:Obstacle = obstacleGroup.members[z];
-					if (obst.type != Hologram)
-						FlxG.collide(obst, bob);
+					if (obst.type != Hologram) {
+						FlxG.collide(obst, wallGroup);
+					}
 				}
 			}
 			
@@ -575,7 +576,7 @@ package Entities.Levels
 			tableButton.exists = false;
 			playerRadius.exists = false;
 			holoButton.visible = true;
-			resetFurnitureButton.exists = false;
+			resetFurnitureButton.visible = false;
 			bedButton.exists = false;
 			if (numHolos > 0) {
 				holoButton.exists = true;
