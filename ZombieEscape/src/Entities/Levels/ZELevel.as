@@ -55,6 +55,7 @@ package Entities.Levels
 		
 		public var playState:Number;
 		public var furnitureState:Number;
+		public var prevState:Number;
 		
 		public var PLAYING_STATE:Number = 0;
 		public var BED_STATE:Number = 1;
@@ -112,6 +113,7 @@ package Entities.Levels
 		protected var tutorial:Boolean;
 		protected var menu:Boolean;
 		protected var ppressed:Boolean;
+		public var justResumed:Boolean = false;
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			ZombieEscape.logger.logLevelStart(currentLevel, null);
@@ -309,7 +311,7 @@ package Entities.Levels
 			tableButton.label.text = "x" + numTables;
 			holoButton.label.text = "x" + numHolos;
 			
-			if (furnitureState == HOLO_STATE && numHolos > 0) {
+			if (furnitureState == HOLO_STATE && numHolos > 0 && !justResumed) {
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
@@ -461,14 +463,12 @@ package Entities.Levels
 			oldX = FlxG.mouse.x;
 			oldY = FlxG.mouse.y;
 			
-			//var newGroup:FlxGroup = new FlxGroup();
 			for (var x:int = 0; x < obstacleGroup.length; x++) {
 				var ob:Obstacle = obstacleGroup.members[x];
 				if (!ob.exists) {
 					obstacleGroup.remove(ob, true);
 				}
 			}
-			//obstacleGroup = newGroup;
 			
 			if (playState == PLAYING_STATE) {
 				for (var z:int = 0; z < obstacleGroup.length; z++) {
@@ -476,6 +476,11 @@ package Entities.Levels
 					if (obst.type != Hologram)
 						FlxG.collide(obst, bob);
 				}
+			}
+			
+			if (justResumed) {
+				furnitureState = prevState;
+				justResumed = false;
 			}
 		}
 		
@@ -578,7 +583,10 @@ package Entities.Levels
 		}
 		
 		public function pauseGame():void {
+			timer.stop();
 			menu = true;
+			prevState = furnitureState;
+			furnitureState = -1;
 			if (ppressed || playState == PLAYING_STATE) {
 				ppressed = true;
 				menuHeader.loadGraphic(Assets.PAUSE_HEADER);
@@ -651,6 +659,10 @@ package Entities.Levels
 		
 		public function closeInGameMenu():void {
 			menu = false;
+			if (placedHolo) {
+				timer.start();
+			}
+			
 			if (ppressed) {
 				playState = PLAYING_STATE;
 			}
@@ -669,6 +681,8 @@ package Entities.Levels
 			resetFurnitureButton.visible = true;
 			playerRadius.visible = true;
 			holoButton.visible = true;
+			//furnitureState = prevState;
+			justResumed = true;
 		}
 		public function checkValidPlacement(mouseX:int, mouseY:int, obstacleSize:FlxPoint):Boolean {
 			if (FlxG.mouse.y >= FlxG.height - 50) {
@@ -703,6 +717,14 @@ package Entities.Levels
 					} 
 				}
 			}
+			
+			/*for (var k:int = 0; k < wallGroup.length; k++) {
+				var w:FlxObject = wallGroup.members[k];
+				if (Utils.checkWithinBounds(new FlxObject(mouseX + obstacleSize.x / 2, mouseY + obstacleSize.y / 2, obstacleSize.x, obstacleSize.y), w)) {
+					//on wall
+					return false;
+				}
+			}*/
 			
 			/*for (var k:int = 0; k < obstacleGroup.length; k++) {
 				var o:Obstacle = obstacleGroup.members[k];
