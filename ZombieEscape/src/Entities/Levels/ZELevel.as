@@ -442,6 +442,12 @@ package Entities.Levels
 				FlxG.collide(wallGroup, bob);
 				FlxG.collide(wallGroup, zombieGroup);
 				
+				for (var d:int = 0; d < obstacleGroup.length; d++) {
+					var oo:Obstacle = obstacleGroup.members[d];
+					if (oo.type != Hologram)
+						FlxG.collide(oo, bob);
+				}
+				
 				FlxG.collide(obstacleGroup, obstacleGroup);
 				
 				if (FlxG.collide(bob, zombieGroup)) {
@@ -457,8 +463,6 @@ package Entities.Levels
 					wonLevel();
 				}
 			}
-			
-			
 			
 			oldX = FlxG.mouse.x;
 			oldY = FlxG.mouse.y;
