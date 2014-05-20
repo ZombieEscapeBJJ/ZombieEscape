@@ -25,6 +25,8 @@ package Entities.Obstacles
 		}
 		
 		override public function update():void {
+			velocity.x = 0;
+			velocity.y = 0;
 			super.update();
 		}
 		
