@@ -75,6 +75,7 @@ package Entities.Levels
 		protected var numTables:int;
 		protected var numHolos:int;
 		protected var startText:FlxText;
+		protected var levelText:FlxText;
 		protected var bedButton:FlxButton;
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
@@ -157,6 +158,10 @@ package Entities.Levels
 			startText = new FlxText(0 , FlxG.height / 2 - 20, FlxG.width, "Press Space to Start Game");
 			startText.alignment = "center";
 			startText.size = 15;
+			
+			levelText = new FlxText(0 , 100, FlxG.width, "Level "+currentLevel);
+			levelText.alignment = "center";
+			levelText.size = 15;
 			//startText.color = 0x000000;
 			
 			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
@@ -261,6 +266,7 @@ package Entities.Levels
 			
 			add(playerRadius);
 			add(startText);
+			add(levelText);
 			
 			add(pauseScreen = new PauseScreen());
 			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
@@ -638,6 +644,7 @@ package Entities.Levels
 			playState = PLAYING_STATE;
 			furnitureState = HOLO_STATE;
 			startText.exists = false;
+			levelText.exists = false;
 			pauseButton.loadGraphic(Assets.PAUSE_BUTTON);
 			pauseButton.exists = true;
 			lampButton.exists = false;
@@ -835,7 +842,19 @@ package Entities.Levels
 			if (currentLevel == 15) {
 				FlxG.switchState(new FinalState());
 			} else {
-				FlxG.switchState(new WinState(currentLevel));
+				PlayState.LEVEL_FURNITURE.splice(0);
+				
+				var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+				var nextLevel:int = shared.data.nextLevel;
+				
+				if (currentLevel+1 > nextLevel) {
+					nextLevel = currentLevel + 1;
+					
+					shared.data.nextLevel = nextLevel;
+					shared.flush();
+				}
+				
+				FlxG.switchState(new PlayState(currentLevel+1));
 			}
 		}
 
