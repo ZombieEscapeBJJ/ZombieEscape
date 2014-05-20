@@ -111,14 +111,16 @@ package Entities.Levels
 		
 		override protected function createGUI():void {
 			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FURNITURE_TUT);
 			add(tutorialBackground);
-			closeButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
-			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			closeButton = new FlxButton(FlxG.width / 2 + 5, FlxG.height / 2 + 20, "", closeTutorial);
+			closeButton.loadGraphic(Assets.CLOSE_BUTTON);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.ZONE_TUT);
 			add(tutorialBackground2);
-			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "", nextStep);
+			nextPrevButton.loadGraphic(Assets.NEXT_BUTTON);
 			add(nextPrevButton);
 			closeButton.visible = false;
 			add(closeButton);
@@ -147,11 +149,11 @@ package Entities.Levels
 			tutorialBackground.visible = false;
 			
 			tutorialBackground2.visible = true;
-			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
+			nextPrevButton.loadGraphic(Assets.PREVIOUS_BUTTON);
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = previousStep;
 			closeButton.visible = true;
-			nextPrevButton.x = FlxG.width / 2 - 90;
+			nextPrevButton.x = FlxG.width / 2 - 75;
 		}
 		
 		public function previousStep():void {
@@ -159,10 +161,10 @@ package Entities.Levels
 			tutorialBackground2.visible = false;
 			
 			tutorialBackground.visible = true;
-			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
+			nextPrevButton.loadGraphic(Assets.NEXT_BUTTON);
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
-			nextPrevButton.x = FlxG.width / 2 - 30;
+			nextPrevButton.x = FlxG.width / 2 - 35;
 			closeButton.visible = false;
 
 		}

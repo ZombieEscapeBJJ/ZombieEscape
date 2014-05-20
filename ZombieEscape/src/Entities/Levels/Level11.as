@@ -84,13 +84,15 @@ package Entities.Levels
 		
 		override protected function createGUI():void {
 			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.HOLO_TUT);
 			add(tutorialBackground);
 			
-			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
-			closeTutorialButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
-			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "", nextStep);
+			nextPrevButton.loadGraphic(Assets.NEXT_BUTTON);
+			closeTutorialButton = new FlxButton(FlxG.width / 2 + 5, FlxG.height / 2 + 20, "", closeTutorial);
+			closeTutorialButton.loadGraphic(Assets.CLOSE_BUTTON);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.HOLO_TUT1);
 			add(tutorialBackground2);
 			tutorialBackground2.visible = false;
@@ -152,11 +154,10 @@ package Entities.Levels
 		public function nextStep():void {
 			firstPage = false;
 			tutorialBackground.visible = false;
-			nextPrevButton.x = FlxG.width / 2 - 90;
+			nextPrevButton.x = FlxG.width / 2 - 75;
 			closeTutorialButton.visible = true;
 			tutorialBackground2.visible = true;
-			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
-			nextPrevButton.label.setFormat(null,8,0x333333,"center");
+			nextPrevButton.loadGraphic(Assets.PREVIOUS_BUTTON);
 			nextPrevButton.onUp = previousStep;
 		}
 		
@@ -164,9 +165,9 @@ package Entities.Levels
 			firstPage = true;
 			tutorialBackground2.visible = false;
 			closeTutorialButton.visible = false;
-			nextPrevButton.x = FlxG.width / 2 - 30;
+			nextPrevButton.x = FlxG.width / 2 - 35;
 			tutorialBackground.visible = true;
-			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
+			nextPrevButton.loadGraphic(Assets.NEXT_BUTTON);
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
 

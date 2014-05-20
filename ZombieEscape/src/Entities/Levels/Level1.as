@@ -88,13 +88,15 @@ package Entities.Levels
 		}
 		override protected function createGUI():void {
 			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.FIRST_TUT);
 			add(tutorialBackground);
 			
-			nextPrevButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Next", nextStep);
-			closeTutorialButton = new FlxButton(FlxG.width / 2 + 25, FlxG.height / 2 + 20, "Close", closeTutorial);
-			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			nextPrevButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "", nextStep);
+			nextPrevButton.loadGraphic(Assets.NEXT_BUTTON);
+			closeTutorialButton = new FlxButton(FlxG.width / 2 + 5, FlxG.height / 2 + 20, "", closeTutorial);
+			closeTutorialButton.loadGraphic(Assets.CLOSE_BUTTON);
+			tutorialBackground2 = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground2.loadGraphic(Assets.FIRST_TUT2);
 			add(tutorialBackground2);
 			
@@ -106,7 +108,7 @@ package Entities.Levels
 			resetFurnitureButton.exists = false;
 			this.doorArrow = new FlxSprite();
 			this.doorArrow.makeGraphic(FlxG.width, FlxG.height, 0x00000000);
-			goalText = new FlxText(25, 32, 100, "Goal");
+			goalText = new FlxText(25, 32, 100, "Finish");
 			goalText.size = 15;
 			add(goalText);
 			Utils.drawArrow(this.doorArrow, 17, 32);
@@ -163,9 +165,8 @@ package Entities.Levels
 			tutorialBackground.visible = false;
 			
 			tutorialBackground2.visible = true;
-			nextPrevButton.label = new FlxText(0, 0, 80, "Previous");
-			nextPrevButton.label.setFormat(null, 8, 0x333333, "center");
-			nextPrevButton.x = FlxG.width / 2 - 90;
+			nextPrevButton.loadGraphic(Assets.PREVIOUS_BUTTON);
+			nextPrevButton.x = FlxG.width / 2 - 75;
 			closeTutorialButton.visible = true;
 			nextPrevButton.onUp = previousStep;
 		}
@@ -175,12 +176,11 @@ package Entities.Levels
 			tutorialBackground2.visible = false;
 			
 			tutorialBackground.visible = true;
-			nextPrevButton.label = new FlxText(0, 0, 80, "Next");
+			nextPrevButton.loadGraphic(Assets.NEXT_BUTTON);
 			nextPrevButton.label.setFormat(null,8,0x333333,"center");
 			nextPrevButton.onUp = nextStep;
-			nextPrevButton.x = FlxG.width / 2 - 30;
+			nextPrevButton.x = FlxG.width / 2 - 35;
 			closeTutorialButton.visible = false;
-
 		}
 		
 		public function closeTutorial():void {
