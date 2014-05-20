@@ -41,6 +41,13 @@ package
 			Sprite.dirty = true;
 			
 		}
+		
+		public static function drawArrow(Sprite:FlxSprite, startx:int, starty:int, LineColor:uint = 0xffffffff, LineThickness:uint = 2):void {
+			Sprite.drawLine(startx, starty, startx + 50, starty, 0xffffffff, 2);
+			Sprite.drawLine(startx, starty, startx + 7, starty + 10, 0xffffffff, 2);
+			Sprite.drawLine(startx, starty, startx + 7, starty - 10, 0xffffffff, 2);
+		}
+		
 		public static function drawRect(Sprite:FlxSprite, object:FlxSprite, radius:int, LineColor:uint = 0xffffffff, LineThickness:uint = 1, FillColor:uint = 0xffffffff):void {
  
 			var gfx:Graphics = FlxG.flashGfx;

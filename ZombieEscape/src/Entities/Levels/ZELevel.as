@@ -240,7 +240,8 @@ package Entities.Levels
 			add(pauseButton);
 			add(resetFurnitureButton);
 			
-	
+
+
 			
 			var zoneRadius:int = 10;
 			for (var j:int = 0; j < zombieGroup.length; j++) {
