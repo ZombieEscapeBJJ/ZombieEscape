@@ -332,7 +332,7 @@ package Entities.Levels
 				for (var i:int = 0; i < obstacleGroup.length; i++) {
 					var o:Obstacle = obstacleGroup.members[i];
 					
-					if (o.exists && o.isRed && !o.isClicked && o.lastX != -1) {
+					if (playState != PLAYING_STATE && o.exists && o.isRed && !o.isClicked && o.lastX != -1) {
 						if (FlxG.mouse.y <= FlxG.height - 50) {
 							o.x = o.lastX;
 							o.y = o.lastY;
