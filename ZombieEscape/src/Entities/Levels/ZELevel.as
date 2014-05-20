@@ -334,9 +334,7 @@ package Entities.Levels
 					var o:Obstacle = obstacleGroup.members[i];
 					
 					if (o.exists && o.isRed && !o.isClicked && o.lastX != -1) {
-						o.x = o.lastX;
-						o.y = o.lastY;
-						/*if (FlxG.mouse.y <= FlxG.height - 50) {
+						if (FlxG.mouse.y <= FlxG.height - 50) {
 							o.x = o.lastX;
 							o.y = o.lastY;
 						} else {
@@ -358,7 +356,8 @@ package Entities.Levels
 									goneTables--;
 									break;
 							}
-						}*/
+							obstacleGroup.remove(o, true);
+						}
 					} 
 					
 					if (o.exists) {
