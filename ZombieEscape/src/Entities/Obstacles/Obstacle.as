@@ -13,6 +13,8 @@ package Entities.Obstacles
 		public var isClicked:Boolean;
 		public static var SIZE:FlxPoint = new FlxPoint(0, 0);
 		public var type:Class = Obstacle;
+		public var lastX:Number = -1;
+		public var lastY:Number = -1;
 		public function Obstacle(X:int, Y:int):void {
 			super(X, Y);
 			immovable = true;

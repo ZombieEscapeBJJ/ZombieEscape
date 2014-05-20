@@ -362,12 +362,14 @@ package Entities.Levels
 									o.loadGraphic(Assets.TABLE);
 									break;
 							}
+							o.lastX = o.x;
+							o.lastY = o.y;
 						}
 						
 						if (FlxG.mouse.justReleased()) {
 							if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 								o.isClicked = false;
-								switch(o.type) {
+								/*switch(o.type) {
 									case Bed:
 										numBeds++;
 										goneBeds--;
@@ -384,11 +386,14 @@ package Entities.Levels
 										numTables++;
 										goneTables--;
 										break;
-								}
+								}*/
 								
-								o.exists = false;
-								obstacleGroup.remove(o, true);
+								//o.exists = false;
+								//obstacleGroup.remove(o, true);
 								//break;
+								
+								o.x = o.lastX;
+								o.y = o.lastY;
 							}
 							o.isClicked = false;
 						}
@@ -479,6 +484,10 @@ package Entities.Levels
 					var obst:Obstacle = obstacleGroup.members[z];
 					if (obst.type != Hologram) {
 						FlxG.collide(obst, wallGroup);
+						if (!checkValidPlacement(obst.x + obst.type.SIZE / 2, obst.y + obst.type.SIZE / 2, obst.type.SIZE) && obst.exists && obst.lastX != -1) {
+							obst.x = obst.lastX;
+							obst.y = obst.lastY;
+						}
 					}
 				}
 			}
