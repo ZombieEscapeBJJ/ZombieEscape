@@ -122,13 +122,34 @@ package Entities.Levels
 			zombieGroup.add(new StrongZombie(100, 16 * 6));
 			zombieGroup.add(new StrongZombie(100, 16 * 8));
 			zombieGroup.add(new StrongZombie(100, 16 * 10));
-			obstacleGroup.add(new Lamp(160, 16 * 2));
-			obstacleGroup.add(new Bed(160, 16 * 4));
-			obstacleGroup.add(new Lamp(160, 16 * 6));
-			obstacleGroup.add(new Bed(160, 16 * 8));
-			obstacleGroup.add(new Lamp(160, 16 * 10));
-			obstacleGroup.add(new Bed(160, 16 * 12));
-			obstacleGroup.add(new Lamp(160, 16 * 14));
+			
+			var lamp1:Lamp = new Lamp(160, 16 * 2);
+			lamp1.onDown = null;
+			obstacleGroup.add(lamp1);
+			
+			var bed1:Bed = new Bed(160, 16 * 4);
+			bed1.onDown = null;
+			obstacleGroup.add(bed1);
+			
+			var lamp2:Lamp = new Lamp(160, 16 * 6);
+			lamp2.onDown = null;
+			obstacleGroup.add(lamp2);
+			
+			var bed2:Bed = new Bed(160, 16 * 8);
+			bed2.onDown = null;
+			obstacleGroup.add(bed2);
+			
+			var lamp3:Lamp = new Lamp(160, 16 * 10);
+			lamp3.onDown = null;
+			obstacleGroup.add(lamp3);
+			
+			var bed3:Bed = new Bed(160, 16 * 12);
+			bed3.onDown = null;
+			obstacleGroup.add(bed3);
+			
+			var lamp4:Lamp = new Lamp(160, 16 * 14);
+			lamp4.onDown = null;
+			obstacleGroup.add(lamp4);
 		}
 		
 		public function closeTutorial():void {

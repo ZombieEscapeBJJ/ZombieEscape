@@ -23,8 +23,10 @@ package Entities.Levels
 		public var nextStepButton:FlxButton;
 		public var previousStepButton:FlxButton;
 		public var closeTutorialButton:FlxButton;
-		
+		public var doorArrow:FlxSprite;
+		public var goalText:FlxText;
 		private var firstPage:Boolean;
+		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -102,6 +104,12 @@ package Entities.Levels
 			pauseButton.exists = false;
 			closeTutorialButton.visible = false;
 			resetFurnitureButton.exists = false;
+			this.doorArrow = new FlxSprite();
+			this.doorArrow.makeGraphic(FlxG.width, FlxG.height, 0x00000000);
+			goalText = new FlxText(25, 32, 100, "Goal");
+			goalText.size = 15;
+			add(goalText);
+			Utils.drawArrow(this.doorArrow, 17, 32);
 		}
 		override protected function createMap():void {
 			var tiles:FlxTilemap;
@@ -138,7 +146,10 @@ package Entities.Levels
 					return;
 				}
 			}
-			
+			if (playState == PLAYING_STATE) {
+				doorArrow.exists = false;
+				goalText.exists = false;
+			}
 			super.update();
 		}
 		override protected function createPlayer():void {
