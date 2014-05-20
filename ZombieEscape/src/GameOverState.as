@@ -39,6 +39,7 @@ package
 		}
 		override public function update():void
 		{
+			FlxG.mouse.load(Assets.DEFAULT_CURSOR);
 			if (FlxG.keys.justReleased("SPACE")) {
 				Restart();
 			}

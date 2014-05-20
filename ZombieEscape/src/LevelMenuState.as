@@ -88,6 +88,7 @@ package
 		override public function update():void
 		{
 			super.update();
+			FlxG.mouse.load(Assets.DEFAULT_CURSOR);
 		}	
 		
 		public function MainMenu():void {

@@ -176,6 +176,9 @@ package
 		[Embed(source = "../assets/sprites/SelectLevelButton.png")]
 		public static var SELECT_BUTTON:Class;
 		
+		[Embed(source = "org/flixel/data/cursor.png")]
+		public static var DEFAULT_CURSOR:Class;
+		
 		public function Assets() 
 		{
 			

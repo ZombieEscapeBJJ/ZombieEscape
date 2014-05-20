@@ -314,6 +314,12 @@ package Entities.Levels
 			
 			if (furnitureState == HOLO_STATE && numHolos > 0 && !justResumed) {
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+				
+				if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, new FlxPoint()))
+					FlxG.mouse.load(Assets.HOLOGRAM);	
+				else
+					FlxG.mouse.load(Assets.DEFAULT_CURSOR);	
+				
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
 						var data_holo:Object = {"Holo_x":FlxG.mouse.x,"Holo_y":FlxG.mouse.y};
@@ -330,6 +336,7 @@ package Entities.Levels
 					}
 				}
 			} else {
+				FlxG.mouse.load(Assets.DEFAULT_CURSOR);	
 				for (var i:int = 0; i < obstacleGroup.length; i++) {
 					var o:Obstacle = obstacleGroup.members[i];
 					
