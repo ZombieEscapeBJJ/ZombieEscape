@@ -331,6 +331,33 @@ package Entities.Levels
 			} else {
 				for (var i:int = 0; i < obstacleGroup.length; i++) {
 					var o:Obstacle = obstacleGroup.members[i];
+					
+					if (o.exists && o.isRed && !o.isClicked && o.lastX != -1) {
+						if (FlxG.mouse.y <= FlxG.height - 50) {
+							o.x = o.lastX;
+							o.y = o.lastY;
+						} else {
+							switch(o.type) {
+								case Bed:
+									numBeds++;
+									goneBeds--;
+									break;
+								case Lamp:
+									numLamps++;
+									goneLamps--;
+									break;
+								case Couch:
+									numCouches++;
+									goneCouches--;
+									break;
+								case Table:
+									numTables++;
+									goneTables--;
+									break;
+							}
+						}
+					} 
+					
 					if (o.exists) {
 						if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 							switch(o.type) {
@@ -347,6 +374,7 @@ package Entities.Levels
 									o.loadGraphic(Assets.RED_TABLE);
 									break;
 							}
+							o.isRed = true;
 						} else {
 							switch(o.type) {
 								case Bed:
@@ -364,36 +392,39 @@ package Entities.Levels
 							}
 							o.lastX = o.x;
 							o.lastY = o.y;
+							o.isRed = false;
 						}
 						
 						if (FlxG.mouse.justReleased()) {
-							if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
+							if (o.isClicked && o.isRed) {
 								o.isClicked = false;
-								/*switch(o.type) {
-									case Bed:
-										numBeds++;
-										goneBeds--;
-										break;
-									case Lamp:
-										numLamps++;
-										goneLamps--;
-										break;
-									case Couch:
-										numCouches++;
-										goneCouches--;
-										break;
-									case Table:
-										numTables++;
-										goneTables--;
-										break;
-								}*/
-								
-								//o.exists = false;
-								//obstacleGroup.remove(o, true);
-								//break;
-								
-								o.x = o.lastX;
-								o.y = o.lastY;
+								if (o.lastX == -1 || FlxG.mouse.y > FlxG.height-50) {
+									switch(o.type) {
+										case Bed:
+											numBeds++;
+											goneBeds--;
+											break;
+										case Lamp:
+											numLamps++;
+											goneLamps--;
+											break;
+										case Couch:
+											numCouches++;
+											goneCouches--;
+											break;
+										case Table:
+											numTables++;
+											goneTables--;
+											break;
+									}
+									
+									o.exists = false;
+									obstacleGroup.remove(o, true);
+									//break;
+								} else {
+									o.x = o.lastX;
+									o.y = o.lastY;
+								}
 							}
 							o.isClicked = false;
 						}
@@ -484,7 +515,7 @@ package Entities.Levels
 					var obst:Obstacle = obstacleGroup.members[z];
 					if (obst.type != Hologram) {
 						FlxG.collide(obst, wallGroup);
-						if (!checkValidPlacement(obst.x + obst.type.SIZE / 2, obst.y + obst.type.SIZE / 2, obst.type.SIZE) && obst.exists && obst.lastX != -1) {
+						if (!obst.isRed && obst.exists && obst.lastX != -1) {
 							obst.x = obst.lastX;
 							obst.y = obst.lastY;
 						}
