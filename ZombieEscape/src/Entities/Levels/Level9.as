@@ -107,10 +107,11 @@ package Entities.Levels
 		
 		override protected function createGUI():void {
 			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.STRONG_TUT);
 			add(tutorialBackground);
-			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
+			closeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "", closeTutorial);
+			closeButton.loadGraphic(Assets.CLOSE_BUTTON);
 			add(closeButton);
 			
 		}
