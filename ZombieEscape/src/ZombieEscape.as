@@ -25,7 +25,10 @@ package
 				shared.data.nextLevel = nextLevel;
 				shared.flush();
 			}
-			logger = new Logger("zombie_escape4", 104, "2bbdad86d57942666f08d86f9385395d", 1, 2);
+			// 1: development
+			// 2: initial facebook release
+			// 3: switched levels 6 and 7
+			logger = new Logger("zombie_escape4", 104, "2bbdad86d57942666f08d86f9385395d", 1, 3);
 			super(400, 300, MenuState, 2);
 		}
 		
