@@ -15,6 +15,7 @@ package Entities.Obstacles
 		public var type:Class = Obstacle;
 		public var lastX:Number = -1;
 		public var lastY:Number = -1;
+		public var isRed:Boolean = false;
 		public function Obstacle(X:int, Y:int):void {
 			super(X, Y);
 			immovable = true;

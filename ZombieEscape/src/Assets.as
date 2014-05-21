@@ -78,6 +78,14 @@ package
 		[Embed(source = "../assets/tiles/carpettile.jpg")]
 		public static var CARPET_TILE:Class;
 		
+
+		[Embed(source = "../assets/sprites/PreviousButton.png")]
+		public static var PREVIOUS_BUTTON:Class;
+		[Embed(source = "../assets/sprites/CloseButton.png")]
+		public static var CLOSE_BUTTON:Class;
+		[Embed(source = "../assets/sprites/NextButton.png")]
+		public static var NEXT_BUTTON:Class;
+		
 		[Embed(source = "../assets/sprites/redbed.png")]
 		public static var RED_BED:Class;
 		[Embed(source = "../assets/sprites/redcouch.png")]
@@ -175,6 +183,9 @@ package
 		public static var RESTART_BUTTON1:Class;
 		[Embed(source = "../assets/sprites/SelectLevelButton.png")]
 		public static var SELECT_BUTTON:Class;
+		
+		[Embed(source = "org/flixel/data/cursor.png")]
+		public static var DEFAULT_CURSOR:Class;
 		
 		public function Assets() 
 		{

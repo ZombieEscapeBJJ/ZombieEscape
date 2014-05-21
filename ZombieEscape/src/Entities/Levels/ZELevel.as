@@ -75,6 +75,7 @@ package Entities.Levels
 		protected var numTables:int;
 		protected var numHolos:int;
 		protected var startText:FlxText;
+		protected var levelText:FlxText;
 		protected var bedButton:FlxButton;
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
@@ -157,6 +158,10 @@ package Entities.Levels
 			startText = new FlxText(0 , FlxG.height / 2 - 20, FlxG.width, "Press Space to Start Game");
 			startText.alignment = "center";
 			startText.size = 15;
+			
+			levelText = new FlxText(0 , 100, FlxG.width, "Level "+currentLevel);
+			levelText.alignment = "center";
+			levelText.size = 15;
 			//startText.color = 0x000000;
 			
 			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
@@ -261,6 +266,7 @@ package Entities.Levels
 			
 			add(playerRadius);
 			add(startText);
+			add(levelText);
 			
 			add(pauseScreen = new PauseScreen());
 			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
@@ -314,6 +320,12 @@ package Entities.Levels
 			
 			if (furnitureState == HOLO_STATE && numHolos > 0 && !justResumed) {
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
+				
+				if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, new FlxPoint()))
+					FlxG.mouse.load(Assets.HOLOGRAM);	
+				else
+					FlxG.mouse.load(Assets.DEFAULT_CURSOR);	
+				
 				if (FlxG.mouse.justReleased()) {
 					if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE)) {
 						var data_holo:Object = {"Holo_x":FlxG.mouse.x,"Holo_y":FlxG.mouse.y};
@@ -330,9 +342,39 @@ package Entities.Levels
 					}
 				}
 			} else {
+				FlxG.mouse.load(Assets.DEFAULT_CURSOR);	
 				for (var i:int = 0; i < obstacleGroup.length; i++) {
 					var o:Obstacle = obstacleGroup.members[i];
+					
+					if (o.exists && o.isRed && !o.isClicked && o.lastX != -1) {
+						if (FlxG.mouse.y <= FlxG.height - 50) {
+							o.x = o.lastX;
+							o.y = o.lastY;
+						} else {
+							switch(o.type) {
+								case Bed:
+									numBeds++;
+									goneBeds--;
+									break;
+								case Lamp:
+									numLamps++;
+									goneLamps--;
+									break;
+								case Couch:
+									numCouches++;
+									goneCouches--;
+									break;
+								case Table:
+									numTables++;
+									goneTables--;
+									break;
+							}
+							obstacleGroup.remove(o, true);
+						}
+					} 
+					
 					if (o.exists) {
+						
 						if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
 							switch(o.type) {
 								case Bed:
@@ -348,6 +390,7 @@ package Entities.Levels
 									o.loadGraphic(Assets.RED_TABLE);
 									break;
 							}
+							o.isRed = true;
 						} else {
 							switch(o.type) {
 								case Bed:
@@ -365,36 +408,41 @@ package Entities.Levels
 							}
 							o.lastX = o.x;
 							o.lastY = o.y;
+							o.isRed = false;
 						}
 						
 						if (FlxG.mouse.justReleased()) {
-							if (o.isClicked && !checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, o.type.SIZE)) {
+							if (o.isClicked && o.isRed) {
 								o.isClicked = false;
-								/*switch(o.type) {
-									case Bed:
-										numBeds++;
-										goneBeds--;
-										break;
-									case Lamp:
-										numLamps++;
-										goneLamps--;
-										break;
-									case Couch:
-										numCouches++;
-										goneCouches--;
-										break;
-									case Table:
-										numTables++;
-										goneTables--;
-										break;
-								}*/
-								
-								//o.exists = false;
-								//obstacleGroup.remove(o, true);
-								//break;
-								
-								o.x = o.lastX;
-								o.y = o.lastY;
+								if (o.lastX == -1 || FlxG.mouse.y > FlxG.height-50) {
+									switch(o.type) {
+										case Bed:
+											numBeds++;
+											goneBeds--;
+											break;
+										case Lamp:
+											numLamps++;
+											goneLamps--;
+											break;
+										case Couch:
+											numCouches++;
+											goneCouches--;
+											break;
+										case Table:
+											numTables++;
+											goneTables--;
+											break;
+									}
+									
+									o.exists = false;
+									obstacleGroup.remove(o, true);
+									//break;
+								} else {
+									if (playState != PLAYING_STATE) {
+										o.x = o.lastX;
+										o.y = o.lastY;
+									}
+								}
 							}
 							o.isClicked = false;
 						}
@@ -485,13 +533,26 @@ package Entities.Levels
 					var obst:Obstacle = obstacleGroup.members[z];
 					if (obst.type != Hologram) {
 						FlxG.collide(obst, wallGroup);
-						if (!checkValidPlacement(obst.x + obst.type.SIZE / 2, obst.y + obst.type.SIZE / 2, obst.type.SIZE) && obst.exists && obst.lastX != -1) {
+						if (furnitureState != HOLO_STATE && !obst.isRed && obst.exists && obst.lastX != -1) {
 							obst.x = obst.lastX;
 							obst.y = obst.lastY;
 						}
 					}
 				}
 			}
+			
+			/*if (playState == PLAYING_STATE) {
+				for (var z:int = 0; z < obstacleGroup.length; z++) {
+					var obst:Obstacle = obstacleGroup.members[z];
+					if (obst.type != Hologram) {
+						FlxG.collide(obst, wallGroup);
+						if (!obst.isRed && obst.exists && obst.lastX != -1) {
+							obst.x = obst.lastX;
+							obst.y = obst.lastY;
+						}
+					}
+				}
+			}*/
 			
 			if (justResumed) {
 				furnitureState = prevState;
@@ -583,6 +644,7 @@ package Entities.Levels
 			playState = PLAYING_STATE;
 			furnitureState = HOLO_STATE;
 			startText.exists = false;
+			levelText.exists = false;
 			pauseButton.loadGraphic(Assets.PAUSE_BUTTON);
 			pauseButton.exists = true;
 			lampButton.exists = false;
@@ -780,7 +842,19 @@ package Entities.Levels
 			if (currentLevel == 15) {
 				FlxG.switchState(new FinalState());
 			} else {
-				FlxG.switchState(new WinState(currentLevel));
+				PlayState.LEVEL_FURNITURE.splice(0);
+				
+				var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+				var nextLevel:int = shared.data.nextLevel;
+				
+				if (currentLevel+1 > nextLevel) {
+					nextLevel = currentLevel + 1;
+					
+					shared.data.nextLevel = nextLevel;
+					shared.flush();
+				}
+				
+				FlxG.switchState(new PlayState(currentLevel+1));
 			}
 		}
 

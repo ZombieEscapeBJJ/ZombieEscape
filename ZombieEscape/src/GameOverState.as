@@ -26,19 +26,20 @@ package
 			);
 			add(background);
 			
-			var restartButton:FlxButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height - 45, "", Restart);
+			var restartButton:FlxButton = new FlxButton(FlxG.width / 2 - 60, FlxG.height - 200, "", Restart);
 			restartButton.loadGraphic(Assets.RESTART_BUTTON);
 			add(restartButton);
-			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 2 - 145, FlxG.height - 45, "", Levels);
+			var levelSelectButton:FlxButton = new FlxButton(FlxG.width / 2 - 50, FlxG.height - 148, "", Levels);
 			levelSelectButton.loadGraphic(Assets.LEVEL_SELECTION_BUTTON);
 			add(levelSelectButton);
-			var mainMenuButton:FlxButton = new FlxButton(FlxG.width / 2 + 45, FlxG.height - 45, "", MainMenu);
+			var mainMenuButton:FlxButton = new FlxButton(FlxG.width / 2 - 49, FlxG.height - 116, "", MainMenu);
 			mainMenuButton.loadGraphic(Assets.MAIN_BUTTON);
 			add(mainMenuButton);
 			FlxG.mouse.show();
 		}
 		override public function update():void
 		{
+			FlxG.mouse.load(Assets.DEFAULT_CURSOR);
 			if (FlxG.keys.justReleased("SPACE")) {
 				Restart();
 			}

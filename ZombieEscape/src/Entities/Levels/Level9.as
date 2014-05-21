@@ -107,10 +107,11 @@ package Entities.Levels
 		
 		override protected function createGUI():void {
 			super.createGUI();
-			tutorialBackground = new FlxSprite(FlxG.width / 2 - 125, FlxG.height / 2 - 125);
+			tutorialBackground = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 			tutorialBackground.loadGraphic(Assets.STRONG_TUT);
 			add(tutorialBackground);
-			closeButton = new FlxButton(FlxG.width / 2 - 30, FlxG.height / 2 + 20, "Close", closeTutorial);
+			closeButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "", closeTutorial);
+			closeButton.loadGraphic(Assets.CLOSE_BUTTON);
 			add(closeButton);
 			
 		}
@@ -125,30 +126,44 @@ package Entities.Levels
 			
 			var lamp1:Lamp = new Lamp(160, 16 * 2);
 			lamp1.onDown = null;
+			lamp1.lastX = 160;
+			lamp1.lastY = 16 * 2;
 			obstacleGroup.add(lamp1);
 			
 			var bed1:Bed = new Bed(160, 16 * 4);
 			bed1.onDown = null;
+			bed1.lastX = 160;
+			bed1.lastY = 16 * 4;
 			obstacleGroup.add(bed1);
 			
 			var lamp2:Lamp = new Lamp(160, 16 * 6);
 			lamp2.onDown = null;
+			lamp2.lastX = 160;
+			lamp2.lastY = 16 * 6;
 			obstacleGroup.add(lamp2);
 			
 			var bed2:Bed = new Bed(160, 16 * 8);
 			bed2.onDown = null;
+			bed2.lastX = 160;
+			bed2.lastY = 16 * 8;
 			obstacleGroup.add(bed2);
 			
 			var lamp3:Lamp = new Lamp(160, 16 * 10);
 			lamp3.onDown = null;
+			lamp3.lastX = 160;
+			lamp3.lastY = 16 * 10;
 			obstacleGroup.add(lamp3);
 			
 			var bed3:Bed = new Bed(160, 16 * 12);
 			bed3.onDown = null;
+			bed3.lastX = 160;
+			bed3.lastY = 16 * 12;
 			obstacleGroup.add(bed3);
 			
 			var lamp4:Lamp = new Lamp(160, 16 * 14);
 			lamp4.onDown = null;
+			lamp4.lastX = 160;
+			lamp4.lastY = 16 * 14;
 			obstacleGroup.add(lamp4);
 		}
 		
