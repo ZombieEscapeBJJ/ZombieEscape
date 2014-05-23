@@ -321,7 +321,7 @@ package Entities.Levels
 			if (furnitureState == HOLO_STATE && numHolos > 0 && !justResumed) {
 				holoButton.loadGraphic(Assets.HOLOGRAM_BUTTON);
 				
-				if (checkValidPlacement(FlxG.mouse.x, FlxG.mouse.y, new FlxPoint()))
+				if (checkValidHoloPlacement(FlxG.mouse.x, FlxG.mouse.y, Table.SIZE))
 					FlxG.mouse.load(Assets.HOLOGRAM);	
 				else
 					FlxG.mouse.load(Assets.DEFAULT_CURSOR);	

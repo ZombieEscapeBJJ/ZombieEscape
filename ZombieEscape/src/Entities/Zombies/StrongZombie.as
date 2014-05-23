@@ -6,7 +6,7 @@ package Entities.Zombies
 	 */
 	public class StrongZombie extends Zombie 
 	{
-		public var SPEED:Number = .6;
+		public var SPEED:Number = .55;
 		
 		public function StrongZombie(x:int, y:int) 
 		{

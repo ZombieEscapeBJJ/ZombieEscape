@@ -56,10 +56,10 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            1, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            4, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
@@ -117,44 +117,44 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(300, 16*8);	
+			bob = new BobFlx(350, 16*8);	
 			finish = new FinishLine(0, 16 * 7);			
 			zombieGroup.add(new StrongZombie(100, 16 * 4));
 			zombieGroup.add(new StrongZombie(100, 16 * 6));
 			zombieGroup.add(new StrongZombie(100, 16 * 8));
 			zombieGroup.add(new StrongZombie(100, 16 * 10));
 			
-			var lamp1:Lamp = new Lamp(160, 16 * 2);
+			var lamp1:Lamp = new Lamp(160, 16*1.4);
 			lamp1.onDown = null;
 			lamp1.lastX = 160;
 			lamp1.lastY = 16 * 2;
 			obstacleGroup.add(lamp1);
 			
-			var bed1:Bed = new Bed(160, 16 * 4);
+			var bed1:Bed = new Bed(160, 16 * 3.5);
 			bed1.onDown = null;
 			bed1.lastX = 160;
 			bed1.lastY = 16 * 4;
 			obstacleGroup.add(bed1);
 			
-			var lamp2:Lamp = new Lamp(160, 16 * 6);
+			var lamp2:Lamp = new Lamp(160, 16 * 5.6);
 			lamp2.onDown = null;
 			lamp2.lastX = 160;
 			lamp2.lastY = 16 * 6;
 			obstacleGroup.add(lamp2);
 			
-			var bed2:Bed = new Bed(160, 16 * 8);
+			var bed2:Bed = new Bed(160, 16 * 7.7);
 			bed2.onDown = null;
 			bed2.lastX = 160;
 			bed2.lastY = 16 * 8;
 			obstacleGroup.add(bed2);
 			
-			var lamp3:Lamp = new Lamp(160, 16 * 10);
+			var lamp3:Lamp = new Lamp(160, 16 * 9.8);
 			lamp3.onDown = null;
 			lamp3.lastX = 160;
 			lamp3.lastY = 16 * 10;
 			obstacleGroup.add(lamp3);
 			
-			var bed3:Bed = new Bed(160, 16 * 12);
+			var bed3:Bed = new Bed(160, 16 * 11.9);
 			bed3.onDown = null;
 			bed3.lastX = 160;
 			bed3.lastY = 16 * 12;
