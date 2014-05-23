@@ -64,7 +64,7 @@ package Entities.Levels
         );
 		
 		public function Level6(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
-			currentLevel = 7;
+			currentLevel = 6;
 			super(state, levelSize, blockSize);
 			this.numBeds = 1;
 			this.numCouches = 1;

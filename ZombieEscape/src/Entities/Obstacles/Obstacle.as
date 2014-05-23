@@ -22,6 +22,8 @@ package Entities.Obstacles
 			isClicked = false;
 			this.onDown = down;
 			this.onUp = up;
+			velocity.x = 0;
+			velocity.y = 0;
 		}
 		
 		override public function update():void {
