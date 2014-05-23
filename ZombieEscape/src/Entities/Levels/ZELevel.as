@@ -246,7 +246,6 @@ package Entities.Levels
 			add(resetFurnitureButton);
 			
 
-
 			
 			var zoneRadius:int = 10;
 			for (var j:int = 0; j < zombieGroup.length; j++) {
@@ -656,6 +655,13 @@ package Entities.Levels
 			bedButton.exists = false;
 			if (numHolos > 0) {
 				holoButton.exists = true;
+			}
+			
+			// log where furniture is
+			for (i = 0; i < obstacleGroup.length; i++) {
+				o = obstacleGroup.members[i];
+				var data_furniture:Object = { "Furniture":o.type, "Furniture_x":o.x, "Furniture_y":o.y, "Furniture_width":o.width, "Furniture_height":o.height };
+				ZombieEscape.logger.logAction(3, data_furniture);
 			}
 		}
 		
