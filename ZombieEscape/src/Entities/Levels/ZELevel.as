@@ -137,16 +137,16 @@ package Entities.Levels
 				var curObstacle:Obstacle = PlayState.LEVEL_FURNITURE[k];
 				var className:String = getQualifiedClassName(curObstacle);
 				if (className == "Entities.Obstacles::Bed") {
-					obstacleGroup.add(new Bed(curObstacle.x, curObstacle.y));
+					obstacleGroup.add(new Bed(curObstacle.placedX, curObstacle.placedY));
 					prevBeds++;
 				} else if (className == "Entities.Obstacles::Couch") {
-					obstacleGroup.add(new Couch(curObstacle.x, curObstacle.y));
+					obstacleGroup.add(new Couch(curObstacle.placedX, curObstacle.placedY));
 					prevCouches++;
 				} else if (className == "Entities.Obstacles::Lamp") {
-					obstacleGroup.add(new Lamp(curObstacle.x, curObstacle.y));
+					obstacleGroup.add(new Lamp(curObstacle.placedX, curObstacle.placedY));
 					prevLamps++;
 				} else if (className == "Entities.Obstacles::Table") {
-					obstacleGroup.add(new Table(curObstacle.x, curObstacle.y));
+					obstacleGroup.add(new Table(curObstacle.placedX, curObstacle.placedY));
 					prevTables++;
 				}
 			}
@@ -638,6 +638,8 @@ package Entities.Levels
 				var o:Obstacle = obstacleGroup.members[i];
 				o.isClicked = false;
 				o.onDown = null;
+				o.placedX = o.x;
+				o.placedY = o.y;
 			}
 			
 			playState = PLAYING_STATE;
