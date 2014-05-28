@@ -34,16 +34,16 @@ package Entities
 			acceleration.x = 0;
 			acceleration.y = 0;
 			if (PlayState.LEVEL.playState == PlayState.LEVEL.PLAYING_STATE) {
-				if (FlxG.keys.LEFT && FlxG.keys.UP) {
+				if ((FlxG.keys.LEFT && FlxG.keys.UP) || (FlxG.keys.A && FlxG.keys.W)) {
 					velocity.x = -drag.x / 10;
 					velocity.y = -drag.y / 10;
-				} else if (FlxG.keys.LEFT && FlxG.keys.DOWN) {
+				} else if ((FlxG.keys.LEFT && FlxG.keys.DOWN) || (FlxG.keys.A && FlxG.keys.S)) {
 					velocity.x = -drag.x / 10;
 					velocity.y = drag.y / 10;
-				} else if (FlxG.keys.RIGHT && FlxG.keys.UP) {
+				} else if ((FlxG.keys.RIGHT && FlxG.keys.UP) || (FlxG.keys.D && FlxG.keys.W)) {
 					velocity.x = drag.x / 10;
 					velocity.y = -drag.y / 10;
-				} else if (FlxG.keys.RIGHT && FlxG.keys.DOWN) {
+				} else if ((FlxG.keys.RIGHT && FlxG.keys.DOWN) || (FlxG.keys.D && FlxG.keys.S)) {
 					velocity.x = drag.x / 10;
 					velocity.y = drag.x / 10;
 				}
