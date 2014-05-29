@@ -76,6 +76,7 @@ package Entities.Levels
 		protected var numHolos:int;
 		protected var startText:FlxText;
 		protected var levelText:FlxText;
+		protected var badgesText:FlxText;
 		protected var bedButton:FlxButton;
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
@@ -107,8 +108,8 @@ package Entities.Levels
 		private var oldX:Number;
 		private var oldY:Number;
 		
-		private var timer:Timer = new Timer(1000, 3);
-		private var timeLeft:int = 3;
+		private var timer:Timer = new Timer(500, 5);
+		private var timeLeft:Number = 2.5;
 		private var timeText:FlxText;
 		
 		protected var tutorial:Boolean;
@@ -163,6 +164,8 @@ package Entities.Levels
 			levelText.alignment = "center";
 			levelText.size = 15;
 			//startText.color = 0x000000;
+			
+			badgesText = new FlxText(15, 5, 200, "Badges:");
 			
 			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
 			pauseButton.loadGraphic(Assets.MENU_BUTTON);
@@ -266,6 +269,7 @@ package Entities.Levels
 			add(playerRadius);
 			add(startText);
 			add(levelText);
+			add(badgesText);
 			
 			add(pauseScreen = new PauseScreen());
 			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
@@ -336,7 +340,7 @@ package Entities.Levels
 						numHolos--;
 						timer.addEventListener(TimerEvent.TIMER, turnOffHologram);
 						timer.start();
-						timeText = new FlxText(holo.x + holo.width, holo.y, holo.width, ""+timeLeft);
+						timeText = new FlxText(holo.x + holo.width, holo.y, holo.width*2, ""+timeLeft);
 						add(timeText);
 					}
 				}
@@ -560,9 +564,9 @@ package Entities.Levels
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
-			timeLeft--;
-			timeText.text = "" + timeLeft;
-			if (timer.currentCount == 3) {
+			timeLeft -= 0.5;
+			timeText.text = "" + timeLeft.toFixed(1);
+			if (timer.currentCount == 5) {
 				furnitureState = 0;
 				placedHolo = false;
 			}
@@ -847,7 +851,7 @@ package Entities.Levels
 			ZombieEscape.logger.logLevelEnd(currentLevel);
 			timer.stop();
 
-			if (currentLevel == 15) {
+			if (currentLevel == 20) {
 				FlxG.switchState(new FinalState());
 			} else {
 				PlayState.LEVEL_FURNITURE.splice(0);
