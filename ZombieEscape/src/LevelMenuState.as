@@ -55,15 +55,17 @@ package
 			fourteen.loadGraphic(Assets.LEVEL14_BUTTON);
 			var fifteen:FlxButton = new FlxButton(300, 180, "", function():void { FlxG.switchState(new PlayState(15)) } );
 			fifteen.loadGraphic(Assets.LEVEL15_BUTTON);
-				
+			var sixteen:FlxButton = new FlxButton(360, 180, "", function():void { FlxG.switchState(new PlayState(16)) } );
+			sixteen.loadGraphic(Assets.LEVEL15_BUTTON);
 			
-			LEVELS = new Array(one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen);
+			LEVELS = new Array(one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen);
 			
 			var GREYS:Array = new Array(Assets.LEVEL1_BUTTON_GREY, Assets.LEVEL2_BUTTON_GREY, Assets.LEVEL3_BUTTON_GREY,
 										Assets.LEVEL4_BUTTON_GREY, Assets.LEVEL5_BUTTON_GREY, Assets.LEVEL6_BUTTON_GREY,
 										Assets.LEVEL7_BUTTON_GREY, Assets.LEVEL8_BUTTON_GREY, Assets.LEVEL9_BUTTON_GREY,
 										Assets.LEVEL10_BUTTON_GREY, Assets.LEVEL11_BUTTON_GREY, Assets.LEVEL12_BUTTON_GREY,
-										Assets.LEVEL13_BUTTON_GREY, Assets.LEVEL14_BUTTON_GREY, Assets.LEVEL15_BUTTON_GREY);
+										Assets.LEVEL13_BUTTON_GREY, Assets.LEVEL14_BUTTON_GREY, Assets.LEVEL15_BUTTON_GREY,
+										Assets.LEVEL15_BUTTON_GREY);
 			
 			var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 

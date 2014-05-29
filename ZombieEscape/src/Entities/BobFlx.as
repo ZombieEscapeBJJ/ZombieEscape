@@ -9,7 +9,7 @@ package Entities
 	 */
 	public class BobFlx extends FlxSprite
 	{
-		protected static const RUN_SPEED:int = 80;
+		protected static const RUN_SPEED:int = 65;
 		public static const SIZE:FlxPoint = new FlxPoint(16, 18);
 		
 		public function BobFlx(X:int, Y:int):void

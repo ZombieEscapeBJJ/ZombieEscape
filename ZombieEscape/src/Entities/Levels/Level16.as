@@ -14,7 +14,7 @@ package Entities.Levels
 	 * ...
 	 * @author Brandon
 	 */
-	public class Level15 extends ZELevel 
+	public class Level16 extends ZELevel 
 	{
 		
 		protected static var FLOORS:Array = new Array(
@@ -51,25 +51,27 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
 			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level15(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
+		public function Level16(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
 		{
-			currentLevel = 15;
+			currentLevel = 16;
 			super(state, levelSize, tileSize);
 			this.numHolos = 1;
+			this.numCouches = 1;
+			this.numLamps = 2;
 		}
 		
 		override protected function createMap():void {
@@ -98,16 +100,21 @@ package Entities.Levels
 		
 		override protected function createPlayer():void {
 			bob = new BobFlx(FlxG.width-50, 16 * 8);
-			this.zombieGroup.add(new FastZombie(25, 25));
-			this.zombieGroup.add(new FastZombie(175, 25));
-			this.zombieGroup.add(new FastZombie(100, 50));
-			this.zombieGroup.add(new FastZombie(325, 25));			
-			this.zombieGroup.add(new FastZombie(25, 16 * 13));
-			this.zombieGroup.add(new FastZombie(175, 16 * 13));
-			this.zombieGroup.add(new FastZombie(325, 16 * 13));		
-			this.zombieGroup.add(new FastZombie(25, 100));
-			this.zombieGroup.add(new FastZombie(100, 16 * 12));
-			finish = new FinishLine(0, 16 * 13);
+			this.zombieGroup.add(new FastZombie(200, 25));
+			this.zombieGroup.add(new FastZombie(200, 65));
+			this.zombieGroup.add(new FastZombie(200, 105));
+			this.zombieGroup.add(new FastZombie(200, 145));
+			this.zombieGroup.add(new FastZombie(200, 185));
+			this.zombieGroup.add(new FastZombie(200, 225));
+			this.zombieGroup.add(new NormalZombie(100, 25));
+			this.zombieGroup.add(new NormalZombie(60, 25));
+			this.zombieGroup.add(new StrongZombie(25, 85));
+			this.zombieGroup.add(new StrongZombie(25, 125));
+			this.zombieGroup.add(new FastZombie(25, 185));
+			this.zombieGroup.add(new FastZombie(25, 225));
+			
+
+			finish = new FinishLine(0, 16 * 7);
 		}
 	}
 		
