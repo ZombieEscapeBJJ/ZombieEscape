@@ -22,6 +22,7 @@ package
 		
 		public function PlayState(level:int) 
 		{
+			MAX_LEVELS = LEVELS.length;
 			FlxG.mouse.show();
 			
 			LEVEL = new LEVELS[level - 1](this, LEVEL_SIZE, BLOCK_SIZE);
