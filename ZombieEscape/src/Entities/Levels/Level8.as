@@ -12,10 +12,9 @@ package Entities.Levels
 	
 	/**
 	 * ...
-	 * @author Brandon
+	 * @author James Okada
 	 */
-	public class Level8 extends ZELevel 
-	{		
+	public class Level8 extends ZELevel {
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -56,22 +55,21 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         );
 		
-		public function Level8(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) 
-		{
+		public function Level8(state:FlxState, levelSize:FlxPoint, blockSize:FlxPoint): void {
 			currentLevel = 8;
-			super(state, levelSize, tileSize);
-			this.numBeds = 1;
+			super(state, levelSize, blockSize);
 			this.numCouches = 2;
-			this.numLamps = 2;
 			this.numTables = 1;
+			this.numBeds = 1;
+			this.numLamps = 1;
 		}
 		
 		override protected function createMap():void {
@@ -99,14 +97,13 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-50, 16 * 2);
-			this.zombieGroup.add(new NormalZombie(25, 25));
-			this.zombieGroup.add(new FastZombie(65, 25));
-			this.zombieGroup.add(new NormalZombie(105, 25));			
-			this.zombieGroup.add(new NormalZombie(55, 16 * 13));
-			this.zombieGroup.add(new FastZombie(195, 16 * 13));
-			this.zombieGroup.add(new NormalZombie(335, 16 * 13));	
-			finish = new FinishLine(0, 16 * 13);
+			bob = new BobFlx(FlxG.width-40, FlxG.height/3);
+			this.zombieGroup.add(new FastZombie(FlxG.width - 50, 24));
+			this.zombieGroup.add(new NormalZombie(FlxG.width / 2 - 50, 24));
+			this.zombieGroup.add(new FastZombie(24, FlxG.height / 2));
+			this.zombieGroup.add(new NormalZombie(2*FlxG.width / 3 - 50, 16*14.5));
+			finish = new FinishLine(0, 16*14);
 		}
 	}
+
 }

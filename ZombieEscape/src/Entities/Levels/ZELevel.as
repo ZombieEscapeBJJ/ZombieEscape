@@ -108,8 +108,8 @@ package Entities.Levels
 		private var oldX:Number;
 		private var oldY:Number;
 		
-		private var timer:Timer = new Timer(1000, 2);
-		private var timeLeft:int = 2;
+		private var timer:Timer = new Timer(500, 5);
+		private var timeLeft:Number = 2.5;
 		private var timeText:FlxText;
 		
 		protected var tutorial:Boolean;
@@ -340,7 +340,7 @@ package Entities.Levels
 						numHolos--;
 						timer.addEventListener(TimerEvent.TIMER, turnOffHologram);
 						timer.start();
-						timeText = new FlxText(holo.x + holo.width, holo.y, holo.width, ""+timeLeft);
+						timeText = new FlxText(holo.x + holo.width, holo.y, holo.width*2, ""+timeLeft);
 						add(timeText);
 					}
 				}
@@ -564,9 +564,9 @@ package Entities.Levels
 		}
 		
 		public function turnOffHologram(event:TimerEvent):void {
-			timeLeft--;
-			timeText.text = "" + timeLeft;
-			if (timer.currentCount == 2) {
+			timeLeft -= 0.5;
+			timeText.text = "" + timeLeft.toFixed(1);
+			if (timer.currentCount == 5) {
 				furnitureState = 0;
 				placedHolo = false;
 			}
@@ -851,7 +851,7 @@ package Entities.Levels
 			ZombieEscape.logger.logLevelEnd(currentLevel);
 			timer.stop();
 
-			if (currentLevel == 16) {
+			if (currentLevel == 20) {
 				FlxG.switchState(new FinalState());
 			} else {
 				PlayState.LEVEL_FURNITURE.splice(0);

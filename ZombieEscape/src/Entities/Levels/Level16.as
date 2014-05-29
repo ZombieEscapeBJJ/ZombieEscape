@@ -16,7 +16,6 @@ package Entities.Levels
 	 */
 	public class Level16 extends ZELevel 
 	{
-		
 		protected static var FLOORS:Array = new Array(
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -51,15 +50,15 @@ package Entities.Levels
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 2, 2, 2, 2, 2, 2, 2, 2, 10, 0, 0, 0, 0, 11, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-            6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
-			6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
             4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -70,8 +69,7 @@ package Entities.Levels
 			currentLevel = 16;
 			super(state, levelSize, tileSize);
 			this.numHolos = 1;
-			this.numCouches = 1;
-			this.numLamps = 2;
+			this.numLamps = 1;
 		}
 		
 		override protected function createMap():void {
@@ -99,23 +97,26 @@ package Entities.Levels
 		}
 		
 		override protected function createPlayer():void {
-			bob = new BobFlx(FlxG.width-50, 16 * 8);
-			this.zombieGroup.add(new FastZombie(200, 25));
-			this.zombieGroup.add(new FastZombie(200, 65));
-			this.zombieGroup.add(new FastZombie(200, 105));
-			this.zombieGroup.add(new FastZombie(200, 145));
-			this.zombieGroup.add(new FastZombie(200, 185));
-			this.zombieGroup.add(new FastZombie(200, 225));
-			this.zombieGroup.add(new NormalZombie(100, 25));
-			this.zombieGroup.add(new NormalZombie(60, 25));
-			this.zombieGroup.add(new StrongZombie(25, 85));
-			this.zombieGroup.add(new StrongZombie(25, 125));
-			this.zombieGroup.add(new FastZombie(25, 185));
-			this.zombieGroup.add(new FastZombie(25, 225));
+			bob = new BobFlx(180, 20);
+			this.zombieGroup.add(new FastZombie(175, 190));
+			this.zombieGroup.add(new FastZombie(195, 190));
+			this.zombieGroup.add(new FastZombie(185, 230));	
+			this.zombieGroup.add(new NormalZombie(90, 20));	
+			this.zombieGroup.add(new NormalZombie(FlxG.width - 50, 150));	
+			this.zombieGroup.add(new NormalZombie(FlxG.width - 70, 150));	
+			this.zombieGroup.add(new NormalZombie(FlxG.width- 60, 110));	
+			finish = new FinishLine(0, 16 * 14);
 			
-
-			finish = new FinishLine(0, 16 * 7);
+			//obstacleGroup.add(new Wall(16, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(65, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(115, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(162, 126, true));
+			//obstacleGroup.add(new Wall(210, 126, true));
+			//obstacleGroup.add(new Wall(210, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(260, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(310, 16 * 11 + 5, false));
+			//obstacleGroup.add(new Wall(330, 16 * 11 + 5, false));
 		}
 	}
-		
+
 }
