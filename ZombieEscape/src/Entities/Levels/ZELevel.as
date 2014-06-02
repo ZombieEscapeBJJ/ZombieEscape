@@ -76,7 +76,6 @@ package Entities.Levels
 		protected var numHolos:int;
 		protected var startText:FlxText;
 		protected var levelText:FlxText;
-		protected var badgesText:FlxText;
 		protected var bedButton:FlxButton;
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
@@ -165,7 +164,6 @@ package Entities.Levels
 			levelText.size = 15;
 			//startText.color = 0x000000;
 			
-			badgesText = new FlxText(15, 5, 200, "Badges:");
 			
 			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
 			pauseButton.loadGraphic(Assets.MENU_BUTTON);
@@ -269,7 +267,6 @@ package Entities.Levels
 			add(playerRadius);
 			add(startText);
 			add(levelText);
-			add(badgesText);
 			
 			add(pauseScreen = new PauseScreen());
 			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
