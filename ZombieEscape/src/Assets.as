@@ -65,6 +65,8 @@ package
 		public static var FAST_ZOMBIE:Class;
 		[Embed(source = "../assets/sprites/StrongZombie.png")]
 		public static var STRONG_ZOMBIE:Class;
+		[Embed(source = "../assets/sprites/AlbinoSplashScreen.png")]
+		public static var ALBINO_SPLASH:Class;
 		[Embed(source = "../assets/sprites/SplashScreen.png")]
 		public static var SPLASH_SCREEN:Class;
 		[Embed(source = "../assets/sprites/LevelSelectionScreen.png")]
@@ -203,9 +205,37 @@ package
 		public static var RESTART_BUTTON1:Class;
 		[Embed(source = "../assets/sprites/SelectLevelButton.png")]
 		public static var SELECT_BUTTON:Class;
+		[Embed(source = "../assets/sprites/resetGameButton.png")]
+		public static var RESET_GAME_BUTTON:Class;
 		
 		[Embed(source = "org/flixel/data/cursor.png")]
 		public static var DEFAULT_CURSOR:Class;
+		
+		[Embed(source="../assets/sprites/less20.png")]
+		public static var LESS20:Class;
+		[Embed(source = "../assets/sprites/less20-not.png")]
+		public static var LESS20_NOT:Class;
+		[Embed(source = "../assets/sprites/less10.png")]
+		public static var LESS10:Class;
+		[Embed(source = "../assets/sprites/less10-not.png")]
+		public static var LESS10_NOT:Class;
+		[Embed(source = "../assets/sprites/less5.png")]
+		public static var LESS5:Class;
+		[Embed(source = "../assets/sprites/less5-not.png")]
+		public static var LESS5_NOT:Class;
+		[Embed(source = "../assets/sprites/surviver.png")]
+		public static var SURVIVOR:Class;
+		[Embed(source = "../assets/sprites/surviver-not.png")]
+		public static var SURVIVOR_NOT:Class;
+		
+		[Embed(source = "../assets/sprites/less20achieve.png")]
+		public static var LESS20_ACHIEVE:Class;
+		[Embed(source = "../assets/sprites/less10achieve.png")]
+		public static var LESS10_ACHIEVE:Class;
+		[Embed(source = "../assets/sprites/less5achieve.png")]
+		public static var LESS5_ACHIEVE:Class;
+		[Embed(source = "../assets/sprites/survivalachieve.png")]
+		public static var SURVIVAL_ACHIEVE:Class;
 		
 		public function Assets() 
 		{

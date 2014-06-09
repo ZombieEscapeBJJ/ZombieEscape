@@ -76,6 +76,7 @@ package Entities.Levels
 		protected var numHolos:int;
 		protected var startText:FlxText;
 		protected var levelText:FlxText;
+		protected var badgesText:FlxText;
 		protected var bedButton:FlxButton;
 		protected var pauseButton:FlxButton;
 		protected var restartButton:FlxButton;
@@ -115,6 +116,11 @@ package Entities.Levels
 		protected var menu:Boolean;
 		protected var ppressed:Boolean;
 		public var justResumed:Boolean = false;
+		public var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
+		private var less20Badge:FlxSprite;
+		private var less10Badge:FlxSprite;
+		private var less5Badge:FlxSprite;
+		private var surviverBadge:FlxSprite;
 		
 		public function ZELevel(state:FlxState, levelSize:FlxPoint, tileSize:FlxPoint) {
 			ZombieEscape.logger.logLevelStart(currentLevel, null);
@@ -164,7 +170,7 @@ package Entities.Levels
 			levelText.size = 15;
 			//startText.color = 0x000000;
 			
-			
+			badgesText = new FlxText(15, 5, 200, "Badges:");
 			pauseButton = new FlxButton(FlxG.width - 85, FlxG.height - 25, "", pauseGame);
 			pauseButton.loadGraphic(Assets.MENU_BUTTON);
 			resumeButton = new FlxButton(FlxG.width / 2 - 50, FlxG.height / 2 - 50, "", closeInGameMenu);
@@ -180,6 +186,33 @@ package Entities.Levels
 			this.playerRadiusArray = new Array();
 			oldX = FlxG.mouse.x;
 			oldY = FlxG.mouse.y;
+			
+
+			less20Badge = new FlxSprite(60, 1);
+			if (shared.data.less20 == 1) {
+				less20Badge.loadGraphic(Assets.LESS20);
+			} else {
+				less20Badge.loadGraphic(Assets.LESS20_NOT);
+			}
+			less10Badge = new FlxSprite(80, 1);
+			if (shared.data.less10 == 1) {
+				less10Badge.loadGraphic(Assets.LESS10);
+			} else {
+				less10Badge.loadGraphic(Assets.LESS10_NOT);
+			}
+			
+			less5Badge = new FlxSprite(100, 1);
+			if (shared.data.less5 == 1) {
+				less5Badge.loadGraphic(Assets.LESS5);
+			} else {
+				less5Badge.loadGraphic(Assets.LESS10_NOT);
+			}
+			surviverBadge = new FlxSprite(120, 1);
+			if (shared.data.surviver == 1) {
+				surviverBadge.loadGraphic(Assets.SURVIVOR);
+			} else {
+				surviverBadge.loadGraphic(Assets.SURVIVOR_NOT);
+			}
 			
 
 			this.create();
@@ -267,7 +300,7 @@ package Entities.Levels
 			add(playerRadius);
 			add(startText);
 			add(levelText);
-			
+			add(badgesText);
 			add(pauseScreen = new PauseScreen());
 			menuHeader = new FlxSprite(FlxG.width / 2 - 127, 30);
 			menuHeader.exists = false;
@@ -275,6 +308,10 @@ package Entities.Levels
 			add(resumeButton);
 			add(restartButton);
 			add(levelSelectButton);
+			add(less20Badge);
+			add(less10Badge);
+			add(less5Badge);
+			add(surviverBadge);
 			resumeButton.visible = false;
 			restartButton.visible = false;
 			levelSelectButton.visible = false;
@@ -513,6 +550,8 @@ package Entities.Levels
 					var data_died:Object = {"Died_x":bob.x,"Died_y":bob.y};
 					ZombieEscape.logger.logAction(1, data_died);
 					FlxG.switchState(new GameOverState(currentLevel));
+					shared.data.numDeaths += 1;
+					shared.flush();
 				} else if (FlxG.collide(bob, finish)) {
 					wonLevel();
 				}
