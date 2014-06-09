@@ -207,6 +207,8 @@ package
 		public static var SELECT_BUTTON:Class;
 		[Embed(source = "../assets/sprites/resetGameButton.png")]
 		public static var RESET_GAME_BUTTON:Class;
+		[Embed(source = "../assets/sprites/scoreScreen.png")]
+		public static var SCORE_SCREEN:Class;
 		
 		[Embed(source = "org/flixel/data/cursor.png")]
 		public static var DEFAULT_CURSOR:Class;

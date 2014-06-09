@@ -14,11 +14,16 @@ package
 		protected var less10Achieve:FlxSprite;
 		protected var less5Achieve:FlxSprite;
 		protected var surviverAchieve:FlxSprite;
+		protected var scoreScreen:FlxSprite;
+		
+		protected var highScore:FlxText;
+		protected var currentScore:FlxText;
 		
 		protected var close20AchievementButton:FlxButton;
 		protected var close10AchievementButton:FlxButton;
 		protected var close5AchievementButton:FlxButton;
 		protected var closeSurviveAchievementButton:FlxButton;
+		protected var closeScoreScreenButton:FlxButton;
 		
 		public var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 		private var numDeaths:int;
@@ -31,7 +36,6 @@ package
 		override public function create():void
 		{
 			numDeaths = shared.data.numDeaths;
-			
 			var background:FlxSprite = new FlxSprite(0, 0);
 			background.loadGraphic(
 				Assets.FINISHED_SCREEN, // image to use
@@ -50,8 +54,9 @@ package
 			add(resetGameButton);
 			add(mainMenuButton);
 			FlxG.mouse.show();
-			if (numDeaths < 20) {
+			if (numDeaths < 20 && shared.data.less20 != 1) {
 				shared.data.less20 = 1;
+				shared.data.score += 50;
 				shared.flush();
 				less20Achieve = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
 				less20Achieve.loadGraphic(Assets.LESS20_ACHIEVE);
@@ -86,8 +91,8 @@ package
 				add(closeSurviveAchievementButton);
 				surviverAchieve.exists = false;
 				closeSurviveAchievementButton.exists = false;
-				
-				
+			} else {
+				addScoreScreen();
 			}
 			
 			
@@ -102,42 +107,53 @@ package
 			FlxG.switchState(new MenuState);
 		}
 		
+		
 		public function ResetGame():void {
 			shared.data.numDeaths = 0;
 			shared.data.nextLevel = 1;
+			shared.data.score = 0;
 			shared.flush();
 			FlxG.switchState(new MenuState);
 		}
 		
 		public function close20Achievement():void {
 			less20Achieve.exists = false;
-			if (numDeaths < 10) {
+			if (numDeaths < 10 && shared.data.less10 != 1) {
 				shared.data.less10 = 1;
+				shared.data.score += 100;
 				shared.flush();
 				less10Achieve.exists = true;
 				close10AchievementButton.exists = true;
+			} else {
+				addScoreScreen();
 			}
 			close20AchievementButton.exists = false;
 		}
 		
 		public function close10Achievement():void {
 			less10Achieve.exists = false;
-			if (numDeaths < 5) {
+			if (numDeaths < 5 && shared.data.less5 != 1) {
 				shared.data.less5 = 1;
+				shared.data.score += 150;
 				shared.flush();
 				less5Achieve.exists = true;
 				close5AchievementButton.exists = true;
+			} else {
+				addScoreScreen();
 			}
 			close10AchievementButton.exists = false;
 		}
 		
 		public function close5Achievement():void {
 			less5Achieve.exists = false;
-			if (numDeaths == 0) {
+			if (numDeaths == 0 && shared.data.surviver != 1) {
 				shared.data.surviver = 1;
+				shared.data.score += 200;
 				shared.flush();
 				surviverAchieve.exists = true;
 				closeSurviveAchievementButton.exists = true;
+			} else {
+				addScoreScreen();
 			}
 			close5AchievementButton.exists = false;
 		}
@@ -145,6 +161,47 @@ package
 		public function closeSurviveAchievement():void {
 			surviverAchieve.exists = false;
 			closeSurviveAchievementButton.exists = false;
+			addScoreScreen();
+		}
+		
+		public function closeScore():void {
+			currentScore.exists = false;
+			highScore.exists = false;
+			scoreScreen.exists = false;
+			closeScoreScreenButton.exists = false;
+			shared.data.less20 = 0;
+			shared.data.less10 = 0;
+			shared.data.less5 = 0;
+			shared.data.surviver = 0;
+			for (var i:int = 0; i < ZombieEscape.LEVELS_PLAYED.length; i++) {
+				ZombieEscape.LEVELS_PLAYED[i] = 1;
+			}
+		}
+		
+		private function addScoreScreen():void {
+			trace("cur Score " + shared.data.highScore);
+			trace("high Score " + shared.data.score);
+			var curHighScore:int = shared.data.highScore;
+			var curScore:int = shared.data.score;
+			
+			if (curScore >= curHighScore) {
+				curHighScore = curScore;
+				shared.data.highScore = curScore;
+				shared.flush();
+			}
+			scoreScreen = new FlxSprite(FlxG.width / 2 - 132, FlxG.height / 2 - 125);
+			scoreScreen.loadGraphic(Assets.SCORE_SCREEN);
+
+			add(scoreScreen);
+			closeScoreScreenButton = new FlxButton(FlxG.width / 2 - 35, FlxG.height / 2 + 20, "", closeScore);
+			closeScoreScreenButton.loadGraphic(Assets.CLOSE_BUTTON);
+			add(closeScoreScreenButton);
+			highScore = new FlxText(FlxG.width / 2 - 30, 65, 100, curHighScore.toString());
+			highScore.size = 20;
+			currentScore = new FlxText(FlxG.width / 2 - 30, 125, 100, curScore.toString());
+			currentScore.size = 20;
+			add(highScore);
+			add(currentScore);
 		}
 	}
 

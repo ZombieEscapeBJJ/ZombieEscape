@@ -16,11 +16,14 @@ package
 		public var nextLevel:int = 1;
 		public var shared:SharedObject = SharedObject.getLocal("ZombieEscape");
 		public static var logger:Logger;
+		public static var LEVELS_PLAYED:Array = new Array();
 		
 		public function ZombieEscape() 
 		{
 			//shared.clear();
-		
+			for (var i:int = 0; i < PlayState.MAX_LEVELS; i++) {
+				LEVELS_PLAYED[i] = 1;
+			}
 			if (shared.data.nextLevel == null) {
 				shared.data.nextLevel = nextLevel;
 				shared.flush();
@@ -44,6 +47,12 @@ package
 				shared.data.survivor = 0;
 			}
 			
+			if (shared.data.score == null) {
+				shared.data.score = 0;
+			}
+			if (shared.data.highScore == null) {
+				shared.data.highScore = 0;
+			}
 			shared.flush();
 			// 1: development
 			// 2: initial facebook release
