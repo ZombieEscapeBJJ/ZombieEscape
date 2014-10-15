@@ -58,7 +58,7 @@ package
 			// 2: initial facebook release
 			// 3: switched levels 6 and 7
 			// 4: newgrounds release
-			logger = new Logger("zombie_escape4", 104, "2bbdad86d57942666f08d86f9385395d", 1, 5);
+			logger = new Logger("zombie_escape4", 104, "2bbdad86d57942666f08d86f9385395d", 1, 6);
 			super(400, 300, MenuState, 2);
 		}
 		
